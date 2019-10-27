@@ -32,8 +32,6 @@ body {
 #wrapper.toggled #sidebar-wrapper {
   margin-left: 0;
 }
-/*.bg-light {
-    background-color: #222831 !important;*/
 
 @media (min-width: 768px) {
   #sidebar-wrapper {
@@ -49,3 +47,39 @@ body {
     margin-left: -15rem;
   }
 }
+/*A partir de aqui se modifica la plantilla original de la interface de usuario*/
+/*1. Color fondo y letra (https://colorhunt.co/palette/136567)*/
+.sidenav {
+    background-color: #222831;
+    color: white;
+}
+.letra > ul > li > a{
+  color: white;
+}
+.dropdown-menu {
+  background-color: #222831;
+}
+.dropdown-item{
+    color: white;
+}
+/*1*/
+/*2.Fondo de color al pasar y seleccionar un item*/
+.list-group-item-action:hover {
+  z-index: 1;
+  color: #fffefe;
+  text-decoration: none;
+  background-color: #b55400;
+}
+.dropdown-item:hover{
+  z-index: 1;
+  color: #fffefe;
+  text-decoration: none;
+  background-color: #b55400;
+}
+.nav-link:hover{
+  z-index: 1;
+  color: #fffefe;
+  text-decoration: none;
+  background-color: #b55400;
+}
+/*2*/
