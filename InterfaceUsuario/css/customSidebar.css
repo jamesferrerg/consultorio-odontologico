@@ -1,0 +1,137 @@
+/*!
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template-overviews/simple-sidebar)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
+/*3. Tipo de letra - para transformar en otros formatos https://transfonter.org*/
+@font-face {
+    font-family: 'Roboto';
+    src: url('../webfonts/Roboto-Regular.eot');
+    src: url('../webfonts/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../webfonts/Roboto-Regular.woff2') format('woff2'),
+        url('../webfonts/Roboto-Regular.woff') format('woff'),
+        url('../webfonts/Roboto-Regular.ttf') format('truetype'),
+        url('../webfonts/Roboto-Regular.svg#Roboto-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RobotoLight';
+    src: url('../webfonts/Roboto-Light.eot');
+    src: url('../webfonts/Roboto-Light.eot?#iefix') format('embedded-opentype'),
+        url('../webfonts/Roboto-Light.woff2') format('woff2'),
+        url('../webfonts/Roboto-Light.woff') format('woff'),
+        url('../webfonts/Roboto-Light.ttf') format('truetype'),
+        url('../webfonts/Roboto-Light.svg#Roboto-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RobotoBold';
+    src: url('../webfonts/Roboto-Bold.eot');
+    src: url('../webfonts/Roboto-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../webfonts/Roboto-Bold.woff2') format('woff2'),
+        url('../webfonts/Roboto-Bold.woff') format('woff'),
+        url('../webfonts/Roboto-Bold.ttf') format('truetype'),
+        url('../webfonts/Roboto-Bold.svg#Roboto-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;/*renderiza directamente la fuente https://developer.mozilla.org/es/docs/Web/CSS/@font-face/font-display*/
+}
+.font-roboto {
+  font-family: 'Roboto';
+}
+.font-roboto-light {
+  font-family: 'RobotoLight';
+}
+.font-roboto-bold {
+  font-family: 'RobotoBold';
+}
+/*3.*/
+body {
+  overflow-x: hidden;
+}
+body, html {
+  font-family: 'Roboto';
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
+/*A partir de aqui se modifica la plantilla original de la interface de usuario*/
+/*1. Color fondo y letra (https://colorhunt.co/palette/136567)*/
+.sidenav {
+    background-color: #eeeeee;
+    color: #393e46;
+}
+.word > ul > li > a{
+  color: #393e46;
+}
+.dropdown-menu {
+  background-color: #eeeeee;
+} 
+.dropdown-item{
+    color: #393e46;
+}
+/*1*/
+/*2.Fondo de color al sobreponerse o pasar y seleccionar un item*/
+.list-group-item-action:hover, .list-group-item-action:focus {
+  z-index: 1;
+  color: #fffefe;
+  text-decoration: none;
+  background-color: #b55400;
+}
+
+/*Color al sobreponerse el raton*/
+.navbar-nav li a:hover{
+  color: #b55400;
+  transition: all .3s;
+}
+.dropdown-item:focus, .dropdown-item:hover {
+  z-index: 1;
+  color: #fffefe;
+  text-decoration: none;
+  background-color: #eeeeee;
+}
+/*2.*/
