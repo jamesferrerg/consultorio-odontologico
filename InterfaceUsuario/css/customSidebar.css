@@ -50,17 +50,17 @@ body {
 /*A partir de aqui se modifica la plantilla original de la interface de usuario*/
 /*1. Color fondo y letra (https://colorhunt.co/palette/136567)*/
 .sidenav {
-    background-color: #222831;
-    color: white;
+    background-color: #eeeeee;
+    color: #393e46;
 }
-.letra > ul > li > a{
-  color: white;
+.word > ul > li > a{
+  color: #393e46;
 }
 .dropdown-menu {
-  background-color: #222831;
+  background-color: #eeeeee;
 } 
 .dropdown-item{
-    color: white;
+    color: #393e46;
 }
 /*1*/
 /*2.Fondo de color al sobreponerse o pasar y seleccionar un item*/
@@ -80,5 +80,5 @@ body {
   z-index: 1;
   color: #fffefe;
   text-decoration: none;
-  background-color: #222831;
+  background-color: #eeeeee;
 }
