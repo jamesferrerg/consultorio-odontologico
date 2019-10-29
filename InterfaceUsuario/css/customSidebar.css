@@ -3,6 +3,7 @@
  * Copyright 2013-2019 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
  */
+<<<<<<< HEAD
 /*3. Tipo de letra - para transformar en otros formatos https://transfonter.org*/
 @font-face {
     font-family: 'Roboto';
@@ -58,6 +59,11 @@ body {
 body, html {
   font-family: 'Roboto';
 }
+=======
+body {
+  overflow-x: hidden;
+}
+>>>>>>> 2d8a7a247a58fd6087922257a800dd3b49417f47
 
 #sidebar-wrapper {
   min-height: 100vh;
@@ -133,5 +139,9 @@ body, html {
   color: #fffefe;
   text-decoration: none;
   background-color: #eeeeee;
+<<<<<<< HEAD
 }
 /*2.*/
+=======
+}
+>>>>>>> 2d8a7a247a58fd6087922257a800dd3b49417f47
