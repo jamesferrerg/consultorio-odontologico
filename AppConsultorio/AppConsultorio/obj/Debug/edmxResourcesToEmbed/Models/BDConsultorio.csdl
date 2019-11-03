@@ -1,0 +1,899 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ConsultorioOdonBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Anamnesis">
+    <Key>
+      <PropertyRef Name="IdAnamnesis" />
+    </Key>
+    <Property Name="IdAnamnesis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Diabetes" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Epilepsia" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TBC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="EnfRespiratorias" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CardiopatiasH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Alergias" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="HepatitisVIH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="EnfGastro" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Hemorragias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <NavigationProperty Name="Antecedentes" Relationship="Self.FK_PacienteAnamnesis_Anamnesis" FromRole="Anamnesis" ToRole="Antecedentes" />
+  </EntityType>
+  <EntityType Name="Antecedentes">
+    <Key>
+      <PropertyRef Name="IdPacienteAnamnesis" />
+    </Key>
+    <Property Name="IdPacienteAnamnesis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoAntededente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdPaciente" Type="Int32" />
+    <Property Name="IdAnamnesis" Type="Int32" />
+    <NavigationProperty Name="Anamnesis" Relationship="Self.FK_PacienteAnamnesis_Anamnesis" FromRole="Antecedentes" ToRole="Anamnesis" />
+    <NavigationProperty Name="Pacientes" Relationship="Self.FK_PacienteAnamnesis_Paciente" FromRole="Antecedentes" ToRole="Pacientes" />
+  </EntityType>
+  <EntityType Name="Condiciones">
+    <Key>
+      <PropertyRef Name="IdCondicionOdontograma" />
+    </Key>
+    <Property Name="IdCondicionOdontograma" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Condicion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdPaciente" Type="Int32" />
+    <Property Name="IdOdontograma" Type="Int32" />
+    <Property Name="IdHistoriaClinica" Type="Int32" />
+    <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_CondicionOdontograma_HistoriaClinica" FromRole="Condiciones" ToRole="HistoriasClinicas" />
+    <NavigationProperty Name="Odontogramas" Relationship="Self.FK_CondicionOdontograma_Odontograma" FromRole="Condiciones" ToRole="Odontogramas" />
+  </EntityType>
+  <EntityType Name="Consultas">
+    <Key>
+      <PropertyRef Name="IdConsulta" />
+    </Key>
+    <Property Name="IdConsulta" Type="Int32" Nullable="false" />
+    <Property Name="Motivo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Diagnostico" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdHistoriaClinica" Type="Int32" />
+    <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_Consulta_HistoriaClinica" FromRole="Consultas" ToRole="HistoriasClinicas" />
+    <NavigationProperty Name="Tratamientos" Relationship="Self.FK_Tratamientos_Consultas" FromRole="Consultas" ToRole="Tratamientos" />
+  </EntityType>
+  <EntityType Name="Departamentos">
+    <Key>
+      <PropertyRef Name="IdDepartamento" />
+    </Key>
+    <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
+    <Property Name="Departamento" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <NavigationProperty Name="Municipios" Relationship="Self.FK_Municipios_Departamentos" FromRole="Departamentos" ToRole="Municipios" />
+    <NavigationProperty Name="Pacientes" Relationship="Self.FK_Pacientes_Departamentos" FromRole="Departamentos" ToRole="Pacientes" />
+  </EntityType>
+  <EntityType Name="DetallesFacturas">
+    <Key>
+      <PropertyRef Name="IdDetalleFactura" />
+    </Key>
+    <Property Name="IdDetalleFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Abono" Type="Int64" />
+    <Property Name="FechaAbono" Type="DateTime" Precision="3" />
+    <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdFactura" Type="Int32" />
+    <NavigationProperty Name="Facturas" Relationship="Self.FK_DetalleFactura_Factura" FromRole="DetallesFacturas" ToRole="Facturas" />
+  </EntityType>
+  <EntityType Name="Empleados">
+    <Key>
+      <PropertyRef Name="IdEmpleado" />
+    </Key>
+    <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FechaContrato" Type="DateTime" Precision="3" />
+    <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="Int64" />
+    <Property Name="Celular" Type="Int64" />
+    <Property Name="TieneUsuario" Type="Int32" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdTipoContrato" Type="Int32" />
+    <Property Name="IdSexo" Type="Int32" />
+    <Property Name="IdTipoIdentificacion" Type="Int32" />
+    <Property Name="IdSueldo" Type="Int32" />
+    <NavigationProperty Name="Sexos" Relationship="Self.FK_Empleado_Sexo" FromRole="Empleados" ToRole="Sexos" />
+    <NavigationProperty Name="Sueldos" Relationship="Self.FK_Empleado_Sueldo" FromRole="Empleados" ToRole="Sueldos" />
+    <NavigationProperty Name="TiposContratos" Relationship="Self.FK_Empleado_TipoContrato" FromRole="Empleados" ToRole="TiposContratos" />
+    <NavigationProperty Name="TiposIdentificacion" Relationship="Self.FK_Empleado_TipoIdentificacion" FromRole="Empleados" ToRole="TiposIdentificacion" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_Empleado" FromRole="Empleados" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Examenes">
+    <Key>
+      <PropertyRef Name="IdPacienteExamen" />
+    </Key>
+    <Property Name="IdPacienteExamen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdExamenClinico" Type="Int32" />
+    <Property Name="IdHistoriaClinica" Type="Int32" />
+    <NavigationProperty Name="ExamenesClinicos" Relationship="Self.FK_PacienteExamen_ExamenClinico" FromRole="Examenes" ToRole="ExamenesClinicos" />
+    <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_PacienteExamen_HistoriaClinica" FromRole="Examenes" ToRole="HistoriasClinicas" />
+  </EntityType>
+  <EntityType Name="ExamenesClinicos">
+    <Key>
+      <PropertyRef Name="IdExamenClinico" />
+    </Key>
+    <Property Name="IdExamenClinico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Labios" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Encias" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Carrillos" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Lengua" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Paladar" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="PisoBoca" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Uvula" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="GlandulasSalivales" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Examenes" Relationship="Self.FK_PacienteExamen_ExamenClinico" FromRole="ExamenesClinicos" ToRole="Examenes" />
+  </EntityType>
+  <EntityType Name="ExamenesComplementarios">
+    <Key>
+      <PropertyRef Name="IdExamenComplementario" />
+    </Key>
+    <Property Name="IdExamenComplementario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoExamen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdHistoriaClinica" Type="Int32" />
+    <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_ExamenComplementario_HistoriaClinica" FromRole="ExamenesComplementarios" ToRole="HistoriasClinicas" />
+  </EntityType>
+  <EntityType Name="Facturas">
+    <Key>
+      <PropertyRef Name="IdFactura" />
+    </Key>
+    <Property Name="IdFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Total" Type="Int64" />
+    <Property Name="FechaFactura" Type="DateTime" Precision="3" />
+    <Property Name="Saldo" Type="Int64" />
+    <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdPaciente" Type="Int32" />
+    <NavigationProperty Name="DetallesFacturas" Relationship="Self.FK_DetalleFactura_Factura" FromRole="Facturas" ToRole="DetallesFacturas" />
+    <NavigationProperty Name="Pacientes" Relationship="Self.FK_Factura_Paciente" FromRole="Facturas" ToRole="Pacientes" />
+  </EntityType>
+  <EntityType Name="HistoriasClinicas">
+    <Key>
+      <PropertyRef Name="IdHistoriaClinica" />
+    </Key>
+    <Property Name="IdHistoriaClinica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FechaInicio" Type="DateTime" Precision="3" />
+    <Property Name="FechaFinal" Type="DateTime" Precision="3" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdPaciente" Type="Int32" />
+    <Property Name="IdTratamiento" Type="Int32" />
+    <Property Name="NumeroHistoria" Type="Int32" />
+    <NavigationProperty Name="Condiciones" Relationship="Self.FK_CondicionOdontograma_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="Condiciones" />
+    <NavigationProperty Name="Consultas" Relationship="Self.FK_Consulta_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="Consultas" />
+    <NavigationProperty Name="Examenes" Relationship="Self.FK_PacienteExamen_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="Examenes" />
+    <NavigationProperty Name="ExamenesComplementarios" Relationship="Self.FK_ExamenComplementario_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="ExamenesComplementarios" />
+    <NavigationProperty Name="Pacientes" Relationship="Self.FK_HistoriaClinica_Paciente" FromRole="HistoriasClinicas" ToRole="Pacientes" />
+    <NavigationProperty Name="Tratamientos" Relationship="Self.FK_HistoriaClinica_Tratamiento" FromRole="HistoriasClinicas" ToRole="Tratamientos" />
+    <NavigationProperty Name="Radiografias" Relationship="Self.FK_Radiografias_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="Radiografias" />
+  </EntityType>
+  <EntityType Name="Municipios">
+    <Key>
+      <PropertyRef Name="IdMunicipio" />
+    </Key>
+    <Property Name="IdMunicipio" Type="Int32" Nullable="false" />
+    <Property Name="Municipio" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdDepartamento" Type="Int32" />
+    <NavigationProperty Name="Departamentos" Relationship="Self.FK_Municipios_Departamentos" FromRole="Municipios" ToRole="Departamentos" />
+  </EntityType>
+  <EntityType Name="Odontogramas">
+    <Key>
+      <PropertyRef Name="IdOdontograma" />
+    </Key>
+    <Property Name="IdOdontograma" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Posicion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <NavigationProperty Name="Condiciones" Relationship="Self.FK_CondicionOdontograma_Odontograma" FromRole="Odontogramas" ToRole="Condiciones" />
+  </EntityType>
+  <EntityType Name="Pacientes">
+    <Key>
+      <PropertyRef Name="IdPaciente" />
+    </Key>
+    <Property Name="IdPaciente" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+    <Property Name="Edad" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="Int64" />
+    <Property Name="Celular" Type="Int64" />
+    <Property Name="Ocupacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Aseguradora" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Vinculacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MotivoConsulta" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdSexo" Type="Int32" />
+    <Property Name="IdDepartamento" Type="Int32" />
+    <Property Name="IdTipoIdentificacion" Type="Int32" />
+    <NavigationProperty Name="Antecedentes" Relationship="Self.FK_PacienteAnamnesis_Paciente" FromRole="Pacientes" ToRole="Antecedentes" />
+    <NavigationProperty Name="Departamentos" Relationship="Self.FK_Pacientes_Departamentos" FromRole="Pacientes" ToRole="Departamentos" />
+    <NavigationProperty Name="Facturas" Relationship="Self.FK_Factura_Paciente" FromRole="Pacientes" ToRole="Facturas" />
+    <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_HistoriaClinica_Paciente" FromRole="Pacientes" ToRole="HistoriasClinicas" />
+    <NavigationProperty Name="Sexos" Relationship="Self.FK_Paciente_Sexo" FromRole="Pacientes" ToRole="Sexos" />
+    <NavigationProperty Name="TiposIdentificacion" Relationship="Self.FK_Paciente_TipoIdentificacion" FromRole="Pacientes" ToRole="TiposIdentificacion" />
+    <NavigationProperty Name="PacientesResponsables" Relationship="Self.FK_PacienteResponsable_Paciente" FromRole="Pacientes" ToRole="PacientesResponsables" />
+  </EntityType>
+  <EntityType Name="PacientesResponsables">
+    <Key>
+      <PropertyRef Name="IdPacienteResponsable" />
+    </Key>
+    <Property Name="IdPacienteResponsable" Type="Int32" Nullable="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdPaciente" Type="Int32" />
+    <Property Name="IdResponsable" Type="Int32" />
+    <NavigationProperty Name="Pacientes" Relationship="Self.FK_PacienteResponsable_Paciente" FromRole="PacientesResponsables" ToRole="Pacientes" />
+    <NavigationProperty Name="Responsables" Relationship="Self.FK_PacienteResponsable_Responsable" FromRole="PacientesResponsables" ToRole="Responsables" />
+  </EntityType>
+  <EntityType Name="Paginas">
+    <Key>
+      <PropertyRef Name="IdPagina" />
+    </Key>
+    <Property Name="IdPagina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Mensaje" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Accion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Controlador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <NavigationProperty Name="RolesPaginas" Relationship="Self.FK_RolPagina_Pagina1" FromRole="Paginas" ToRole="RolesPaginas" />
+  </EntityType>
+  <EntityType Name="Radiografias">
+    <Key>
+      <PropertyRef Name="IdRadiografia" />
+    </Key>
+    <Property Name="IdRadiografia" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Radiografia" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdHistoriaClinica" Type="Int32" />
+    <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_Radiografias_HistoriaClinica" FromRole="Radiografias" ToRole="HistoriasClinicas" />
+  </EntityType>
+  <EntityType Name="Responsables">
+    <Key>
+      <PropertyRef Name="IdResponsable" />
+    </Key>
+    <Property Name="IdResponsable" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Parentesco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="Int64" />
+    <Property Name="Habilitado" Type="Int32" />
+    <NavigationProperty Name="PacientesResponsables" Relationship="Self.FK_PacienteResponsable_Responsable" FromRole="Responsables" ToRole="PacientesResponsables" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="IdRol" />
+    </Key>
+    <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <NavigationProperty Name="RolesPaginas" Relationship="Self.FK_RolPagina_Rol" FromRole="Roles" ToRole="RolesPaginas" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_Rol" FromRole="Roles" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="RolesPaginas">
+    <Key>
+      <PropertyRef Name="IdRolPagina" />
+    </Key>
+    <Property Name="IdRolPagina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdRol" Type="Int32" />
+    <Property Name="IdPagina" Type="Int32" />
+    <NavigationProperty Name="Paginas" Relationship="Self.FK_RolPagina_Pagina1" FromRole="RolesPaginas" ToRole="Paginas" />
+    <NavigationProperty Name="Roles" Relationship="Self.FK_RolPagina_Rol" FromRole="RolesPaginas" ToRole="Roles" />
+  </EntityType>
+  <EntityType Name="Sexos">
+    <Key>
+      <PropertyRef Name="IdSexo" />
+    </Key>
+    <Property Name="IdSexo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sexo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleado_Sexo" FromRole="Sexos" ToRole="Empleados" />
+    <NavigationProperty Name="Pacientes" Relationship="Self.FK_Paciente_Sexo" FromRole="Sexos" ToRole="Pacientes" />
+  </EntityType>
+  <EntityType Name="Sueldos">
+    <Key>
+      <PropertyRef Name="IdSueldo" />
+    </Key>
+    <Property Name="IdSueldo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cantidad" Type="Int64" />
+    <Property Name="Habilitado" Type="Int32" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleado_Sueldo" FromRole="Sueldos" ToRole="Empleados" />
+  </EntityType>
+  <EntityType Name="TiposContratos">
+    <Key>
+      <PropertyRef Name="IdTipoContrato" />
+    </Key>
+    <Property Name="IdTipoContrato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleado_TipoContrato" FromRole="TiposContratos" ToRole="Empleados" />
+  </EntityType>
+  <EntityType Name="TiposIdentificacion">
+    <Key>
+      <PropertyRef Name="IdTipoIdentificacion" />
+    </Key>
+    <Property Name="IdTipoIdentificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Identificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleado_TipoIdentificacion" FromRole="TiposIdentificacion" ToRole="Empleados" />
+    <NavigationProperty Name="Pacientes" Relationship="Self.FK_Paciente_TipoIdentificacion" FromRole="TiposIdentificacion" ToRole="Pacientes" />
+  </EntityType>
+  <EntityType Name="TiposTratamientos">
+    <Key>
+      <PropertyRef Name="IdTipoTratamiento" />
+    </Key>
+    <Property Name="IdTipoTratamiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoTratamiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <NavigationProperty Name="Tratamientos" Relationship="Self.FK_Tratamientos_TiposTratamientos" FromRole="TiposTratamientos" ToRole="Tratamientos" />
+  </EntityType>
+  <EntityType Name="TiposUsuarios">
+    <Key>
+      <PropertyRef Name="IdTipoUsuario" />
+    </Key>
+    <Property Name="IdTipoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="TiposUsuarios" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Tratamientos">
+    <Key>
+      <PropertyRef Name="IdTratamiento" />
+    </Key>
+    <Property Name="IdTratamiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdConsulta" Type="Int32" />
+    <Property Name="IdTipoTratamiento" Type="Int32" />
+    <NavigationProperty Name="Consultas" Relationship="Self.FK_Tratamientos_Consultas" FromRole="Tratamientos" ToRole="Consultas" />
+    <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_HistoriaClinica_Tratamiento" FromRole="Tratamientos" ToRole="HistoriasClinicas" />
+    <NavigationProperty Name="TiposTratamientos" Relationship="Self.FK_Tratamientos_TiposTratamientos" FromRole="Tratamientos" ToRole="TiposTratamientos" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="IdRol" Type="Int32" />
+    <Property Name="IdTipoUsuario" Type="Int32" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK_Usuario_Empleado" FromRole="Usuarios" ToRole="Empleados" />
+    <NavigationProperty Name="Roles" Relationship="Self.FK_Usuario_Rol" FromRole="Usuarios" ToRole="Roles" />
+    <NavigationProperty Name="TiposUsuarios" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="Usuarios" ToRole="TiposUsuarios" />
+  </EntityType>
+  <Association Name="FK_PacienteAnamnesis_Anamnesis">
+    <End Role="Anamnesis" Type="Self.Anamnesis" Multiplicity="0..1" />
+    <End Role="Antecedentes" Type="Self.Antecedentes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Anamnesis">
+        <PropertyRef Name="IdAnamnesis" />
+      </Principal>
+      <Dependent Role="Antecedentes">
+        <PropertyRef Name="IdAnamnesis" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PacienteAnamnesis_Paciente">
+    <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="0..1" />
+    <End Role="Antecedentes" Type="Self.Antecedentes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pacientes">
+        <PropertyRef Name="IdPaciente" />
+      </Principal>
+      <Dependent Role="Antecedentes">
+        <PropertyRef Name="IdPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CondicionOdontograma_HistoriaClinica">
+    <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="0..1" />
+    <End Role="Condiciones" Type="Self.Condiciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HistoriasClinicas">
+        <PropertyRef Name="IdHistoriaClinica" />
+      </Principal>
+      <Dependent Role="Condiciones">
+        <PropertyRef Name="IdHistoriaClinica" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CondicionOdontograma_Odontograma">
+    <End Role="Odontogramas" Type="Self.Odontogramas" Multiplicity="0..1" />
+    <End Role="Condiciones" Type="Self.Condiciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Odontogramas">
+        <PropertyRef Name="IdOdontograma" />
+      </Principal>
+      <Dependent Role="Condiciones">
+        <PropertyRef Name="IdOdontograma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consulta_HistoriaClinica">
+    <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="0..1" />
+    <End Role="Consultas" Type="Self.Consultas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HistoriasClinicas">
+        <PropertyRef Name="IdHistoriaClinica" />
+      </Principal>
+      <Dependent Role="Consultas">
+        <PropertyRef Name="IdHistoriaClinica" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tratamientos_Consultas">
+    <End Role="Consultas" Type="Self.Consultas" Multiplicity="0..1" />
+    <End Role="Tratamientos" Type="Self.Tratamientos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consultas">
+        <PropertyRef Name="IdConsulta" />
+      </Principal>
+      <Dependent Role="Tratamientos">
+        <PropertyRef Name="IdConsulta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Municipios_Departamentos">
+    <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="0..1" />
+    <End Role="Municipios" Type="Self.Municipios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departamentos">
+        <PropertyRef Name="IdDepartamento" />
+      </Principal>
+      <Dependent Role="Municipios">
+        <PropertyRef Name="IdDepartamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pacientes_Departamentos">
+    <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="0..1" />
+    <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departamentos">
+        <PropertyRef Name="IdDepartamento" />
+      </Principal>
+      <Dependent Role="Pacientes">
+        <PropertyRef Name="IdDepartamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleFactura_Factura">
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+    <End Role="DetallesFacturas" Type="Self.DetallesFacturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facturas">
+        <PropertyRef Name="IdFactura" />
+      </Principal>
+      <Dependent Role="DetallesFacturas">
+        <PropertyRef Name="IdFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleado_Sexo">
+    <End Role="Sexos" Type="Self.Sexos" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sexos">
+        <PropertyRef Name="IdSexo" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="IdSexo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleado_Sueldo">
+    <End Role="Sueldos" Type="Self.Sueldos" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sueldos">
+        <PropertyRef Name="IdSueldo" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="IdSueldo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleado_TipoContrato">
+    <End Role="TiposContratos" Type="Self.TiposContratos" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposContratos">
+        <PropertyRef Name="IdTipoContrato" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="IdTipoContrato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleado_TipoIdentificacion">
+    <End Role="TiposIdentificacion" Type="Self.TiposIdentificacion" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposIdentificacion">
+        <PropertyRef Name="IdTipoIdentificacion" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="IdTipoIdentificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_Empleado">
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PacienteExamen_ExamenClinico">
+    <End Role="ExamenesClinicos" Type="Self.ExamenesClinicos" Multiplicity="0..1" />
+    <End Role="Examenes" Type="Self.Examenes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExamenesClinicos">
+        <PropertyRef Name="IdExamenClinico" />
+      </Principal>
+      <Dependent Role="Examenes">
+        <PropertyRef Name="IdExamenClinico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PacienteExamen_HistoriaClinica">
+    <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="0..1" />
+    <End Role="Examenes" Type="Self.Examenes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HistoriasClinicas">
+        <PropertyRef Name="IdHistoriaClinica" />
+      </Principal>
+      <Dependent Role="Examenes">
+        <PropertyRef Name="IdHistoriaClinica" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExamenComplementario_HistoriaClinica">
+    <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="0..1" />
+    <End Role="ExamenesComplementarios" Type="Self.ExamenesComplementarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HistoriasClinicas">
+        <PropertyRef Name="IdHistoriaClinica" />
+      </Principal>
+      <Dependent Role="ExamenesComplementarios">
+        <PropertyRef Name="IdHistoriaClinica" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Factura_Paciente">
+    <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="0..1" />
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pacientes">
+        <PropertyRef Name="IdPaciente" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="IdPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HistoriaClinica_Paciente">
+    <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="0..1" />
+    <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pacientes">
+        <PropertyRef Name="IdPaciente" />
+      </Principal>
+      <Dependent Role="HistoriasClinicas">
+        <PropertyRef Name="IdPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HistoriaClinica_Tratamiento">
+    <End Role="Tratamientos" Type="Self.Tratamientos" Multiplicity="0..1" />
+    <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tratamientos">
+        <PropertyRef Name="IdTratamiento" />
+      </Principal>
+      <Dependent Role="HistoriasClinicas">
+        <PropertyRef Name="IdTratamiento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Radiografias_HistoriaClinica">
+    <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="0..1" />
+    <End Role="Radiografias" Type="Self.Radiografias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HistoriasClinicas">
+        <PropertyRef Name="IdHistoriaClinica" />
+      </Principal>
+      <Dependent Role="Radiografias">
+        <PropertyRef Name="IdHistoriaClinica" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Paciente_Sexo">
+    <End Role="Sexos" Type="Self.Sexos" Multiplicity="0..1" />
+    <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sexos">
+        <PropertyRef Name="IdSexo" />
+      </Principal>
+      <Dependent Role="Pacientes">
+        <PropertyRef Name="IdSexo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Paciente_TipoIdentificacion">
+    <End Role="TiposIdentificacion" Type="Self.TiposIdentificacion" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposIdentificacion">
+        <PropertyRef Name="IdTipoIdentificacion" />
+      </Principal>
+      <Dependent Role="Pacientes">
+        <PropertyRef Name="IdTipoIdentificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PacienteResponsable_Paciente">
+    <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PacientesResponsables" Type="Self.PacientesResponsables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pacientes">
+        <PropertyRef Name="IdPaciente" />
+      </Principal>
+      <Dependent Role="PacientesResponsables">
+        <PropertyRef Name="IdPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PacienteResponsable_Responsable">
+    <End Role="Responsables" Type="Self.Responsables" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PacientesResponsables" Type="Self.PacientesResponsables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Responsables">
+        <PropertyRef Name="IdResponsable" />
+      </Principal>
+      <Dependent Role="PacientesResponsables">
+        <PropertyRef Name="IdResponsable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolPagina_Pagina1">
+    <End Role="Paginas" Type="Self.Paginas" Multiplicity="0..1" />
+    <End Role="RolesPaginas" Type="Self.RolesPaginas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paginas">
+        <PropertyRef Name="IdPagina" />
+      </Principal>
+      <Dependent Role="RolesPaginas">
+        <PropertyRef Name="IdPagina" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolPagina_Rol">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="RolesPaginas" Type="Self.RolesPaginas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="RolesPaginas">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_Rol">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tratamientos_TiposTratamientos">
+    <End Role="TiposTratamientos" Type="Self.TiposTratamientos" Multiplicity="0..1" />
+    <End Role="Tratamientos" Type="Self.Tratamientos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposTratamientos">
+        <PropertyRef Name="IdTipoTratamiento" />
+      </Principal>
+      <Dependent Role="Tratamientos">
+        <PropertyRef Name="IdTipoTratamiento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_TipoUsuario">
+    <End Role="TiposUsuarios" Type="Self.TiposUsuarios" Multiplicity="0..1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposUsuarios">
+        <PropertyRef Name="IdTipoUsuario" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="IdTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ConsultorioOdonBDEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Anamnesis" EntityType="Self.Anamnesis" />
+    <EntitySet Name="Antecedentes" EntityType="Self.Antecedentes" />
+    <EntitySet Name="Condiciones" EntityType="Self.Condiciones" />
+    <EntitySet Name="Consultas" EntityType="Self.Consultas" />
+    <EntitySet Name="Departamentos" EntityType="Self.Departamentos" />
+    <EntitySet Name="DetallesFacturas" EntityType="Self.DetallesFacturas" />
+    <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+    <EntitySet Name="Examenes" EntityType="Self.Examenes" />
+    <EntitySet Name="ExamenesClinicos" EntityType="Self.ExamenesClinicos" />
+    <EntitySet Name="ExamenesComplementarios" EntityType="Self.ExamenesComplementarios" />
+    <EntitySet Name="Facturas" EntityType="Self.Facturas" />
+    <EntitySet Name="HistoriasClinicas" EntityType="Self.HistoriasClinicas" />
+    <EntitySet Name="Municipios" EntityType="Self.Municipios" />
+    <EntitySet Name="Odontogramas" EntityType="Self.Odontogramas" />
+    <EntitySet Name="Pacientes" EntityType="Self.Pacientes" />
+    <EntitySet Name="PacientesResponsables" EntityType="Self.PacientesResponsables" />
+    <EntitySet Name="Paginas" EntityType="Self.Paginas" />
+    <EntitySet Name="Radiografias" EntityType="Self.Radiografias" />
+    <EntitySet Name="Responsables" EntityType="Self.Responsables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" />
+    <EntitySet Name="RolesPaginas" EntityType="Self.RolesPaginas" />
+    <EntitySet Name="Sexos" EntityType="Self.Sexos" />
+    <EntitySet Name="Sueldos" EntityType="Self.Sueldos" />
+    <EntitySet Name="TiposContratos" EntityType="Self.TiposContratos" />
+    <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" />
+    <EntitySet Name="TiposTratamientos" EntityType="Self.TiposTratamientos" />
+    <EntitySet Name="TiposUsuarios" EntityType="Self.TiposUsuarios" />
+    <EntitySet Name="Tratamientos" EntityType="Self.Tratamientos" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <AssociationSet Name="FK_PacienteAnamnesis_Anamnesis" Association="Self.FK_PacienteAnamnesis_Anamnesis">
+      <End Role="Anamnesis" EntitySet="Anamnesis" />
+      <End Role="Antecedentes" EntitySet="Antecedentes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PacienteAnamnesis_Paciente" Association="Self.FK_PacienteAnamnesis_Paciente">
+      <End Role="Pacientes" EntitySet="Pacientes" />
+      <End Role="Antecedentes" EntitySet="Antecedentes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CondicionOdontograma_HistoriaClinica" Association="Self.FK_CondicionOdontograma_HistoriaClinica">
+      <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+      <End Role="Condiciones" EntitySet="Condiciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CondicionOdontograma_Odontograma" Association="Self.FK_CondicionOdontograma_Odontograma">
+      <End Role="Odontogramas" EntitySet="Odontogramas" />
+      <End Role="Condiciones" EntitySet="Condiciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consulta_HistoriaClinica" Association="Self.FK_Consulta_HistoriaClinica">
+      <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+      <End Role="Consultas" EntitySet="Consultas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tratamientos_Consultas" Association="Self.FK_Tratamientos_Consultas">
+      <End Role="Consultas" EntitySet="Consultas" />
+      <End Role="Tratamientos" EntitySet="Tratamientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Municipios_Departamentos" Association="Self.FK_Municipios_Departamentos">
+      <End Role="Departamentos" EntitySet="Departamentos" />
+      <End Role="Municipios" EntitySet="Municipios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pacientes_Departamentos" Association="Self.FK_Pacientes_Departamentos">
+      <End Role="Departamentos" EntitySet="Departamentos" />
+      <End Role="Pacientes" EntitySet="Pacientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleFactura_Factura" Association="Self.FK_DetalleFactura_Factura">
+      <End Role="Facturas" EntitySet="Facturas" />
+      <End Role="DetallesFacturas" EntitySet="DetallesFacturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empleado_Sexo" Association="Self.FK_Empleado_Sexo">
+      <End Role="Sexos" EntitySet="Sexos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empleado_Sueldo" Association="Self.FK_Empleado_Sueldo">
+      <End Role="Sueldos" EntitySet="Sueldos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empleado_TipoContrato" Association="Self.FK_Empleado_TipoContrato">
+      <End Role="TiposContratos" EntitySet="TiposContratos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empleado_TipoIdentificacion" Association="Self.FK_Empleado_TipoIdentificacion">
+      <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_Empleado" Association="Self.FK_Usuario_Empleado">
+      <End Role="Empleados" EntitySet="Empleados" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PacienteExamen_ExamenClinico" Association="Self.FK_PacienteExamen_ExamenClinico">
+      <End Role="ExamenesClinicos" EntitySet="ExamenesClinicos" />
+      <End Role="Examenes" EntitySet="Examenes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PacienteExamen_HistoriaClinica" Association="Self.FK_PacienteExamen_HistoriaClinica">
+      <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+      <End Role="Examenes" EntitySet="Examenes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExamenComplementario_HistoriaClinica" Association="Self.FK_ExamenComplementario_HistoriaClinica">
+      <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+      <End Role="ExamenesComplementarios" EntitySet="ExamenesComplementarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Factura_Paciente" Association="Self.FK_Factura_Paciente">
+      <End Role="Pacientes" EntitySet="Pacientes" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HistoriaClinica_Paciente" Association="Self.FK_HistoriaClinica_Paciente">
+      <End Role="Pacientes" EntitySet="Pacientes" />
+      <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HistoriaClinica_Tratamiento" Association="Self.FK_HistoriaClinica_Tratamiento">
+      <End Role="Tratamientos" EntitySet="Tratamientos" />
+      <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Radiografias_HistoriaClinica" Association="Self.FK_Radiografias_HistoriaClinica">
+      <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+      <End Role="Radiografias" EntitySet="Radiografias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Paciente_Sexo" Association="Self.FK_Paciente_Sexo">
+      <End Role="Sexos" EntitySet="Sexos" />
+      <End Role="Pacientes" EntitySet="Pacientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Paciente_TipoIdentificacion" Association="Self.FK_Paciente_TipoIdentificacion">
+      <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
+      <End Role="Pacientes" EntitySet="Pacientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PacienteResponsable_Paciente" Association="Self.FK_PacienteResponsable_Paciente">
+      <End Role="Pacientes" EntitySet="Pacientes" />
+      <End Role="PacientesResponsables" EntitySet="PacientesResponsables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PacienteResponsable_Responsable" Association="Self.FK_PacienteResponsable_Responsable">
+      <End Role="Responsables" EntitySet="Responsables" />
+      <End Role="PacientesResponsables" EntitySet="PacientesResponsables" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolPagina_Pagina1" Association="Self.FK_RolPagina_Pagina1">
+      <End Role="Paginas" EntitySet="Paginas" />
+      <End Role="RolesPaginas" EntitySet="RolesPaginas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolPagina_Rol" Association="Self.FK_RolPagina_Rol">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="RolesPaginas" EntitySet="RolesPaginas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tratamientos_TiposTratamientos" Association="Self.FK_Tratamientos_TiposTratamientos">
+      <End Role="TiposTratamientos" EntitySet="TiposTratamientos" />
+      <End Role="Tratamientos" EntitySet="Tratamientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
+      <End Role="TiposUsuarios" EntitySet="TiposUsuarios" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

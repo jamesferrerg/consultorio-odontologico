@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ConsultorioOdonBDModelStoreContainer" CdmEntityContainer="ConsultorioOdonBDEntities1">
+    <EntitySetMapping Name="Anamnesis">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Anamnesis">
+        <MappingFragment StoreEntitySet="Anamnesis">
+          <ScalarProperty Name="IdAnamnesis" ColumnName="IdAnamnesis" />
+          <ScalarProperty Name="Diabetes" ColumnName="Diabetes" />
+          <ScalarProperty Name="Epilepsia" ColumnName="Epilepsia" />
+          <ScalarProperty Name="TBC" ColumnName="TBC" />
+          <ScalarProperty Name="EnfRespiratorias" ColumnName="EnfRespiratorias" />
+          <ScalarProperty Name="CardiopatiasH" ColumnName="CardiopatiasH" />
+          <ScalarProperty Name="Alergias" ColumnName="Alergias" />
+          <ScalarProperty Name="HepatitisVIH" ColumnName="HepatitisVIH" />
+          <ScalarProperty Name="EnfGastro" ColumnName="EnfGastro" />
+          <ScalarProperty Name="Hemorragias" ColumnName="Hemorragias" />
+          <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Antecedentes">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Antecedentes">
+        <MappingFragment StoreEntitySet="Antecedentes">
+          <ScalarProperty Name="IdPacienteAnamnesis" ColumnName="IdPacienteAnamnesis" />
+          <ScalarProperty Name="TipoAntededente" ColumnName="TipoAntededente" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+          <ScalarProperty Name="IdAnamnesis" ColumnName="IdAnamnesis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Condiciones">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Condiciones">
+        <MappingFragment StoreEntitySet="Condiciones">
+          <ScalarProperty Name="IdCondicionOdontograma" ColumnName="IdCondicionOdontograma" />
+          <ScalarProperty Name="Condicion" ColumnName="Condicion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+          <ScalarProperty Name="IdOdontograma" ColumnName="IdOdontograma" />
+          <ScalarProperty Name="IdHistoriaClinica" ColumnName="IdHistoriaClinica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Consultas">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Consultas">
+        <MappingFragment StoreEntitySet="Consultas">
+          <ScalarProperty Name="IdConsulta" ColumnName="IdConsulta" />
+          <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+          <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdHistoriaClinica" ColumnName="IdHistoriaClinica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departamentos">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Departamentos">
+        <MappingFragment StoreEntitySet="Departamentos">
+          <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+          <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetallesFacturas">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.DetallesFacturas">
+        <MappingFragment StoreEntitySet="DetallesFacturas">
+          <ScalarProperty Name="IdDetalleFactura" ColumnName="IdDetalleFactura" />
+          <ScalarProperty Name="Abono" ColumnName="Abono" />
+          <ScalarProperty Name="FechaAbono" ColumnName="FechaAbono" />
+          <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleados">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Empleados">
+        <MappingFragment StoreEntitySet="Empleados">
+          <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="FechaContrato" ColumnName="FechaContrato" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="TieneUsuario" ColumnName="TieneUsuario" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdTipoContrato" ColumnName="IdTipoContrato" />
+          <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
+          <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+          <ScalarProperty Name="IdSueldo" ColumnName="IdSueldo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Examenes">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Examenes">
+        <MappingFragment StoreEntitySet="Examenes">
+          <ScalarProperty Name="IdPacienteExamen" ColumnName="IdPacienteExamen" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdExamenClinico" ColumnName="IdExamenClinico" />
+          <ScalarProperty Name="IdHistoriaClinica" ColumnName="IdHistoriaClinica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExamenesClinicos">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.ExamenesClinicos">
+        <MappingFragment StoreEntitySet="ExamenesClinicos">
+          <ScalarProperty Name="IdExamenClinico" ColumnName="IdExamenClinico" />
+          <ScalarProperty Name="Labios" ColumnName="Labios" />
+          <ScalarProperty Name="Encias" ColumnName="Encias" />
+          <ScalarProperty Name="Carrillos" ColumnName="Carrillos" />
+          <ScalarProperty Name="Lengua" ColumnName="Lengua" />
+          <ScalarProperty Name="Paladar" ColumnName="Paladar" />
+          <ScalarProperty Name="PisoBoca" ColumnName="PisoBoca" />
+          <ScalarProperty Name="Uvula" ColumnName="Uvula" />
+          <ScalarProperty Name="GlandulasSalivales" ColumnName="GlandulasSalivales" />
+          <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExamenesComplementarios">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.ExamenesComplementarios">
+        <MappingFragment StoreEntitySet="ExamenesComplementarios">
+          <ScalarProperty Name="IdExamenComplementario" ColumnName="IdExamenComplementario" />
+          <ScalarProperty Name="TipoExamen" ColumnName="TipoExamen" />
+          <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdHistoriaClinica" ColumnName="IdHistoriaClinica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facturas">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Facturas">
+        <MappingFragment StoreEntitySet="Facturas">
+          <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
+          <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+          <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HistoriasClinicas">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.HistoriasClinicas">
+        <MappingFragment StoreEntitySet="HistoriasClinicas">
+          <ScalarProperty Name="IdHistoriaClinica" ColumnName="IdHistoriaClinica" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+          <ScalarProperty Name="IdTratamiento" ColumnName="IdTratamiento" />
+          <ScalarProperty Name="NumeroHistoria" ColumnName="NumeroHistoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Municipios">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Municipios">
+        <MappingFragment StoreEntitySet="Municipios">
+          <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
+          <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Odontogramas">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Odontogramas">
+        <MappingFragment StoreEntitySet="Odontogramas">
+          <ScalarProperty Name="IdOdontograma" ColumnName="IdOdontograma" />
+          <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+          <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pacientes">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Pacientes">
+        <MappingFragment StoreEntitySet="Pacientes">
+          <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="Edad" ColumnName="Edad" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Celular" ColumnName="Celular" />
+          <ScalarProperty Name="Ocupacion" ColumnName="Ocupacion" />
+          <ScalarProperty Name="Aseguradora" ColumnName="Aseguradora" />
+          <ScalarProperty Name="Vinculacion" ColumnName="Vinculacion" />
+          <ScalarProperty Name="MotivoConsulta" ColumnName="MotivoConsulta" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
+          <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+          <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PacientesResponsables">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.PacientesResponsables">
+        <MappingFragment StoreEntitySet="PacientesResponsables">
+          <ScalarProperty Name="IdPacienteResponsable" ColumnName="IdPacienteResponsable" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+          <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Paginas">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Paginas">
+        <MappingFragment StoreEntitySet="Paginas">
+          <ScalarProperty Name="IdPagina" ColumnName="IdPagina" />
+          <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+          <ScalarProperty Name="Accion" ColumnName="Accion" />
+          <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Radiografias">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Radiografias">
+        <MappingFragment StoreEntitySet="Radiografias">
+          <ScalarProperty Name="IdRadiografia" ColumnName="IdRadiografia" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Radiografia" ColumnName="Radiografia" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdHistoriaClinica" ColumnName="IdHistoriaClinica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Responsables">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Responsables">
+        <MappingFragment StoreEntitySet="Responsables">
+          <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Parentesco" ColumnName="Parentesco" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="NombreR" ColumnName="NombreR" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RolesPaginas">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.RolesPaginas">
+        <MappingFragment StoreEntitySet="RolesPaginas">
+          <ScalarProperty Name="IdRolPagina" ColumnName="IdRolPagina" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="IdPagina" ColumnName="IdPagina" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sexos">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Sexos">
+        <MappingFragment StoreEntitySet="Sexos">
+          <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
+          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sueldos">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Sueldos">
+        <MappingFragment StoreEntitySet="Sueldos">
+          <ScalarProperty Name="IdSueldo" ColumnName="IdSueldo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposContratos">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.TiposContratos">
+        <MappingFragment StoreEntitySet="TiposContratos">
+          <ScalarProperty Name="IdTipoContrato" ColumnName="IdTipoContrato" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposIdentificacion">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.TiposIdentificacion">
+        <MappingFragment StoreEntitySet="TiposIdentificacion">
+          <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="Numero" ColumnName="Numero" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposTratamientos">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.TiposTratamientos">
+        <MappingFragment StoreEntitySet="TiposTratamientos">
+          <ScalarProperty Name="IdTipoTratamiento" ColumnName="IdTipoTratamiento" />
+          <ScalarProperty Name="TipoTratamiento" ColumnName="TipoTratamiento" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposUsuarios">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.TiposUsuarios">
+        <MappingFragment StoreEntitySet="TiposUsuarios">
+          <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tratamientos">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Tratamientos">
+        <MappingFragment StoreEntitySet="Tratamientos">
+          <ScalarProperty Name="IdTratamiento" ColumnName="IdTratamiento" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdConsulta" ColumnName="IdConsulta" />
+          <ScalarProperty Name="IdTipoTratamiento" ColumnName="IdTipoTratamiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="NombreU" ColumnName="NombreU" />
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

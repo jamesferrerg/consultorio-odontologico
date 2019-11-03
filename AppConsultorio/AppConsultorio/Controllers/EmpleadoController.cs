@@ -21,11 +21,11 @@ namespace AppConsultorio.Controllers
                                     idempleado = empleado.IdEmpleado,
                                     nombre = empleado.Nombre,
                                     apellido = empleado.Apellido,
-                                    fechacontrato = Convert.ToDateTime(empleado.FechaContrato),
+                                    //fechacontrato = Convert.ToDateTime(empleado.FechaContrato),
                                     direccion = empleado.Direccion,
-                                    barrio = empleado.Barrio,
-                                    telefono = Convert.ToInt32(empleado.Telefono),
-                                    celular = Convert.ToInt32(empleado.Celular)
+                                    barrio = empleado.Barrio
+                                    //telefono = Convert.ToInt32(empleado.Telefono),
+                                    //celular = Convert.ToInt32(empleado.Celular)
                                  }).ToList();
             }
 

@@ -1,0 +1,42 @@
+﻿@using AppConsultorio.Models
+@model List<EmpleadoCLS>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+        <tr>
+            <td>Id Empleado</td>
+            <td>Nombres</td>
+            <td>Apellidos</td>
+            @*<td>Fecha de contrato</td>*@
+            <td>Dirección</td>
+            <td>Barrio</td>
+            @*<td>Teléfono</td>
+                <td>Celular</td>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.idempleado</td>
+                <td>@item.nombre</td>
+                <td>@item.apellido</td>
+                @*<td>@item.fechacontrato</td>*@
+                <td>@item.direccion</td>
+                <td>@item.barrio</td>
+                @*<td>@item.telefono</td>
+                    <td>@item.celular</td>*@
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
