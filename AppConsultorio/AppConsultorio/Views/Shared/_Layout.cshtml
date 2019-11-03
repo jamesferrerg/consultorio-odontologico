@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>@ViewBag.Title - Aplicación - Consultorio</title>
+    <title>@ViewBag.Title - Consultorio Sonrisas</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/custom-sidebar.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/fontawesome-all.css" rel="stylesheet" />
@@ -17,7 +17,10 @@
         <div class="border-right sidenav" id="sidebar-wrapper">
             <div class="sidebar-heading">Consultorio <i class="fas fa-tooth"></i></div>
             <div class="list-group list-group-flush">
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "list-group-item list-group-item-action sidenav" })
+                @Html.ActionLink("Empleado", "Index", "Empleado", new { area = "" }, new { @class = "list-group-item list-group-item-action sidenav" })
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">&copy James Gómez Valverde</small>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -58,6 +61,9 @@
         <!-- /#page-content-wrapper -->
 
     </div>
+    <footer>
+        
+    </footer>
     <script src="~/Scripts/popper.min.js"></script>
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>

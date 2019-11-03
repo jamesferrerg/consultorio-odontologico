@@ -16,16 +16,18 @@ namespace AppConsultorio.Controllers
             using (var bd = new ConsultorioOdonBDEntities1())
             {
                 listaEmpleado = (from empleado in bd.Empleados
+                                 where empleado.Habilitado==1
                                  select new EmpleadoCLS
                                  {
                                     idempleado = empleado.IdEmpleado,
                                     nombre = empleado.Nombre,
                                     apellido = empleado.Apellido,
-                                    //fechacontrato = Convert.ToDateTime(empleado.FechaContrato),
+                                    //Debe castear(realizar cambios en tipos de datos) por que es fecha, bigint
+                                    fechacontrato = (DateTime)empleado.FechaContrato,
                                     direccion = empleado.Direccion,
-                                    barrio = empleado.Barrio
-                                    //telefono = Convert.ToInt32(empleado.Telefono),
-                                    //celular = Convert.ToInt32(empleado.Celular)
+                                    barrio = empleado.Barrio,
+                                    telefono = (long)empleado.Telefono,
+                                    celular = (long)empleado.Celular
                                  }).ToList();
             }
 

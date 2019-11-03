@@ -14,17 +14,18 @@ namespace AppConsultorio.Models
         public string nombre { get; set; }
         [Display(Name = "Apellidos")]
         public string apellido { get; set; }
-        //[DataType(DataType.Date)]
-        //[Display(Name = "Fecha de contrato")]
-        //public DateTime fechacontrato { get; set; }
+        [DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}",ApplyFormatInEditMode =true)]
+        [Display(Name = "Fecha de contrato")]
+        public DateTime fechacontrato { get; set; }
         [Display(Name = "Dirección")]
         public string direccion { get; set; }
         [Display(Name = "Barrio")]
         public string barrio { get; set; }
         [Display(Name = "Teléfono fijo")]
-        //public long telefono { get; set; }
-        //[Display(Name = "Celular")]
-        //public long celular { get; set; }
+        public long telefono { get; set; }
+        [Display(Name = "Celular")]
+        public long celular { get; set; }
         public int tieneusuario { get; set; }
         public int habilitado { get; set; }
     }

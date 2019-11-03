@@ -2,23 +2,24 @@
 @model List<EmpleadoCLS>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Empleados";
 }
 
-<h2>Index</h2>
+<h2>Empleados</h2>
 
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover table-sm-responsive">
 
-    <thead>
+    <thead class="thead-light">
         <tr>
-            <td>Id Empleado</td>
-            <td>Nombres</td>
-            <td>Apellidos</td>
-            @*<td>Fecha de contrato</td>*@
-            <td>Dirección</td>
-            <td>Barrio</td>
-            @*<td>Teléfono</td>
-                <td>Celular</td>*@
+            @*"p=>" esto es variable de rango*@
+            <th>@Html.LabelFor(p => Model[0].idempleado)</th>
+            <th>@Html.LabelFor(p => Model[0].nombre)</th>
+            <th>@Html.LabelFor(p => Model[0].apellido)</th>
+            <th>@Html.LabelFor(p => Model[0].fechacontrato)</th>
+            <th>@Html.LabelFor(p => Model[0].direccion)</th>
+            <th>@Html.LabelFor(p => Model[0].barrio)</th>
+            <th>@Html.LabelFor(p => Model[0].telefono)</th>
+            <th>@Html.LabelFor(p => Model[0].celular)</th>
         </tr>
     </thead>
     <tbody>
@@ -28,11 +29,11 @@
                 <td>@item.idempleado</td>
                 <td>@item.nombre</td>
                 <td>@item.apellido</td>
-                @*<td>@item.fechacontrato</td>*@
+                <td>@item.fechacontrato.ToString("dd/MM/yyyy")</td>
                 <td>@item.direccion</td>
                 <td>@item.barrio</td>
-                @*<td>@item.telefono</td>
-                    <td>@item.celular</td>*@
+                <td>@item.telefono</td>
+                <td>@item.celular</td>
             </tr>
         }
 
