@@ -7,7 +7,7 @@
 
 <h2>Empleados</h2>
 
-<table class="table table-bordered table-hover table-sm-responsive">
+<table class="table table-bordered table-hover table-sm-responsive" style="font-size:80%">
 
     <thead class="thead-light">
         <tr>
@@ -15,26 +15,38 @@
             <th>@Html.LabelFor(p => Model[0].idempleado)</th>
             <th>@Html.LabelFor(p => Model[0].nombre)</th>
             <th>@Html.LabelFor(p => Model[0].apellido)</th>
+            <th>@Html.LabelFor(p => Model[0].sexoFM)</th>
             <th>@Html.LabelFor(p => Model[0].fechacontrato)</th>
             <th>@Html.LabelFor(p => Model[0].direccion)</th>
             <th>@Html.LabelFor(p => Model[0].barrio)</th>
             <th>@Html.LabelFor(p => Model[0].telefono)</th>
             <th>@Html.LabelFor(p => Model[0].celular)</th>
+            <th>@Html.LabelFor(p => Model[0].identificacion)</th>
+            <th>@Html.LabelFor(p => Model[0].numeroIdentificacion)</th>
+            <th>@Html.LabelFor(p => Model[0].nombreSueldo)</th>
+            <th>@Html.LabelFor(p => Model[0].cantidad)</th>
+            <th>@Html.LabelFor(p => Model[0].nombreContrato)</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.idempleado</td>
-                <td>@item.nombre</td>
-                <td>@item.apellido</td>
-                <td>@item.fechacontrato.ToString("dd/MM/yyyy")</td>
-                <td>@item.direccion</td>
-                <td>@item.barrio</td>
-                <td>@item.telefono</td>
-                <td>@item.celular</td>
-            </tr>
+        <tr>
+            <td>@item.idempleado</td>
+            <td>@item.nombre</td>
+            <td>@item.apellido</td>
+            <td>@item.sexoFM</td>
+            <td>@item.fechacontrato.ToString("dd/MM/yyyy")</td>
+            <td>@item.direccion</td>
+            <td>@item.barrio</td>
+            <td>@item.telefono</td>
+            <td>@item.celular</td>
+            <td>@item.identificacion</td>
+            <td>@item.numeroIdentificacion</td>
+            <td>@item.nombreSueldo</td>
+            <td>@item.cantidad</td>
+            <td>@item.nombreContrato</td>
+        </tr>
         }
 
     </tbody>

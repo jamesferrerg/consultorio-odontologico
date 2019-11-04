@@ -48,6 +48,7 @@ namespace AppConsultorio.Models
         public virtual DbSet<RolesPaginas> RolesPaginas { get; set; }
         public virtual DbSet<Sexos> Sexos { get; set; }
         public virtual DbSet<Sueldos> Sueldos { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TiposContratos> TiposContratos { get; set; }
         public virtual DbSet<TiposIdentificacion> TiposIdentificacion { get; set; }
         public virtual DbSet<TiposTratamientos> TiposTratamientos { get; set; }

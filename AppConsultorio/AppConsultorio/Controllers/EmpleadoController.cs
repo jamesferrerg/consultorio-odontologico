@@ -16,6 +16,14 @@ namespace AppConsultorio.Controllers
             using (var bd = new ConsultorioOdonBDEntities1())
             {
                 listaEmpleado = (from empleado in bd.Empleados
+                                 join tiposContratos in bd.TiposContratos
+                                 on empleado.IdTipoContrato equals tiposContratos.IdTipoContrato
+                                 join sexos in bd.Sexos
+                                 on empleado.IdSexo equals sexos.IdSexo
+                                 join tiposIdentificacion in bd.TiposIdentificacion
+                                 on empleado.IdTipoIdentificacion equals tiposIdentificacion.IdTipoIdentificacion
+                                 join sueldos in bd.Sueldos
+                                 on empleado.IdSueldo equals sueldos.IdSueldo
                                  where empleado.Habilitado==1
                                  select new EmpleadoCLS
                                  {
@@ -27,7 +35,14 @@ namespace AppConsultorio.Controllers
                                     direccion = empleado.Direccion,
                                     barrio = empleado.Barrio,
                                     telefono = (long)empleado.Telefono,
-                                    celular = (long)empleado.Celular
+                                    celular = (long)empleado.Celular,
+                                    //2. 
+                                    identificacion = tiposIdentificacion.Identificacion,
+                                    numeroIdentificacion = tiposIdentificacion.Numero,
+                                    nombreSueldo = sueldos.Nombre,
+                                    cantidad = (long)sueldos.Cantidad,
+                                    sexoFM = sexos.Sexo,
+                                    nombreContrato = tiposContratos.Nombre
                                  }).ToList();
             }
 

@@ -75,7 +75,7 @@
     </Key>
     <Property Name="IdEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" />
-    <Property Name="Apellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="Apellido" Type="varchar" MaxLength="50" />
     <Property Name="FechaContrato" Type="datetime" />
     <Property Name="Direccion" Type="varchar" MaxLength="100" />
     <Property Name="Barrio" Type="varchar" MaxLength="50" />
@@ -262,6 +262,16 @@
     <Property Name="Nombre" Type="varchar" MaxLength="50" />
     <Property Name="Cantidad" Type="bigint" />
     <Property Name="Habilitado" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="TiposContratos">
     <Key>
@@ -709,6 +719,7 @@
     <EntitySet Name="RolesPaginas" EntityType="Self.RolesPaginas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sexos" EntityType="Self.Sexos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sueldos" EntityType="Self.Sueldos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposContratos" EntityType="Self.TiposContratos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposTratamientos" EntityType="Self.TiposTratamientos" Schema="dbo" store:Type="Tables" />

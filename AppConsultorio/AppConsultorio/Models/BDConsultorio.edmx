@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ConsultorioOdonBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ConsultorioOdonBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Anamnesis">
           <Key>
             <PropertyRef Name="IdAnamnesis" />
@@ -80,7 +80,7 @@
           </Key>
           <Property Name="IdEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
-          <Property Name="Apellido" Type="nvarchar" MaxLength="50" />
+          <Property Name="Apellido" Type="varchar" MaxLength="50" />
           <Property Name="FechaContrato" Type="datetime" />
           <Property Name="Direccion" Type="varchar" MaxLength="100" />
           <Property Name="Barrio" Type="varchar" MaxLength="50" />
@@ -267,6 +267,16 @@
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Cantidad" Type="bigint" />
           <Property Name="Habilitado" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TiposContratos">
           <Key>
@@ -714,6 +724,7 @@
           <EntitySet Name="RolesPaginas" EntityType="Self.RolesPaginas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sexos" EntityType="Self.Sexos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sueldos" EntityType="Self.Sueldos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposContratos" EntityType="Self.TiposContratos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposTratamientos" EntityType="Self.TiposTratamientos" Schema="dbo" store:Type="Tables" />
@@ -841,11 +852,162 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ConsultorioOdonBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ConsultorioOdonBDEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Anamnesis" EntityType="ConsultorioOdonBDModel.Anamnesis" />
+          <EntitySet Name="Antecedentes" EntityType="ConsultorioOdonBDModel.Antecedentes" />
+          <EntitySet Name="Condiciones" EntityType="ConsultorioOdonBDModel.Condiciones" />
+          <EntitySet Name="Consultas" EntityType="ConsultorioOdonBDModel.Consultas" />
+          <EntitySet Name="Departamentos" EntityType="ConsultorioOdonBDModel.Departamentos" />
+          <EntitySet Name="DetallesFacturas" EntityType="ConsultorioOdonBDModel.DetallesFacturas" />
+          <EntitySet Name="Empleados" EntityType="ConsultorioOdonBDModel.Empleados" />
+          <EntitySet Name="Examenes" EntityType="ConsultorioOdonBDModel.Examenes" />
+          <EntitySet Name="ExamenesClinicos" EntityType="ConsultorioOdonBDModel.ExamenesClinicos" />
+          <EntitySet Name="ExamenesComplementarios" EntityType="ConsultorioOdonBDModel.ExamenesComplementarios" />
+          <EntitySet Name="Facturas" EntityType="ConsultorioOdonBDModel.Facturas" />
+          <EntitySet Name="HistoriasClinicas" EntityType="ConsultorioOdonBDModel.HistoriasClinicas" />
+          <EntitySet Name="Municipios" EntityType="ConsultorioOdonBDModel.Municipios" />
+          <EntitySet Name="Odontogramas" EntityType="ConsultorioOdonBDModel.Odontogramas" />
+          <EntitySet Name="Pacientes" EntityType="ConsultorioOdonBDModel.Pacientes" />
+          <EntitySet Name="PacientesResponsables" EntityType="ConsultorioOdonBDModel.PacientesResponsables" />
+          <EntitySet Name="Paginas" EntityType="ConsultorioOdonBDModel.Paginas" />
+          <EntitySet Name="Radiografias" EntityType="ConsultorioOdonBDModel.Radiografias" />
+          <EntitySet Name="Responsables" EntityType="ConsultorioOdonBDModel.Responsables" />
+          <EntitySet Name="Roles" EntityType="ConsultorioOdonBDModel.Roles" />
+          <EntitySet Name="RolesPaginas" EntityType="ConsultorioOdonBDModel.RolesPaginas" />
+          <EntitySet Name="Sexos" EntityType="ConsultorioOdonBDModel.Sexos" />
+          <EntitySet Name="Sueldos" EntityType="ConsultorioOdonBDModel.Sueldos" />
+          <EntitySet Name="sysdiagrams" EntityType="ConsultorioOdonBDModel.sysdiagrams" />
+          <EntitySet Name="TiposContratos" EntityType="ConsultorioOdonBDModel.TiposContratos" />
+          <EntitySet Name="TiposIdentificacion" EntityType="ConsultorioOdonBDModel.TiposIdentificacion" />
+          <EntitySet Name="TiposTratamientos" EntityType="ConsultorioOdonBDModel.TiposTratamientos" />
+          <EntitySet Name="TiposUsuarios" EntityType="ConsultorioOdonBDModel.TiposUsuarios" />
+          <EntitySet Name="Tratamientos" EntityType="ConsultorioOdonBDModel.Tratamientos" />
+          <EntitySet Name="Usuarios" EntityType="ConsultorioOdonBDModel.Usuarios" />
+          <AssociationSet Name="FK_PacienteAnamnesis_Anamnesis" Association="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Anamnesis">
+            <End Role="Anamnesis" EntitySet="Anamnesis" />
+            <End Role="Antecedentes" EntitySet="Antecedentes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PacienteAnamnesis_Paciente" Association="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Paciente">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Antecedentes" EntitySet="Antecedentes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CondicionOdontograma_HistoriaClinica" Association="ConsultorioOdonBDModel.FK_CondicionOdontograma_HistoriaClinica">
+            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+            <End Role="Condiciones" EntitySet="Condiciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CondicionOdontograma_Odontograma" Association="ConsultorioOdonBDModel.FK_CondicionOdontograma_Odontograma">
+            <End Role="Odontogramas" EntitySet="Odontogramas" />
+            <End Role="Condiciones" EntitySet="Condiciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Consulta_HistoriaClinica" Association="ConsultorioOdonBDModel.FK_Consulta_HistoriaClinica">
+            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+            <End Role="Consultas" EntitySet="Consultas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tratamientos_Consultas" Association="ConsultorioOdonBDModel.FK_Tratamientos_Consultas">
+            <End Role="Consultas" EntitySet="Consultas" />
+            <End Role="Tratamientos" EntitySet="Tratamientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Municipios_Departamentos" Association="ConsultorioOdonBDModel.FK_Municipios_Departamentos">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Municipios" EntitySet="Municipios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pacientes_Departamentos" Association="ConsultorioOdonBDModel.FK_Pacientes_Departamentos">
+            <End Role="Departamentos" EntitySet="Departamentos" />
+            <End Role="Pacientes" EntitySet="Pacientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleFactura_Factura" Association="ConsultorioOdonBDModel.FK_DetalleFactura_Factura">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="DetallesFacturas" EntitySet="DetallesFacturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Sexo" Association="ConsultorioOdonBDModel.FK_Empleado_Sexo">
+            <End Role="Sexos" EntitySet="Sexos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Sueldo" Association="ConsultorioOdonBDModel.FK_Empleado_Sueldo">
+            <End Role="Sueldos" EntitySet="Sueldos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_TipoContrato" Association="ConsultorioOdonBDModel.FK_Empleado_TipoContrato">
+            <End Role="TiposContratos" EntitySet="TiposContratos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_TipoIdentificacion" Association="ConsultorioOdonBDModel.FK_Empleado_TipoIdentificacion">
+            <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Empleado" Association="ConsultorioOdonBDModel.FK_Usuario_Empleado">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PacienteExamen_ExamenClinico" Association="ConsultorioOdonBDModel.FK_PacienteExamen_ExamenClinico">
+            <End Role="ExamenesClinicos" EntitySet="ExamenesClinicos" />
+            <End Role="Examenes" EntitySet="Examenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PacienteExamen_HistoriaClinica" Association="ConsultorioOdonBDModel.FK_PacienteExamen_HistoriaClinica">
+            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+            <End Role="Examenes" EntitySet="Examenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExamenComplementario_HistoriaClinica" Association="ConsultorioOdonBDModel.FK_ExamenComplementario_HistoriaClinica">
+            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+            <End Role="ExamenesComplementarios" EntitySet="ExamenesComplementarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Paciente" Association="ConsultorioOdonBDModel.FK_Factura_Paciente">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoriaClinica_Paciente" Association="ConsultorioOdonBDModel.FK_HistoriaClinica_Paciente">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoriaClinica_Tratamiento" Association="ConsultorioOdonBDModel.FK_HistoriaClinica_Tratamiento">
+            <End Role="Tratamientos" EntitySet="Tratamientos" />
+            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Radiografias_HistoriaClinica" Association="ConsultorioOdonBDModel.FK_Radiografias_HistoriaClinica">
+            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
+            <End Role="Radiografias" EntitySet="Radiografias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paciente_Sexo" Association="ConsultorioOdonBDModel.FK_Paciente_Sexo">
+            <End Role="Sexos" EntitySet="Sexos" />
+            <End Role="Pacientes" EntitySet="Pacientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paciente_TipoIdentificacion" Association="ConsultorioOdonBDModel.FK_Paciente_TipoIdentificacion">
+            <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
+            <End Role="Pacientes" EntitySet="Pacientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PacienteResponsable_Paciente" Association="ConsultorioOdonBDModel.FK_PacienteResponsable_Paciente">
+            <End Role="Pacientes" EntitySet="Pacientes" />
+            <End Role="PacientesResponsables" EntitySet="PacientesResponsables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PacienteResponsable_Responsable" Association="ConsultorioOdonBDModel.FK_PacienteResponsable_Responsable">
+            <End Role="Responsables" EntitySet="Responsables" />
+            <End Role="PacientesResponsables" EntitySet="PacientesResponsables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolPagina_Pagina1" Association="ConsultorioOdonBDModel.FK_RolPagina_Pagina1">
+            <End Role="Paginas" EntitySet="Paginas" />
+            <End Role="RolesPaginas" EntitySet="RolesPaginas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RolPagina_Rol" Association="ConsultorioOdonBDModel.FK_RolPagina_Rol">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RolesPaginas" EntitySet="RolesPaginas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Rol" Association="ConsultorioOdonBDModel.FK_Usuario_Rol">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tratamientos_TiposTratamientos" Association="ConsultorioOdonBDModel.FK_Tratamientos_TiposTratamientos">
+            <End Role="TiposTratamientos" EntitySet="TiposTratamientos" />
+            <End Role="Tratamientos" EntitySet="Tratamientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="ConsultorioOdonBDModel.FK_Usuario_TipoUsuario">
+            <End Role="TiposUsuarios" EntitySet="TiposUsuarios" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Anamnesis">
           <Key>
             <PropertyRef Name="IdAnamnesis" />
@@ -862,7 +1024,7 @@
           <Property Name="Hemorragias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
-          <NavigationProperty Name="Antecedentes" Relationship="Self.FK_PacienteAnamnesis_Anamnesis" FromRole="Anamnesis" ToRole="Antecedentes" />
+          <NavigationProperty Name="Antecedentes" Relationship="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Anamnesis" FromRole="Anamnesis" ToRole="Antecedentes" />
         </EntityType>
         <EntityType Name="Antecedentes">
           <Key>
@@ -873,8 +1035,8 @@
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdPaciente" Type="Int32" />
           <Property Name="IdAnamnesis" Type="Int32" />
-          <NavigationProperty Name="Anamnesis" Relationship="Self.FK_PacienteAnamnesis_Anamnesis" FromRole="Antecedentes" ToRole="Anamnesis" />
-          <NavigationProperty Name="Pacientes" Relationship="Self.FK_PacienteAnamnesis_Paciente" FromRole="Antecedentes" ToRole="Pacientes" />
+          <NavigationProperty Name="Anamnesis" Relationship="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Anamnesis" FromRole="Antecedentes" ToRole="Anamnesis" />
+          <NavigationProperty Name="Pacientes" Relationship="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Paciente" FromRole="Antecedentes" ToRole="Pacientes" />
         </EntityType>
         <EntityType Name="Condiciones">
           <Key>
@@ -887,8 +1049,8 @@
           <Property Name="IdPaciente" Type="Int32" />
           <Property Name="IdOdontograma" Type="Int32" />
           <Property Name="IdHistoriaClinica" Type="Int32" />
-          <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_CondicionOdontograma_HistoriaClinica" FromRole="Condiciones" ToRole="HistoriasClinicas" />
-          <NavigationProperty Name="Odontogramas" Relationship="Self.FK_CondicionOdontograma_Odontograma" FromRole="Condiciones" ToRole="Odontogramas" />
+          <NavigationProperty Name="HistoriasClinicas" Relationship="ConsultorioOdonBDModel.FK_CondicionOdontograma_HistoriaClinica" FromRole="Condiciones" ToRole="HistoriasClinicas" />
+          <NavigationProperty Name="Odontogramas" Relationship="ConsultorioOdonBDModel.FK_CondicionOdontograma_Odontograma" FromRole="Condiciones" ToRole="Odontogramas" />
         </EntityType>
         <EntityType Name="Consultas">
           <Key>
@@ -900,8 +1062,8 @@
           <Property Name="Fecha" Type="DateTime" Precision="3" />
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdHistoriaClinica" Type="Int32" />
-          <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_Consulta_HistoriaClinica" FromRole="Consultas" ToRole="HistoriasClinicas" />
-          <NavigationProperty Name="Tratamientos" Relationship="Self.FK_Tratamientos_Consultas" FromRole="Consultas" ToRole="Tratamientos" />
+          <NavigationProperty Name="HistoriasClinicas" Relationship="ConsultorioOdonBDModel.FK_Consulta_HistoriaClinica" FromRole="Consultas" ToRole="HistoriasClinicas" />
+          <NavigationProperty Name="Tratamientos" Relationship="ConsultorioOdonBDModel.FK_Tratamientos_Consultas" FromRole="Consultas" ToRole="Tratamientos" />
         </EntityType>
         <EntityType Name="Departamentos">
           <Key>
@@ -910,8 +1072,8 @@
           <Property Name="IdDepartamento" Type="Int32" Nullable="false" />
           <Property Name="Departamento" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
-          <NavigationProperty Name="Municipios" Relationship="Self.FK_Municipios_Departamentos" FromRole="Departamentos" ToRole="Municipios" />
-          <NavigationProperty Name="Pacientes" Relationship="Self.FK_Pacientes_Departamentos" FromRole="Departamentos" ToRole="Pacientes" />
+          <NavigationProperty Name="Municipios" Relationship="ConsultorioOdonBDModel.FK_Municipios_Departamentos" FromRole="Departamentos" ToRole="Municipios" />
+          <NavigationProperty Name="Pacientes" Relationship="ConsultorioOdonBDModel.FK_Pacientes_Departamentos" FromRole="Departamentos" ToRole="Pacientes" />
         </EntityType>
         <EntityType Name="DetallesFacturas">
           <Key>
@@ -923,7 +1085,7 @@
           <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdFactura" Type="Int32" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK_DetalleFactura_Factura" FromRole="DetallesFacturas" ToRole="Facturas" />
+          <NavigationProperty Name="Facturas" Relationship="ConsultorioOdonBDModel.FK_DetalleFactura_Factura" FromRole="DetallesFacturas" ToRole="Facturas" />
         </EntityType>
         <EntityType Name="Empleados">
           <Key>
@@ -931,7 +1093,7 @@
           </Key>
           <Property Name="IdEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaContrato" Type="DateTime" Precision="3" />
           <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -943,11 +1105,11 @@
           <Property Name="IdSexo" Type="Int32" />
           <Property Name="IdTipoIdentificacion" Type="Int32" />
           <Property Name="IdSueldo" Type="Int32" />
-          <NavigationProperty Name="Sexos" Relationship="Self.FK_Empleado_Sexo" FromRole="Empleados" ToRole="Sexos" />
-          <NavigationProperty Name="Sueldos" Relationship="Self.FK_Empleado_Sueldo" FromRole="Empleados" ToRole="Sueldos" />
-          <NavigationProperty Name="TiposContratos" Relationship="Self.FK_Empleado_TipoContrato" FromRole="Empleados" ToRole="TiposContratos" />
-          <NavigationProperty Name="TiposIdentificacion" Relationship="Self.FK_Empleado_TipoIdentificacion" FromRole="Empleados" ToRole="TiposIdentificacion" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_Empleado" FromRole="Empleados" ToRole="Usuarios" />
+          <NavigationProperty Name="Sexos" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sexo" FromRole="Empleados" ToRole="Sexos" />
+          <NavigationProperty Name="Sueldos" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sueldo" FromRole="Empleados" ToRole="Sueldos" />
+          <NavigationProperty Name="TiposContratos" Relationship="ConsultorioOdonBDModel.FK_Empleado_TipoContrato" FromRole="Empleados" ToRole="TiposContratos" />
+          <NavigationProperty Name="TiposIdentificacion" Relationship="ConsultorioOdonBDModel.FK_Empleado_TipoIdentificacion" FromRole="Empleados" ToRole="TiposIdentificacion" />
+          <NavigationProperty Name="Usuarios" Relationship="ConsultorioOdonBDModel.FK_Usuario_Empleado" FromRole="Empleados" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Examenes">
           <Key>
@@ -957,8 +1119,8 @@
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdExamenClinico" Type="Int32" />
           <Property Name="IdHistoriaClinica" Type="Int32" />
-          <NavigationProperty Name="ExamenesClinicos" Relationship="Self.FK_PacienteExamen_ExamenClinico" FromRole="Examenes" ToRole="ExamenesClinicos" />
-          <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_PacienteExamen_HistoriaClinica" FromRole="Examenes" ToRole="HistoriasClinicas" />
+          <NavigationProperty Name="ExamenesClinicos" Relationship="ConsultorioOdonBDModel.FK_PacienteExamen_ExamenClinico" FromRole="Examenes" ToRole="ExamenesClinicos" />
+          <NavigationProperty Name="HistoriasClinicas" Relationship="ConsultorioOdonBDModel.FK_PacienteExamen_HistoriaClinica" FromRole="Examenes" ToRole="HistoriasClinicas" />
         </EntityType>
         <EntityType Name="ExamenesClinicos">
           <Key>
@@ -974,7 +1136,7 @@
           <Property Name="Uvula" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="GlandulasSalivales" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Examenes" Relationship="Self.FK_PacienteExamen_ExamenClinico" FromRole="ExamenesClinicos" ToRole="Examenes" />
+          <NavigationProperty Name="Examenes" Relationship="ConsultorioOdonBDModel.FK_PacienteExamen_ExamenClinico" FromRole="ExamenesClinicos" ToRole="Examenes" />
         </EntityType>
         <EntityType Name="ExamenesComplementarios">
           <Key>
@@ -985,7 +1147,7 @@
           <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdHistoriaClinica" Type="Int32" />
-          <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_ExamenComplementario_HistoriaClinica" FromRole="ExamenesComplementarios" ToRole="HistoriasClinicas" />
+          <NavigationProperty Name="HistoriasClinicas" Relationship="ConsultorioOdonBDModel.FK_ExamenComplementario_HistoriaClinica" FromRole="ExamenesComplementarios" ToRole="HistoriasClinicas" />
         </EntityType>
         <EntityType Name="Facturas">
           <Key>
@@ -998,8 +1160,8 @@
           <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdPaciente" Type="Int32" />
-          <NavigationProperty Name="DetallesFacturas" Relationship="Self.FK_DetalleFactura_Factura" FromRole="Facturas" ToRole="DetallesFacturas" />
-          <NavigationProperty Name="Pacientes" Relationship="Self.FK_Factura_Paciente" FromRole="Facturas" ToRole="Pacientes" />
+          <NavigationProperty Name="DetallesFacturas" Relationship="ConsultorioOdonBDModel.FK_DetalleFactura_Factura" FromRole="Facturas" ToRole="DetallesFacturas" />
+          <NavigationProperty Name="Pacientes" Relationship="ConsultorioOdonBDModel.FK_Factura_Paciente" FromRole="Facturas" ToRole="Pacientes" />
         </EntityType>
         <EntityType Name="HistoriasClinicas">
           <Key>
@@ -1012,13 +1174,13 @@
           <Property Name="IdPaciente" Type="Int32" />
           <Property Name="IdTratamiento" Type="Int32" />
           <Property Name="NumeroHistoria" Type="Int32" />
-          <NavigationProperty Name="Condiciones" Relationship="Self.FK_CondicionOdontograma_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="Condiciones" />
-          <NavigationProperty Name="Consultas" Relationship="Self.FK_Consulta_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="Consultas" />
-          <NavigationProperty Name="Examenes" Relationship="Self.FK_PacienteExamen_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="Examenes" />
-          <NavigationProperty Name="ExamenesComplementarios" Relationship="Self.FK_ExamenComplementario_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="ExamenesComplementarios" />
-          <NavigationProperty Name="Pacientes" Relationship="Self.FK_HistoriaClinica_Paciente" FromRole="HistoriasClinicas" ToRole="Pacientes" />
-          <NavigationProperty Name="Tratamientos" Relationship="Self.FK_HistoriaClinica_Tratamiento" FromRole="HistoriasClinicas" ToRole="Tratamientos" />
-          <NavigationProperty Name="Radiografias" Relationship="Self.FK_Radiografias_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="Radiografias" />
+          <NavigationProperty Name="Condiciones" Relationship="ConsultorioOdonBDModel.FK_CondicionOdontograma_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="Condiciones" />
+          <NavigationProperty Name="Consultas" Relationship="ConsultorioOdonBDModel.FK_Consulta_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="Consultas" />
+          <NavigationProperty Name="Examenes" Relationship="ConsultorioOdonBDModel.FK_PacienteExamen_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="Examenes" />
+          <NavigationProperty Name="ExamenesComplementarios" Relationship="ConsultorioOdonBDModel.FK_ExamenComplementario_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="ExamenesComplementarios" />
+          <NavigationProperty Name="Pacientes" Relationship="ConsultorioOdonBDModel.FK_HistoriaClinica_Paciente" FromRole="HistoriasClinicas" ToRole="Pacientes" />
+          <NavigationProperty Name="Tratamientos" Relationship="ConsultorioOdonBDModel.FK_HistoriaClinica_Tratamiento" FromRole="HistoriasClinicas" ToRole="Tratamientos" />
+          <NavigationProperty Name="Radiografias" Relationship="ConsultorioOdonBDModel.FK_Radiografias_HistoriaClinica" FromRole="HistoriasClinicas" ToRole="Radiografias" />
         </EntityType>
         <EntityType Name="Municipios">
           <Key>
@@ -1028,7 +1190,7 @@
           <Property Name="Municipio" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdDepartamento" Type="Int32" />
-          <NavigationProperty Name="Departamentos" Relationship="Self.FK_Municipios_Departamentos" FromRole="Municipios" ToRole="Departamentos" />
+          <NavigationProperty Name="Departamentos" Relationship="ConsultorioOdonBDModel.FK_Municipios_Departamentos" FromRole="Municipios" ToRole="Departamentos" />
         </EntityType>
         <EntityType Name="Odontogramas">
           <Key>
@@ -1038,7 +1200,7 @@
           <Property Name="Posicion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Observacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
-          <NavigationProperty Name="Condiciones" Relationship="Self.FK_CondicionOdontograma_Odontograma" FromRole="Odontogramas" ToRole="Condiciones" />
+          <NavigationProperty Name="Condiciones" Relationship="ConsultorioOdonBDModel.FK_CondicionOdontograma_Odontograma" FromRole="Odontogramas" ToRole="Condiciones" />
         </EntityType>
         <EntityType Name="Pacientes">
           <Key>
@@ -1062,13 +1224,13 @@
           <Property Name="IdSexo" Type="Int32" />
           <Property Name="IdDepartamento" Type="Int32" />
           <Property Name="IdTipoIdentificacion" Type="Int32" />
-          <NavigationProperty Name="Antecedentes" Relationship="Self.FK_PacienteAnamnesis_Paciente" FromRole="Pacientes" ToRole="Antecedentes" />
-          <NavigationProperty Name="Departamentos" Relationship="Self.FK_Pacientes_Departamentos" FromRole="Pacientes" ToRole="Departamentos" />
-          <NavigationProperty Name="Facturas" Relationship="Self.FK_Factura_Paciente" FromRole="Pacientes" ToRole="Facturas" />
-          <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_HistoriaClinica_Paciente" FromRole="Pacientes" ToRole="HistoriasClinicas" />
-          <NavigationProperty Name="Sexos" Relationship="Self.FK_Paciente_Sexo" FromRole="Pacientes" ToRole="Sexos" />
-          <NavigationProperty Name="TiposIdentificacion" Relationship="Self.FK_Paciente_TipoIdentificacion" FromRole="Pacientes" ToRole="TiposIdentificacion" />
-          <NavigationProperty Name="PacientesResponsables" Relationship="Self.FK_PacienteResponsable_Paciente" FromRole="Pacientes" ToRole="PacientesResponsables" />
+          <NavigationProperty Name="Antecedentes" Relationship="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Paciente" FromRole="Pacientes" ToRole="Antecedentes" />
+          <NavigationProperty Name="Departamentos" Relationship="ConsultorioOdonBDModel.FK_Pacientes_Departamentos" FromRole="Pacientes" ToRole="Departamentos" />
+          <NavigationProperty Name="Facturas" Relationship="ConsultorioOdonBDModel.FK_Factura_Paciente" FromRole="Pacientes" ToRole="Facturas" />
+          <NavigationProperty Name="HistoriasClinicas" Relationship="ConsultorioOdonBDModel.FK_HistoriaClinica_Paciente" FromRole="Pacientes" ToRole="HistoriasClinicas" />
+          <NavigationProperty Name="Sexos" Relationship="ConsultorioOdonBDModel.FK_Paciente_Sexo" FromRole="Pacientes" ToRole="Sexos" />
+          <NavigationProperty Name="TiposIdentificacion" Relationship="ConsultorioOdonBDModel.FK_Paciente_TipoIdentificacion" FromRole="Pacientes" ToRole="TiposIdentificacion" />
+          <NavigationProperty Name="PacientesResponsables" Relationship="ConsultorioOdonBDModel.FK_PacienteResponsable_Paciente" FromRole="Pacientes" ToRole="PacientesResponsables" />
         </EntityType>
         <EntityType Name="PacientesResponsables">
           <Key>
@@ -1078,8 +1240,8 @@
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdPaciente" Type="Int32" />
           <Property Name="IdResponsable" Type="Int32" />
-          <NavigationProperty Name="Pacientes" Relationship="Self.FK_PacienteResponsable_Paciente" FromRole="PacientesResponsables" ToRole="Pacientes" />
-          <NavigationProperty Name="Responsables" Relationship="Self.FK_PacienteResponsable_Responsable" FromRole="PacientesResponsables" ToRole="Responsables" />
+          <NavigationProperty Name="Pacientes" Relationship="ConsultorioOdonBDModel.FK_PacienteResponsable_Paciente" FromRole="PacientesResponsables" ToRole="Pacientes" />
+          <NavigationProperty Name="Responsables" Relationship="ConsultorioOdonBDModel.FK_PacienteResponsable_Responsable" FromRole="PacientesResponsables" ToRole="Responsables" />
         </EntityType>
         <EntityType Name="Paginas">
           <Key>
@@ -1090,7 +1252,7 @@
           <Property Name="Accion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Controlador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
-          <NavigationProperty Name="RolesPaginas" Relationship="Self.FK_RolPagina_Pagina1" FromRole="Paginas" ToRole="RolesPaginas" />
+          <NavigationProperty Name="RolesPaginas" Relationship="ConsultorioOdonBDModel.FK_RolPagina_Pagina1" FromRole="Paginas" ToRole="RolesPaginas" />
         </EntityType>
         <EntityType Name="Radiografias">
           <Key>
@@ -1102,7 +1264,7 @@
           <Property Name="Fecha" Type="DateTime" Precision="3" />
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdHistoriaClinica" Type="Int32" />
-          <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_Radiografias_HistoriaClinica" FromRole="Radiografias" ToRole="HistoriasClinicas" />
+          <NavigationProperty Name="HistoriasClinicas" Relationship="ConsultorioOdonBDModel.FK_Radiografias_HistoriaClinica" FromRole="Radiografias" ToRole="HistoriasClinicas" />
         </EntityType>
         <EntityType Name="Responsables">
           <Key>
@@ -1114,7 +1276,7 @@
           <Property Name="Parentesco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Telefono" Type="Int64" />
           <Property Name="Habilitado" Type="Int32" />
-          <NavigationProperty Name="PacientesResponsables" Relationship="Self.FK_PacienteResponsable_Responsable" FromRole="Responsables" ToRole="PacientesResponsables" />
+          <NavigationProperty Name="PacientesResponsables" Relationship="ConsultorioOdonBDModel.FK_PacienteResponsable_Responsable" FromRole="Responsables" ToRole="PacientesResponsables" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -1124,8 +1286,8 @@
           <Property Name="NombreR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
-          <NavigationProperty Name="RolesPaginas" Relationship="Self.FK_RolPagina_Rol" FromRole="Roles" ToRole="RolesPaginas" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_Rol" FromRole="Roles" ToRole="Usuarios" />
+          <NavigationProperty Name="RolesPaginas" Relationship="ConsultorioOdonBDModel.FK_RolPagina_Rol" FromRole="Roles" ToRole="RolesPaginas" />
+          <NavigationProperty Name="Usuarios" Relationship="ConsultorioOdonBDModel.FK_Usuario_Rol" FromRole="Roles" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="RolesPaginas">
           <Key>
@@ -1135,8 +1297,8 @@
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdRol" Type="Int32" />
           <Property Name="IdPagina" Type="Int32" />
-          <NavigationProperty Name="Paginas" Relationship="Self.FK_RolPagina_Pagina1" FromRole="RolesPaginas" ToRole="Paginas" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK_RolPagina_Rol" FromRole="RolesPaginas" ToRole="Roles" />
+          <NavigationProperty Name="Paginas" Relationship="ConsultorioOdonBDModel.FK_RolPagina_Pagina1" FromRole="RolesPaginas" ToRole="Paginas" />
+          <NavigationProperty Name="Roles" Relationship="ConsultorioOdonBDModel.FK_RolPagina_Rol" FromRole="RolesPaginas" ToRole="Roles" />
         </EntityType>
         <EntityType Name="Sexos">
           <Key>
@@ -1145,8 +1307,8 @@
           <Property Name="IdSexo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Sexo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
-          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleado_Sexo" FromRole="Sexos" ToRole="Empleados" />
-          <NavigationProperty Name="Pacientes" Relationship="Self.FK_Paciente_Sexo" FromRole="Sexos" ToRole="Pacientes" />
+          <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sexo" FromRole="Sexos" ToRole="Empleados" />
+          <NavigationProperty Name="Pacientes" Relationship="ConsultorioOdonBDModel.FK_Paciente_Sexo" FromRole="Sexos" ToRole="Pacientes" />
         </EntityType>
         <EntityType Name="Sueldos">
           <Key>
@@ -1156,7 +1318,17 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Cantidad" Type="Int64" />
           <Property Name="Habilitado" Type="Int32" />
-          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleado_Sueldo" FromRole="Sueldos" ToRole="Empleados" />
+          <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sueldo" FromRole="Sueldos" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TiposContratos">
           <Key>
@@ -1165,7 +1337,7 @@
           <Property Name="IdTipoContrato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
-          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleado_TipoContrato" FromRole="TiposContratos" ToRole="Empleados" />
+          <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleado_TipoContrato" FromRole="TiposContratos" ToRole="Empleados" />
         </EntityType>
         <EntityType Name="TiposIdentificacion">
           <Key>
@@ -1175,8 +1347,8 @@
           <Property Name="Identificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
-          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleado_TipoIdentificacion" FromRole="TiposIdentificacion" ToRole="Empleados" />
-          <NavigationProperty Name="Pacientes" Relationship="Self.FK_Paciente_TipoIdentificacion" FromRole="TiposIdentificacion" ToRole="Pacientes" />
+          <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleado_TipoIdentificacion" FromRole="TiposIdentificacion" ToRole="Empleados" />
+          <NavigationProperty Name="Pacientes" Relationship="ConsultorioOdonBDModel.FK_Paciente_TipoIdentificacion" FromRole="TiposIdentificacion" ToRole="Pacientes" />
         </EntityType>
         <EntityType Name="TiposTratamientos">
           <Key>
@@ -1185,7 +1357,7 @@
           <Property Name="IdTipoTratamiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TipoTratamiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
-          <NavigationProperty Name="Tratamientos" Relationship="Self.FK_Tratamientos_TiposTratamientos" FromRole="TiposTratamientos" ToRole="Tratamientos" />
+          <NavigationProperty Name="Tratamientos" Relationship="ConsultorioOdonBDModel.FK_Tratamientos_TiposTratamientos" FromRole="TiposTratamientos" ToRole="Tratamientos" />
         </EntityType>
         <EntityType Name="TiposUsuarios">
           <Key>
@@ -1195,7 +1367,7 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="TiposUsuarios" ToRole="Usuarios" />
+          <NavigationProperty Name="Usuarios" Relationship="ConsultorioOdonBDModel.FK_Usuario_TipoUsuario" FromRole="TiposUsuarios" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Tratamientos">
           <Key>
@@ -1205,27 +1377,27 @@
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdConsulta" Type="Int32" />
           <Property Name="IdTipoTratamiento" Type="Int32" />
-          <NavigationProperty Name="Consultas" Relationship="Self.FK_Tratamientos_Consultas" FromRole="Tratamientos" ToRole="Consultas" />
-          <NavigationProperty Name="HistoriasClinicas" Relationship="Self.FK_HistoriaClinica_Tratamiento" FromRole="Tratamientos" ToRole="HistoriasClinicas" />
-          <NavigationProperty Name="TiposTratamientos" Relationship="Self.FK_Tratamientos_TiposTratamientos" FromRole="Tratamientos" ToRole="TiposTratamientos" />
+          <NavigationProperty Name="Consultas" Relationship="ConsultorioOdonBDModel.FK_Tratamientos_Consultas" FromRole="Tratamientos" ToRole="Consultas" />
+          <NavigationProperty Name="HistoriasClinicas" Relationship="ConsultorioOdonBDModel.FK_HistoriaClinica_Tratamiento" FromRole="Tratamientos" ToRole="HistoriasClinicas" />
+          <NavigationProperty Name="TiposTratamientos" Relationship="ConsultorioOdonBDModel.FK_Tratamientos_TiposTratamientos" FromRole="Tratamientos" ToRole="TiposTratamientos" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
             <PropertyRef Name="IdUsuario" />
           </Key>
           <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreU" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdRol" Type="Int32" />
           <Property Name="IdTipoUsuario" Type="Int32" />
-          <NavigationProperty Name="Empleados" Relationship="Self.FK_Usuario_Empleado" FromRole="Usuarios" ToRole="Empleados" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK_Usuario_Rol" FromRole="Usuarios" ToRole="Roles" />
-          <NavigationProperty Name="TiposUsuarios" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="Usuarios" ToRole="TiposUsuarios" />
+          <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Usuario_Empleado" FromRole="Usuarios" ToRole="Empleados" />
+          <NavigationProperty Name="Roles" Relationship="ConsultorioOdonBDModel.FK_Usuario_Rol" FromRole="Usuarios" ToRole="Roles" />
+          <NavigationProperty Name="TiposUsuarios" Relationship="ConsultorioOdonBDModel.FK_Usuario_TipoUsuario" FromRole="Usuarios" ToRole="TiposUsuarios" />
         </EntityType>
         <Association Name="FK_PacienteAnamnesis_Anamnesis">
-          <End Role="Anamnesis" Type="Self.Anamnesis" Multiplicity="0..1" />
-          <End Role="Antecedentes" Type="Self.Antecedentes" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Anamnesis" Role="Anamnesis" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Antecedentes" Role="Antecedentes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Anamnesis">
               <PropertyRef Name="IdAnamnesis" />
@@ -1236,8 +1408,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PacienteAnamnesis_Paciente">
-          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="0..1" />
-          <End Role="Antecedentes" Type="Self.Antecedentes" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Pacientes" Role="Pacientes" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Antecedentes" Role="Antecedentes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pacientes">
               <PropertyRef Name="IdPaciente" />
@@ -1248,8 +1420,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CondicionOdontograma_HistoriaClinica">
-          <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="0..1" />
-          <End Role="Condiciones" Type="Self.Condiciones" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.HistoriasClinicas" Role="HistoriasClinicas" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Condiciones" Role="Condiciones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HistoriasClinicas">
               <PropertyRef Name="IdHistoriaClinica" />
@@ -1260,8 +1432,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CondicionOdontograma_Odontograma">
-          <End Role="Odontogramas" Type="Self.Odontogramas" Multiplicity="0..1" />
-          <End Role="Condiciones" Type="Self.Condiciones" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Odontogramas" Role="Odontogramas" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Condiciones" Role="Condiciones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Odontogramas">
               <PropertyRef Name="IdOdontograma" />
@@ -1272,8 +1444,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Consulta_HistoriaClinica">
-          <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="0..1" />
-          <End Role="Consultas" Type="Self.Consultas" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.HistoriasClinicas" Role="HistoriasClinicas" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Consultas" Role="Consultas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HistoriasClinicas">
               <PropertyRef Name="IdHistoriaClinica" />
@@ -1284,8 +1456,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tratamientos_Consultas">
-          <End Role="Consultas" Type="Self.Consultas" Multiplicity="0..1" />
-          <End Role="Tratamientos" Type="Self.Tratamientos" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Consultas" Role="Consultas" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Tratamientos" Role="Tratamientos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Consultas">
               <PropertyRef Name="IdConsulta" />
@@ -1296,8 +1468,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Municipios_Departamentos">
-          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="0..1" />
-          <End Role="Municipios" Type="Self.Municipios" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Departamentos" Role="Departamentos" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Municipios" Role="Municipios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Departamentos">
               <PropertyRef Name="IdDepartamento" />
@@ -1308,8 +1480,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pacientes_Departamentos">
-          <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="0..1" />
-          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Departamentos" Role="Departamentos" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Pacientes" Role="Pacientes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Departamentos">
               <PropertyRef Name="IdDepartamento" />
@@ -1320,8 +1492,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DetalleFactura_Factura">
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
-          <End Role="DetallesFacturas" Type="Self.DetallesFacturas" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Facturas" Role="Facturas" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.DetallesFacturas" Role="DetallesFacturas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Facturas">
               <PropertyRef Name="IdFactura" />
@@ -1332,8 +1504,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Empleado_Sexo">
-          <End Role="Sexos" Type="Self.Sexos" Multiplicity="0..1" />
-          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Sexos" Role="Sexos" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Empleados" Role="Empleados" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sexos">
               <PropertyRef Name="IdSexo" />
@@ -1344,8 +1516,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Empleado_Sueldo">
-          <End Role="Sueldos" Type="Self.Sueldos" Multiplicity="0..1" />
-          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Sueldos" Role="Sueldos" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Empleados" Role="Empleados" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sueldos">
               <PropertyRef Name="IdSueldo" />
@@ -1356,8 +1528,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Empleado_TipoContrato">
-          <End Role="TiposContratos" Type="Self.TiposContratos" Multiplicity="0..1" />
-          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.TiposContratos" Role="TiposContratos" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Empleados" Role="Empleados" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TiposContratos">
               <PropertyRef Name="IdTipoContrato" />
@@ -1368,10 +1540,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Empleado_TipoIdentificacion">
-          <End Role="TiposIdentificacion" Type="Self.TiposIdentificacion" Multiplicity="0..1">
+          <End Type="ConsultorioOdonBDModel.TiposIdentificacion" Role="TiposIdentificacion" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Empleados" Role="Empleados" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TiposIdentificacion">
               <PropertyRef Name="IdTipoIdentificacion" />
@@ -1382,8 +1554,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_Empleado">
-          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Empleados" Role="Empleados" Multiplicity="1" />
+          <End Type="ConsultorioOdonBDModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Empleados">
               <PropertyRef Name="IdEmpleado" />
@@ -1394,8 +1566,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PacienteExamen_ExamenClinico">
-          <End Role="ExamenesClinicos" Type="Self.ExamenesClinicos" Multiplicity="0..1" />
-          <End Role="Examenes" Type="Self.Examenes" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.ExamenesClinicos" Role="ExamenesClinicos" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Examenes" Role="Examenes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ExamenesClinicos">
               <PropertyRef Name="IdExamenClinico" />
@@ -1406,8 +1578,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PacienteExamen_HistoriaClinica">
-          <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="0..1" />
-          <End Role="Examenes" Type="Self.Examenes" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.HistoriasClinicas" Role="HistoriasClinicas" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Examenes" Role="Examenes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HistoriasClinicas">
               <PropertyRef Name="IdHistoriaClinica" />
@@ -1418,8 +1590,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExamenComplementario_HistoriaClinica">
-          <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="0..1" />
-          <End Role="ExamenesComplementarios" Type="Self.ExamenesComplementarios" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.HistoriasClinicas" Role="HistoriasClinicas" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.ExamenesComplementarios" Role="ExamenesComplementarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HistoriasClinicas">
               <PropertyRef Name="IdHistoriaClinica" />
@@ -1430,8 +1602,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Factura_Paciente">
-          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="0..1" />
-          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Pacientes" Role="Pacientes" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Facturas" Role="Facturas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pacientes">
               <PropertyRef Name="IdPaciente" />
@@ -1442,8 +1614,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HistoriaClinica_Paciente">
-          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="0..1" />
-          <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Pacientes" Role="Pacientes" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.HistoriasClinicas" Role="HistoriasClinicas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pacientes">
               <PropertyRef Name="IdPaciente" />
@@ -1454,8 +1626,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_HistoriaClinica_Tratamiento">
-          <End Role="Tratamientos" Type="Self.Tratamientos" Multiplicity="0..1" />
-          <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Tratamientos" Role="Tratamientos" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.HistoriasClinicas" Role="HistoriasClinicas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tratamientos">
               <PropertyRef Name="IdTratamiento" />
@@ -1466,8 +1638,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Radiografias_HistoriaClinica">
-          <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="0..1" />
-          <End Role="Radiografias" Type="Self.Radiografias" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.HistoriasClinicas" Role="HistoriasClinicas" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Radiografias" Role="Radiografias" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HistoriasClinicas">
               <PropertyRef Name="IdHistoriaClinica" />
@@ -1478,8 +1650,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Paciente_Sexo">
-          <End Role="Sexos" Type="Self.Sexos" Multiplicity="0..1" />
-          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Sexos" Role="Sexos" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Pacientes" Role="Pacientes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sexos">
               <PropertyRef Name="IdSexo" />
@@ -1490,10 +1662,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Paciente_TipoIdentificacion">
-          <End Role="TiposIdentificacion" Type="Self.TiposIdentificacion" Multiplicity="0..1">
+          <End Type="ConsultorioOdonBDModel.TiposIdentificacion" Role="TiposIdentificacion" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Pacientes" Role="Pacientes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TiposIdentificacion">
               <PropertyRef Name="IdTipoIdentificacion" />
@@ -1504,10 +1676,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PacienteResponsable_Paciente">
-          <End Role="Pacientes" Type="Self.Pacientes" Multiplicity="0..1">
+          <End Type="ConsultorioOdonBDModel.Pacientes" Role="Pacientes" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="PacientesResponsables" Type="Self.PacientesResponsables" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.PacientesResponsables" Role="PacientesResponsables" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pacientes">
               <PropertyRef Name="IdPaciente" />
@@ -1518,10 +1690,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PacienteResponsable_Responsable">
-          <End Role="Responsables" Type="Self.Responsables" Multiplicity="0..1">
+          <End Type="ConsultorioOdonBDModel.Responsables" Role="Responsables" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="PacientesResponsables" Type="Self.PacientesResponsables" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.PacientesResponsables" Role="PacientesResponsables" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Responsables">
               <PropertyRef Name="IdResponsable" />
@@ -1532,8 +1704,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RolPagina_Pagina1">
-          <End Role="Paginas" Type="Self.Paginas" Multiplicity="0..1" />
-          <End Role="RolesPaginas" Type="Self.RolesPaginas" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Paginas" Role="Paginas" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.RolesPaginas" Role="RolesPaginas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Paginas">
               <PropertyRef Name="IdPagina" />
@@ -1544,8 +1716,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RolPagina_Rol">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
-          <End Role="RolesPaginas" Type="Self.RolesPaginas" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Roles" Role="Roles" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.RolesPaginas" Role="RolesPaginas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
               <PropertyRef Name="IdRol" />
@@ -1556,8 +1728,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_Rol">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.Roles" Role="Roles" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Usuarios" Role="Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
               <PropertyRef Name="IdRol" />
@@ -1568,8 +1740,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Tratamientos_TiposTratamientos">
-          <End Role="TiposTratamientos" Type="Self.TiposTratamientos" Multiplicity="0..1" />
-          <End Role="Tratamientos" Type="Self.Tratamientos" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.TiposTratamientos" Role="TiposTratamientos" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Tratamientos" Role="Tratamientos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TiposTratamientos">
               <PropertyRef Name="IdTipoTratamiento" />
@@ -1580,8 +1752,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_TipoUsuario">
-          <End Role="TiposUsuarios" Type="Self.TiposUsuarios" Multiplicity="0..1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <End Type="ConsultorioOdonBDModel.TiposUsuarios" Role="TiposUsuarios" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Usuarios" Role="Usuarios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TiposUsuarios">
               <PropertyRef Name="IdTipoUsuario" />
@@ -1591,157 +1763,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ConsultorioOdonBDEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Anamnesis" EntityType="Self.Anamnesis" />
-          <EntitySet Name="Antecedentes" EntityType="Self.Antecedentes" />
-          <EntitySet Name="Condiciones" EntityType="Self.Condiciones" />
-          <EntitySet Name="Consultas" EntityType="Self.Consultas" />
-          <EntitySet Name="Departamentos" EntityType="Self.Departamentos" />
-          <EntitySet Name="DetallesFacturas" EntityType="Self.DetallesFacturas" />
-          <EntitySet Name="Empleados" EntityType="Self.Empleados" />
-          <EntitySet Name="Examenes" EntityType="Self.Examenes" />
-          <EntitySet Name="ExamenesClinicos" EntityType="Self.ExamenesClinicos" />
-          <EntitySet Name="ExamenesComplementarios" EntityType="Self.ExamenesComplementarios" />
-          <EntitySet Name="Facturas" EntityType="Self.Facturas" />
-          <EntitySet Name="HistoriasClinicas" EntityType="Self.HistoriasClinicas" />
-          <EntitySet Name="Municipios" EntityType="Self.Municipios" />
-          <EntitySet Name="Odontogramas" EntityType="Self.Odontogramas" />
-          <EntitySet Name="Pacientes" EntityType="Self.Pacientes" />
-          <EntitySet Name="PacientesResponsables" EntityType="Self.PacientesResponsables" />
-          <EntitySet Name="Paginas" EntityType="Self.Paginas" />
-          <EntitySet Name="Radiografias" EntityType="Self.Radiografias" />
-          <EntitySet Name="Responsables" EntityType="Self.Responsables" />
-          <EntitySet Name="Roles" EntityType="Self.Roles" />
-          <EntitySet Name="RolesPaginas" EntityType="Self.RolesPaginas" />
-          <EntitySet Name="Sexos" EntityType="Self.Sexos" />
-          <EntitySet Name="Sueldos" EntityType="Self.Sueldos" />
-          <EntitySet Name="TiposContratos" EntityType="Self.TiposContratos" />
-          <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" />
-          <EntitySet Name="TiposTratamientos" EntityType="Self.TiposTratamientos" />
-          <EntitySet Name="TiposUsuarios" EntityType="Self.TiposUsuarios" />
-          <EntitySet Name="Tratamientos" EntityType="Self.Tratamientos" />
-          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
-          <AssociationSet Name="FK_PacienteAnamnesis_Anamnesis" Association="Self.FK_PacienteAnamnesis_Anamnesis">
-            <End Role="Anamnesis" EntitySet="Anamnesis" />
-            <End Role="Antecedentes" EntitySet="Antecedentes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PacienteAnamnesis_Paciente" Association="Self.FK_PacienteAnamnesis_Paciente">
-            <End Role="Pacientes" EntitySet="Pacientes" />
-            <End Role="Antecedentes" EntitySet="Antecedentes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CondicionOdontograma_HistoriaClinica" Association="Self.FK_CondicionOdontograma_HistoriaClinica">
-            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
-            <End Role="Condiciones" EntitySet="Condiciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CondicionOdontograma_Odontograma" Association="Self.FK_CondicionOdontograma_Odontograma">
-            <End Role="Odontogramas" EntitySet="Odontogramas" />
-            <End Role="Condiciones" EntitySet="Condiciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Consulta_HistoriaClinica" Association="Self.FK_Consulta_HistoriaClinica">
-            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
-            <End Role="Consultas" EntitySet="Consultas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tratamientos_Consultas" Association="Self.FK_Tratamientos_Consultas">
-            <End Role="Consultas" EntitySet="Consultas" />
-            <End Role="Tratamientos" EntitySet="Tratamientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Municipios_Departamentos" Association="Self.FK_Municipios_Departamentos">
-            <End Role="Departamentos" EntitySet="Departamentos" />
-            <End Role="Municipios" EntitySet="Municipios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pacientes_Departamentos" Association="Self.FK_Pacientes_Departamentos">
-            <End Role="Departamentos" EntitySet="Departamentos" />
-            <End Role="Pacientes" EntitySet="Pacientes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleFactura_Factura" Association="Self.FK_DetalleFactura_Factura">
-            <End Role="Facturas" EntitySet="Facturas" />
-            <End Role="DetallesFacturas" EntitySet="DetallesFacturas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empleado_Sexo" Association="Self.FK_Empleado_Sexo">
-            <End Role="Sexos" EntitySet="Sexos" />
-            <End Role="Empleados" EntitySet="Empleados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empleado_Sueldo" Association="Self.FK_Empleado_Sueldo">
-            <End Role="Sueldos" EntitySet="Sueldos" />
-            <End Role="Empleados" EntitySet="Empleados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empleado_TipoContrato" Association="Self.FK_Empleado_TipoContrato">
-            <End Role="TiposContratos" EntitySet="TiposContratos" />
-            <End Role="Empleados" EntitySet="Empleados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empleado_TipoIdentificacion" Association="Self.FK_Empleado_TipoIdentificacion">
-            <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
-            <End Role="Empleados" EntitySet="Empleados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Empleado" Association="Self.FK_Usuario_Empleado">
-            <End Role="Empleados" EntitySet="Empleados" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PacienteExamen_ExamenClinico" Association="Self.FK_PacienteExamen_ExamenClinico">
-            <End Role="ExamenesClinicos" EntitySet="ExamenesClinicos" />
-            <End Role="Examenes" EntitySet="Examenes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PacienteExamen_HistoriaClinica" Association="Self.FK_PacienteExamen_HistoriaClinica">
-            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
-            <End Role="Examenes" EntitySet="Examenes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExamenComplementario_HistoriaClinica" Association="Self.FK_ExamenComplementario_HistoriaClinica">
-            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
-            <End Role="ExamenesComplementarios" EntitySet="ExamenesComplementarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Factura_Paciente" Association="Self.FK_Factura_Paciente">
-            <End Role="Pacientes" EntitySet="Pacientes" />
-            <End Role="Facturas" EntitySet="Facturas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HistoriaClinica_Paciente" Association="Self.FK_HistoriaClinica_Paciente">
-            <End Role="Pacientes" EntitySet="Pacientes" />
-            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HistoriaClinica_Tratamiento" Association="Self.FK_HistoriaClinica_Tratamiento">
-            <End Role="Tratamientos" EntitySet="Tratamientos" />
-            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Radiografias_HistoriaClinica" Association="Self.FK_Radiografias_HistoriaClinica">
-            <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
-            <End Role="Radiografias" EntitySet="Radiografias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Paciente_Sexo" Association="Self.FK_Paciente_Sexo">
-            <End Role="Sexos" EntitySet="Sexos" />
-            <End Role="Pacientes" EntitySet="Pacientes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Paciente_TipoIdentificacion" Association="Self.FK_Paciente_TipoIdentificacion">
-            <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
-            <End Role="Pacientes" EntitySet="Pacientes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PacienteResponsable_Paciente" Association="Self.FK_PacienteResponsable_Paciente">
-            <End Role="Pacientes" EntitySet="Pacientes" />
-            <End Role="PacientesResponsables" EntitySet="PacientesResponsables" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PacienteResponsable_Responsable" Association="Self.FK_PacienteResponsable_Responsable">
-            <End Role="Responsables" EntitySet="Responsables" />
-            <End Role="PacientesResponsables" EntitySet="PacientesResponsables" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RolPagina_Pagina1" Association="Self.FK_RolPagina_Pagina1">
-            <End Role="Paginas" EntitySet="Paginas" />
-            <End Role="RolesPaginas" EntitySet="RolesPaginas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RolPagina_Rol" Association="Self.FK_RolPagina_Rol">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="RolesPaginas" EntitySet="RolesPaginas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tratamientos_TiposTratamientos" Association="Self.FK_Tratamientos_TiposTratamientos">
-            <End Role="TiposTratamientos" EntitySet="TiposTratamientos" />
-            <End Role="Tratamientos" EntitySet="Tratamientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
-            <End Role="TiposUsuarios" EntitySet="TiposUsuarios" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1751,346 +1772,357 @@
           <EntitySetMapping Name="Anamnesis">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Anamnesis">
               <MappingFragment StoreEntitySet="Anamnesis">
-                <ScalarProperty Name="IdAnamnesis" ColumnName="IdAnamnesis" />
-                <ScalarProperty Name="Diabetes" ColumnName="Diabetes" />
-                <ScalarProperty Name="Epilepsia" ColumnName="Epilepsia" />
-                <ScalarProperty Name="TBC" ColumnName="TBC" />
-                <ScalarProperty Name="EnfRespiratorias" ColumnName="EnfRespiratorias" />
-                <ScalarProperty Name="CardiopatiasH" ColumnName="CardiopatiasH" />
-                <ScalarProperty Name="Alergias" ColumnName="Alergias" />
-                <ScalarProperty Name="HepatitisVIH" ColumnName="HepatitisVIH" />
-                <ScalarProperty Name="EnfGastro" ColumnName="EnfGastro" />
-                <ScalarProperty Name="Hemorragias" ColumnName="Hemorragias" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Hemorragias" ColumnName="Hemorragias" />
+                <ScalarProperty Name="EnfGastro" ColumnName="EnfGastro" />
+                <ScalarProperty Name="HepatitisVIH" ColumnName="HepatitisVIH" />
+                <ScalarProperty Name="Alergias" ColumnName="Alergias" />
+                <ScalarProperty Name="CardiopatiasH" ColumnName="CardiopatiasH" />
+                <ScalarProperty Name="EnfRespiratorias" ColumnName="EnfRespiratorias" />
+                <ScalarProperty Name="TBC" ColumnName="TBC" />
+                <ScalarProperty Name="Epilepsia" ColumnName="Epilepsia" />
+                <ScalarProperty Name="Diabetes" ColumnName="Diabetes" />
+                <ScalarProperty Name="IdAnamnesis" ColumnName="IdAnamnesis" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Antecedentes">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Antecedentes">
               <MappingFragment StoreEntitySet="Antecedentes">
-                <ScalarProperty Name="IdPacienteAnamnesis" ColumnName="IdPacienteAnamnesis" />
-                <ScalarProperty Name="TipoAntededente" ColumnName="TipoAntededente" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
                 <ScalarProperty Name="IdAnamnesis" ColumnName="IdAnamnesis" />
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="TipoAntededente" ColumnName="TipoAntededente" />
+                <ScalarProperty Name="IdPacienteAnamnesis" ColumnName="IdPacienteAnamnesis" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Condiciones">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Condiciones">
               <MappingFragment StoreEntitySet="Condiciones">
-                <ScalarProperty Name="IdCondicionOdontograma" ColumnName="IdCondicionOdontograma" />
-                <ScalarProperty Name="Condicion" ColumnName="Condicion" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
-                <ScalarProperty Name="IdOdontograma" ColumnName="IdOdontograma" />
                 <ScalarProperty Name="IdHistoriaClinica" ColumnName="IdHistoriaClinica" />
+                <ScalarProperty Name="IdOdontograma" ColumnName="IdOdontograma" />
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Condicion" ColumnName="Condicion" />
+                <ScalarProperty Name="IdCondicionOdontograma" ColumnName="IdCondicionOdontograma" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Consultas">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Consultas">
               <MappingFragment StoreEntitySet="Consultas">
-                <ScalarProperty Name="IdConsulta" ColumnName="IdConsulta" />
-                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
-                <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="IdHistoriaClinica" ColumnName="IdHistoriaClinica" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="IdConsulta" ColumnName="IdConsulta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Departamentos">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Departamentos">
               <MappingFragment StoreEntitySet="Departamentos">
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
-                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DetallesFacturas">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.DetallesFacturas">
               <MappingFragment StoreEntitySet="DetallesFacturas">
-                <ScalarProperty Name="IdDetalleFactura" ColumnName="IdDetalleFactura" />
-                <ScalarProperty Name="Abono" ColumnName="Abono" />
-                <ScalarProperty Name="FechaAbono" ColumnName="FechaAbono" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="FechaAbono" ColumnName="FechaAbono" />
+                <ScalarProperty Name="Abono" ColumnName="Abono" />
+                <ScalarProperty Name="IdDetalleFactura" ColumnName="IdDetalleFactura" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Empleados">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Empleados">
               <MappingFragment StoreEntitySet="Empleados">
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="FechaContrato" ColumnName="FechaContrato" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="TieneUsuario" ColumnName="TieneUsuario" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="IdTipoContrato" ColumnName="IdTipoContrato" />
-                <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
-                <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
                 <ScalarProperty Name="IdSueldo" ColumnName="IdSueldo" />
+                <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+                <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
+                <ScalarProperty Name="IdTipoContrato" ColumnName="IdTipoContrato" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="TieneUsuario" ColumnName="TieneUsuario" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="FechaContrato" ColumnName="FechaContrato" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Examenes">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Examenes">
               <MappingFragment StoreEntitySet="Examenes">
-                <ScalarProperty Name="IdPacienteExamen" ColumnName="IdPacienteExamen" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="IdExamenClinico" ColumnName="IdExamenClinico" />
                 <ScalarProperty Name="IdHistoriaClinica" ColumnName="IdHistoriaClinica" />
+                <ScalarProperty Name="IdExamenClinico" ColumnName="IdExamenClinico" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="IdPacienteExamen" ColumnName="IdPacienteExamen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ExamenesClinicos">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.ExamenesClinicos">
               <MappingFragment StoreEntitySet="ExamenesClinicos">
-                <ScalarProperty Name="IdExamenClinico" ColumnName="IdExamenClinico" />
-                <ScalarProperty Name="Labios" ColumnName="Labios" />
-                <ScalarProperty Name="Encias" ColumnName="Encias" />
-                <ScalarProperty Name="Carrillos" ColumnName="Carrillos" />
-                <ScalarProperty Name="Lengua" ColumnName="Lengua" />
-                <ScalarProperty Name="Paladar" ColumnName="Paladar" />
-                <ScalarProperty Name="PisoBoca" ColumnName="PisoBoca" />
-                <ScalarProperty Name="Uvula" ColumnName="Uvula" />
-                <ScalarProperty Name="GlandulasSalivales" ColumnName="GlandulasSalivales" />
                 <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="GlandulasSalivales" ColumnName="GlandulasSalivales" />
+                <ScalarProperty Name="Uvula" ColumnName="Uvula" />
+                <ScalarProperty Name="PisoBoca" ColumnName="PisoBoca" />
+                <ScalarProperty Name="Paladar" ColumnName="Paladar" />
+                <ScalarProperty Name="Lengua" ColumnName="Lengua" />
+                <ScalarProperty Name="Carrillos" ColumnName="Carrillos" />
+                <ScalarProperty Name="Encias" ColumnName="Encias" />
+                <ScalarProperty Name="Labios" ColumnName="Labios" />
+                <ScalarProperty Name="IdExamenClinico" ColumnName="IdExamenClinico" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ExamenesComplementarios">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.ExamenesComplementarios">
               <MappingFragment StoreEntitySet="ExamenesComplementarios">
-                <ScalarProperty Name="IdExamenComplementario" ColumnName="IdExamenComplementario" />
-                <ScalarProperty Name="TipoExamen" ColumnName="TipoExamen" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="IdHistoriaClinica" ColumnName="IdHistoriaClinica" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="TipoExamen" ColumnName="TipoExamen" />
+                <ScalarProperty Name="IdExamenComplementario" ColumnName="IdExamenComplementario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Facturas">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Facturas">
               <MappingFragment StoreEntitySet="Facturas">
-                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
-                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="FechaFactura" ColumnName="FechaFactura" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="HistoriasClinicas">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.HistoriasClinicas">
               <MappingFragment StoreEntitySet="HistoriasClinicas">
-                <ScalarProperty Name="IdHistoriaClinica" ColumnName="IdHistoriaClinica" />
-                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
-                <ScalarProperty Name="IdTratamiento" ColumnName="IdTratamiento" />
                 <ScalarProperty Name="NumeroHistoria" ColumnName="NumeroHistoria" />
+                <ScalarProperty Name="IdTratamiento" ColumnName="IdTratamiento" />
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="FechaFinal" ColumnName="FechaFinal" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="IdHistoriaClinica" ColumnName="IdHistoriaClinica" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Municipios">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Municipios">
               <MappingFragment StoreEntitySet="Municipios">
-                <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
-                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="IdMunicipio" ColumnName="IdMunicipio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Odontogramas">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Odontogramas">
               <MappingFragment StoreEntitySet="Odontogramas">
-                <ScalarProperty Name="IdOdontograma" ColumnName="IdOdontograma" />
-                <ScalarProperty Name="Posicion" ColumnName="Posicion" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+                <ScalarProperty Name="IdOdontograma" ColumnName="IdOdontograma" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pacientes">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Pacientes">
               <MappingFragment StoreEntitySet="Pacientes">
-                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-                <ScalarProperty Name="Edad" ColumnName="Edad" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="Ocupacion" ColumnName="Ocupacion" />
-                <ScalarProperty Name="Aseguradora" ColumnName="Aseguradora" />
-                <ScalarProperty Name="Vinculacion" ColumnName="Vinculacion" />
-                <ScalarProperty Name="MotivoConsulta" ColumnName="MotivoConsulta" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
-                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
                 <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+                <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
+                <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="MotivoConsulta" ColumnName="MotivoConsulta" />
+                <ScalarProperty Name="Vinculacion" ColumnName="Vinculacion" />
+                <ScalarProperty Name="Aseguradora" ColumnName="Aseguradora" />
+                <ScalarProperty Name="Ocupacion" ColumnName="Ocupacion" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Barrio" ColumnName="Barrio" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PacientesResponsables">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.PacientesResponsables">
               <MappingFragment StoreEntitySet="PacientesResponsables">
-                <ScalarProperty Name="IdPacienteResponsable" ColumnName="IdPacienteResponsable" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
                 <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="IdPacienteResponsable" ColumnName="IdPacienteResponsable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Paginas">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Paginas">
               <MappingFragment StoreEntitySet="Paginas">
-                <ScalarProperty Name="IdPagina" ColumnName="IdPagina" />
-                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
-                <ScalarProperty Name="Accion" ColumnName="Accion" />
-                <ScalarProperty Name="Controlador" ColumnName="Controlador" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+                <ScalarProperty Name="Accion" ColumnName="Accion" />
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="IdPagina" ColumnName="IdPagina" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Radiografias">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Radiografias">
               <MappingFragment StoreEntitySet="Radiografias">
-                <ScalarProperty Name="IdRadiografia" ColumnName="IdRadiografia" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Radiografia" ColumnName="Radiografia" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="IdHistoriaClinica" ColumnName="IdHistoriaClinica" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Radiografia" ColumnName="Radiografia" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdRadiografia" ColumnName="IdRadiografia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Responsables">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Responsables">
               <MappingFragment StoreEntitySet="Responsables">
-                <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Parentesco" ColumnName="Parentesco" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Parentesco" ColumnName="Parentesco" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Roles">
               <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="NombreR" ColumnName="NombreR" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NombreR" ColumnName="NombreR" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RolesPaginas">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.RolesPaginas">
               <MappingFragment StoreEntitySet="RolesPaginas">
-                <ScalarProperty Name="IdRolPagina" ColumnName="IdRolPagina" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="IdPagina" ColumnName="IdPagina" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="IdRolPagina" ColumnName="IdRolPagina" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sexos">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Sexos">
               <MappingFragment StoreEntitySet="Sexos">
-                <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sueldos">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Sueldos">
               <MappingFragment StoreEntitySet="Sueldos">
-                <ScalarProperty Name="IdSueldo" ColumnName="IdSueldo" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdSueldo" ColumnName="IdSueldo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ConsultorioOdonBDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TiposContratos">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.TiposContratos">
               <MappingFragment StoreEntitySet="TiposContratos">
-                <ScalarProperty Name="IdTipoContrato" ColumnName="IdTipoContrato" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdTipoContrato" ColumnName="IdTipoContrato" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TiposIdentificacion">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.TiposIdentificacion">
               <MappingFragment StoreEntitySet="TiposIdentificacion">
-                <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
-                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
-                <ScalarProperty Name="Numero" ColumnName="Numero" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TiposTratamientos">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.TiposTratamientos">
               <MappingFragment StoreEntitySet="TiposTratamientos">
-                <ScalarProperty Name="IdTipoTratamiento" ColumnName="IdTipoTratamiento" />
-                <ScalarProperty Name="TipoTratamiento" ColumnName="TipoTratamiento" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="TipoTratamiento" ColumnName="TipoTratamiento" />
+                <ScalarProperty Name="IdTipoTratamiento" ColumnName="IdTipoTratamiento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TiposUsuarios">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.TiposUsuarios">
               <MappingFragment StoreEntitySet="TiposUsuarios">
-                <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tratamientos">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Tratamientos">
               <MappingFragment StoreEntitySet="Tratamientos">
-                <ScalarProperty Name="IdTratamiento" ColumnName="IdTratamiento" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="IdConsulta" ColumnName="IdConsulta" />
                 <ScalarProperty Name="IdTipoTratamiento" ColumnName="IdTipoTratamiento" />
+                <ScalarProperty Name="IdConsulta" ColumnName="IdConsulta" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="IdTratamiento" ColumnName="IdTratamiento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="NombreU" ColumnName="NombreU" />
-                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="NombreU" ColumnName="NombreU" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

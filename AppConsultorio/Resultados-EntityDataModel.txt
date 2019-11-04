@@ -1,0 +1,3 @@
+﻿Archivo de modelo generado: BDConsultorio.edmx.
+La carga de los metadatos desde la base de datos tardó 00:00:01.0571589.
+La generación del modelo tardó 00:00:01.7273181.

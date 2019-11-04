@@ -323,6 +323,9 @@
     <Compile Include="Models\Sueldos.cs">
       <DependentUpon>BDConsultorio.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>BDConsultorio.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TiposContratos.cs">
       <DependentUpon>BDConsultorio.tt</DependentUpon>
     </Compile>
