@@ -172,6 +172,8 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="webfonts\Roboto-Bold.svg" />
     <Content Include="webfonts\Roboto-Light.svg" />
     <Content Include="webfonts\Roboto-Regular.svg" />
@@ -323,9 +325,6 @@
     <Compile Include="Models\Sueldos.cs">
       <DependentUpon>BDConsultorio.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>BDConsultorio.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TiposContratos.cs">
       <DependentUpon>BDConsultorio.tt</DependentUpon>
     </Compile>
@@ -370,6 +369,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Empleado\_InfoEmpleado.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

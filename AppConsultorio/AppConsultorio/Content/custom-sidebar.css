@@ -137,3 +137,8 @@ body {
   background-color: #eeeeee;  
 }
 /*2.*/
+@media screen and (max-width: 960px) {
+    .word-size {
+        font-size: .8em;
+    }
+}

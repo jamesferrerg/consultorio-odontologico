@@ -24,7 +24,6 @@
     <EntitySet Name="RolesPaginas" EntityType="ConsultorioOdonBDModel.RolesPaginas" />
     <EntitySet Name="Sexos" EntityType="ConsultorioOdonBDModel.Sexos" />
     <EntitySet Name="Sueldos" EntityType="ConsultorioOdonBDModel.Sueldos" />
-    <EntitySet Name="sysdiagrams" EntityType="ConsultorioOdonBDModel.sysdiagrams" />
     <EntitySet Name="TiposContratos" EntityType="ConsultorioOdonBDModel.TiposContratos" />
     <EntitySet Name="TiposIdentificacion" EntityType="ConsultorioOdonBDModel.TiposIdentificacion" />
     <EntitySet Name="TiposTratamientos" EntityType="ConsultorioOdonBDModel.TiposTratamientos" />
@@ -459,27 +458,17 @@
       <PropertyRef Name="IdSueldo" />
     </Key>
     <Property Name="IdSueldo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Cantidad" Type="Int64" />
     <Property Name="Habilitado" Type="Int32" />
     <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sueldo" FromRole="Sueldos" ToRole="Empleados" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="TiposContratos">
     <Key>
       <PropertyRef Name="IdTipoContrato" />
     </Key>
     <Property Name="IdTipoContrato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contrato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Habilitado" Type="Int32" />
     <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleado_TipoContrato" FromRole="TiposContratos" ToRole="Empleados" />
   </EntityType>

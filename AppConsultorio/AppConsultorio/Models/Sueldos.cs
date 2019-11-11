@@ -21,7 +21,7 @@ namespace AppConsultorio.Models
         }
     
         public int IdSueldo { get; set; }
-        public string Nombre { get; set; }
+        public string Cargo { get; set; }
         public Nullable<long> Cantidad { get; set; }
         public Nullable<int> Habilitado { get; set; }
     

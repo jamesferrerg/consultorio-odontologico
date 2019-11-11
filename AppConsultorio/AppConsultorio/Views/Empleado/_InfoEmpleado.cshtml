@@ -1,0 +1,47 @@
+﻿@using AppConsultorio.Models
+@model List<EmpleadoCLS>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6">
+                <div class="container">
+                    <div class="card">
+                        <div class="card-header">
+                            <b>
+                                @item.nombre
+                                @item.apellido
+                            </b>
+                        </div>
+                        <div class="card-group">
+                            <div class="card">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">@item.identificacion</li>
+                                    <li class="list-group-item">Dirección: @item.direccion</li>
+                                    <li class="list-group-item">Barrio: @item.barrio</li>
+                                    <li class="list-group-item">Sexo: @item.sexoFM</li>
+                                    <li class="list-group-item">Fecha de contrato: @item.fechacontrato.ToString("dd/MM/yyyy")</li>
+                                </ul>
+                            </div>
+                            <div class="card">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Número: @item.numeroIdentificacion</li>
+                                    <li class="list-group-item">Teléfono: @item.telefono</li>
+                                    <li class="list-group-item">Celular: @item.celular</li>
+                                    <li class="list-group-item">@item.nombreContrato</li>
+                                    <li class="list-group-item">Cargo: @item.nombreSueldo</li>
+                                    <li class="list-group-item">Salario: @item.cantidad.ToString("#,##0")</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            @*@Html.ActionLink(" ","Editar","Empleado", new { id=@})*@
+                            <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                            <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+        }
+    </div>
