@@ -37,12 +37,19 @@ namespace AppConsultorio.Models
         [Required]
         public long celular { get; set; }
         public int tieneusuario { get; set; }
+        [Display(Name = "Número de identificación")]
+        [Required]
+        public string numeroIdentificacion { get; set; }
         public int habilitado { get; set; }
         // 1. Id's de otras tablas
+        [Required]
         public int idtipoContrato { get; set; }
+        [Required]
         public int idSexo { get; set; }
+        [Required]
         public int idtipoIdentificacion { get; set; }
-        public int idSueldo { get; set; }
+        [Required]
+        public int idCargo { get; set; }
         // 2. Propiedades adicionales
         // 2.1 Tabla tipo contrato
         [Display(Name = "Contrato")]
@@ -52,18 +59,16 @@ namespace AppConsultorio.Models
         [Display(Name = "Sexo")]
         [Required]
         public string sexoFM { get; set; }
+        // 2.3 Tabla tipo identificacion
         [Display(Name = "Identificación")]
         [Required]
-        public string identificacion { get; set; }
-        [Display(Name = "Número de identificación")]
+        public string tipoIdentificacion { get; set; }
+        //2.4 tabla cargo
+        [Display(Name = "Cargo a desempeñar")]
         [Required]
-        public string numeroIdentificacion { get; set; }
-        // 2.3 Tabla sueldo
-        [Display(Name = "Razón de salario")]
-        [Required]
-        public string nombreSueldo { get; set; }
+        public string nombreCargo { get; set; }
         [Display(Name = "Salario")]
         [Required]
-        public long cantidad { get; set; }
+        public long salario { get; set; }
     }
 }

@@ -16,7 +16,7 @@
                         <div class="card-group">
                             <div class="card">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">@item.identificacion</li>
+                                    <li class="list-group-item">@item.tipoIdentificacion</li>
                                     <li class="list-group-item">Dirección: @item.direccion</li>
                                     <li class="list-group-item">Barrio: @item.barrio</li>
                                     <li class="list-group-item">Sexo: @item.sexoFM</li>
@@ -29,15 +29,18 @@
                                     <li class="list-group-item">Teléfono: @item.telefono</li>
                                     <li class="list-group-item">Celular: @item.celular</li>
                                     <li class="list-group-item">@item.nombreContrato</li>
-                                    <li class="list-group-item">Cargo: @item.nombreSueldo</li>
-                                    <li class="list-group-item">Salario: @item.cantidad.ToString("#,##0")</li>
+                                    <li class="list-group-item">Cargo: @item.nombreCargo</li>
+                                    <li class="list-group-item">Salario: @item.salario.ToString("#,##0")</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="card-footer text-center">
-                            @*@Html.ActionLink(" ","Editar","Empleado", new { id=@})*@
-                            <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                            <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                            <button type="button" onclick="Editar(@item.idempleado)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="button" onclick="Eliminar()" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -22,15 +22,16 @@ namespace AppConsultorio.Models
         public string Barrio { get; set; }
         public Nullable<long> Telefono { get; set; }
         public Nullable<long> Celular { get; set; }
+        public string NumeroIdentificacion { get; set; }
         public Nullable<int> TieneUsuario { get; set; }
         public Nullable<int> Habilitado { get; set; }
         public Nullable<int> IdTipoContrato { get; set; }
         public Nullable<int> IdSexo { get; set; }
         public Nullable<int> IdTipoIdentificacion { get; set; }
-        public Nullable<int> IdSueldo { get; set; }
+        public Nullable<int> IdCargo { get; set; }
     
+        public virtual Cargos Cargos { get; set; }
         public virtual Sexos Sexos { get; set; }
-        public virtual Sueldos Sueldos { get; set; }
         public virtual TiposContratos TiposContratos { get; set; }
         public virtual TiposIdentificacion TiposIdentificacion { get; set; }
         public virtual Usuarios Usuarios { get; set; }

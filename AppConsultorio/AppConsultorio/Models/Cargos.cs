@@ -12,18 +12,19 @@ namespace AppConsultorio.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Sueldos
+    public partial class Cargos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Sueldos()
+        public Cargos()
         {
             this.Empleados = new HashSet<Empleados>();
         }
     
-        public int IdSueldo { get; set; }
+        public int IdCargo { get; set; }
         public string Cargo { get; set; }
-        public Nullable<long> Cantidad { get; set; }
+        public Nullable<long> Salario { get; set; }
         public Nullable<int> Habilitado { get; set; }
+        public string Observacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Empleados> Empleados { get; set; }

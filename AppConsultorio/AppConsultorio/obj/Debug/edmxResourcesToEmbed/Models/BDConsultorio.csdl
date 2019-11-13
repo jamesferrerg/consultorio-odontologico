@@ -3,6 +3,7 @@
   <EntityContainer Name="ConsultorioOdonBDEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Anamnesis" EntityType="ConsultorioOdonBDModel.Anamnesis" />
     <EntitySet Name="Antecedentes" EntityType="ConsultorioOdonBDModel.Antecedentes" />
+    <EntitySet Name="Cargos" EntityType="ConsultorioOdonBDModel.Cargos" />
     <EntitySet Name="Condiciones" EntityType="ConsultorioOdonBDModel.Condiciones" />
     <EntitySet Name="Consultas" EntityType="ConsultorioOdonBDModel.Consultas" />
     <EntitySet Name="Departamentos" EntityType="ConsultorioOdonBDModel.Departamentos" />
@@ -23,7 +24,6 @@
     <EntitySet Name="Roles" EntityType="ConsultorioOdonBDModel.Roles" />
     <EntitySet Name="RolesPaginas" EntityType="ConsultorioOdonBDModel.RolesPaginas" />
     <EntitySet Name="Sexos" EntityType="ConsultorioOdonBDModel.Sexos" />
-    <EntitySet Name="Sueldos" EntityType="ConsultorioOdonBDModel.Sueldos" />
     <EntitySet Name="TiposContratos" EntityType="ConsultorioOdonBDModel.TiposContratos" />
     <EntitySet Name="TiposIdentificacion" EntityType="ConsultorioOdonBDModel.TiposIdentificacion" />
     <EntitySet Name="TiposTratamientos" EntityType="ConsultorioOdonBDModel.TiposTratamientos" />
@@ -37,6 +37,10 @@
     <AssociationSet Name="FK_PacienteAnamnesis_Paciente" Association="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Paciente">
       <End Role="Pacientes" EntitySet="Pacientes" />
       <End Role="Antecedentes" EntitySet="Antecedentes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empleados_Cargos" Association="ConsultorioOdonBDModel.FK_Empleados_Cargos">
+      <End Role="Cargos" EntitySet="Cargos" />
+      <End Role="Empleados" EntitySet="Empleados" />
     </AssociationSet>
     <AssociationSet Name="FK_CondicionOdontograma_HistoriaClinica" Association="ConsultorioOdonBDModel.FK_CondicionOdontograma_HistoriaClinica">
       <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
@@ -68,10 +72,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_Empleado_Sexo" Association="ConsultorioOdonBDModel.FK_Empleado_Sexo">
       <End Role="Sexos" EntitySet="Sexos" />
-      <End Role="Empleados" EntitySet="Empleados" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Empleado_Sueldo" Association="ConsultorioOdonBDModel.FK_Empleado_Sueldo">
-      <End Role="Sueldos" EntitySet="Sueldos" />
       <End Role="Empleados" EntitySet="Empleados" />
     </AssociationSet>
     <AssociationSet Name="FK_Empleado_TipoContrato" Association="ConsultorioOdonBDModel.FK_Empleado_TipoContrato">
@@ -181,6 +181,17 @@
     <NavigationProperty Name="Anamnesis" Relationship="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Anamnesis" FromRole="Antecedentes" ToRole="Anamnesis" />
     <NavigationProperty Name="Pacientes" Relationship="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Paciente" FromRole="Antecedentes" ToRole="Pacientes" />
   </EntityType>
+  <EntityType Name="Cargos">
+    <Key>
+      <PropertyRef Name="IdCargo" />
+    </Key>
+    <Property Name="IdCargo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Salario" Type="Int64" />
+    <Property Name="Habilitado" Type="Int32" />
+    <Property Name="Observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleados_Cargos" FromRole="Cargos" ToRole="Empleados" />
+  </EntityType>
   <EntityType Name="Condiciones">
     <Key>
       <PropertyRef Name="IdCondicionOdontograma" />
@@ -242,14 +253,15 @@
     <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Telefono" Type="Int64" />
     <Property Name="Celular" Type="Int64" />
+    <Property Name="NumeroIdentificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="TieneUsuario" Type="Int32" />
     <Property Name="Habilitado" Type="Int32" />
     <Property Name="IdTipoContrato" Type="Int32" />
     <Property Name="IdSexo" Type="Int32" />
     <Property Name="IdTipoIdentificacion" Type="Int32" />
-    <Property Name="IdSueldo" Type="Int32" />
+    <Property Name="IdCargo" Type="Int32" />
+    <NavigationProperty Name="Cargos" Relationship="ConsultorioOdonBDModel.FK_Empleados_Cargos" FromRole="Empleados" ToRole="Cargos" />
     <NavigationProperty Name="Sexos" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sexo" FromRole="Empleados" ToRole="Sexos" />
-    <NavigationProperty Name="Sueldos" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sueldo" FromRole="Empleados" ToRole="Sueldos" />
     <NavigationProperty Name="TiposContratos" Relationship="ConsultorioOdonBDModel.FK_Empleado_TipoContrato" FromRole="Empleados" ToRole="TiposContratos" />
     <NavigationProperty Name="TiposIdentificacion" Relationship="ConsultorioOdonBDModel.FK_Empleado_TipoIdentificacion" FromRole="Empleados" ToRole="TiposIdentificacion" />
     <NavigationProperty Name="Usuarios" Relationship="ConsultorioOdonBDModel.FK_Usuario_Empleado" FromRole="Empleados" ToRole="Usuarios" />
@@ -453,16 +465,6 @@
     <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sexo" FromRole="Sexos" ToRole="Empleados" />
     <NavigationProperty Name="Pacientes" Relationship="ConsultorioOdonBDModel.FK_Paciente_Sexo" FromRole="Sexos" ToRole="Pacientes" />
   </EntityType>
-  <EntityType Name="Sueldos">
-    <Key>
-      <PropertyRef Name="IdSueldo" />
-    </Key>
-    <Property Name="IdSueldo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Cantidad" Type="Int64" />
-    <Property Name="Habilitado" Type="Int32" />
-    <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sueldo" FromRole="Sueldos" ToRole="Empleados" />
-  </EntityType>
   <EntityType Name="TiposContratos">
     <Key>
       <PropertyRef Name="IdTipoContrato" />
@@ -477,8 +479,7 @@
       <PropertyRef Name="IdTipoIdentificacion" />
     </Key>
     <Property Name="IdTipoIdentificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Identificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TipoIdentificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Habilitado" Type="Int32" />
     <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleado_TipoIdentificacion" FromRole="TiposIdentificacion" ToRole="Empleados" />
     <NavigationProperty Name="Pacientes" Relationship="ConsultorioOdonBDModel.FK_Paciente_TipoIdentificacion" FromRole="TiposIdentificacion" ToRole="Pacientes" />
@@ -549,6 +550,18 @@
       </Principal>
       <Dependent Role="Antecedentes">
         <PropertyRef Name="IdPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleados_Cargos">
+    <End Type="ConsultorioOdonBDModel.Cargos" Role="Cargos" Multiplicity="0..1" />
+    <End Type="ConsultorioOdonBDModel.Empleados" Role="Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cargos">
+        <PropertyRef Name="IdCargo" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="IdCargo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -645,18 +658,6 @@
       </Principal>
       <Dependent Role="Empleados">
         <PropertyRef Name="IdSexo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Empleado_Sueldo">
-    <End Type="ConsultorioOdonBDModel.Sueldos" Role="Sueldos" Multiplicity="0..1" />
-    <End Type="ConsultorioOdonBDModel.Empleados" Role="Empleados" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Sueldos">
-        <PropertyRef Name="IdSueldo" />
-      </Principal>
-      <Dependent Role="Empleados">
-        <PropertyRef Name="IdSueldo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -27,6 +27,7 @@ namespace AppConsultorio.Models
     
         public virtual DbSet<Anamnesis> Anamnesis { get; set; }
         public virtual DbSet<Antecedentes> Antecedentes { get; set; }
+        public virtual DbSet<Cargos> Cargos { get; set; }
         public virtual DbSet<Condiciones> Condiciones { get; set; }
         public virtual DbSet<Consultas> Consultas { get; set; }
         public virtual DbSet<Departamentos> Departamentos { get; set; }
@@ -47,7 +48,6 @@ namespace AppConsultorio.Models
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<RolesPaginas> RolesPaginas { get; set; }
         public virtual DbSet<Sexos> Sexos { get; set; }
-        public virtual DbSet<Sueldos> Sueldos { get; set; }
         public virtual DbSet<TiposContratos> TiposContratos { get; set; }
         public virtual DbSet<TiposIdentificacion> TiposIdentificacion { get; set; }
         public virtual DbSet<TiposTratamientos> TiposTratamientos { get; set; }

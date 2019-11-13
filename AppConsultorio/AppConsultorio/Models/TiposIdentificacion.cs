@@ -22,8 +22,7 @@ namespace AppConsultorio.Models
         }
     
         public int IdTipoIdentificacion { get; set; }
-        public string Identificacion { get; set; }
-        public string Numero { get; set; }
+        public string TipoIdentificacion { get; set; }
         public Nullable<int> Habilitado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -32,6 +32,16 @@
           <Property Name="IdPaciente" Type="int" />
           <Property Name="IdAnamnesis" Type="int" />
         </EntityType>
+        <EntityType Name="Cargos">
+          <Key>
+            <PropertyRef Name="IdCargo" />
+          </Key>
+          <Property Name="IdCargo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cargo" Type="varchar" MaxLength="100" />
+          <Property Name="Salario" Type="bigint" />
+          <Property Name="Habilitado" Type="int" />
+          <Property Name="Observacion" Type="varchar" MaxLength="150" />
+        </EntityType>
         <EntityType Name="Condiciones">
           <Key>
             <PropertyRef Name="IdCondicionOdontograma" />
@@ -86,12 +96,13 @@
           <Property Name="Barrio" Type="varchar" MaxLength="50" />
           <Property Name="Telefono" Type="bigint" />
           <Property Name="Celular" Type="bigint" />
+          <Property Name="NumeroIdentificacion" Type="varchar" MaxLength="50" />
           <Property Name="TieneUsuario" Type="int" />
           <Property Name="Habilitado" Type="int" />
           <Property Name="IdTipoContrato" Type="int" />
           <Property Name="IdSexo" Type="int" />
           <Property Name="IdTipoIdentificacion" Type="int" />
-          <Property Name="IdSueldo" Type="int" />
+          <Property Name="IdCargo" Type="int" />
         </EntityType>
         <EntityType Name="Examenes">
           <Key>
@@ -259,15 +270,6 @@
           <Property Name="Sexo" Type="varchar" MaxLength="20" />
           <Property Name="Habilitado" Type="int" />
         </EntityType>
-        <EntityType Name="Sueldos">
-          <Key>
-            <PropertyRef Name="IdSueldo" />
-          </Key>
-          <Property Name="IdSueldo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Cargo" Type="varchar" MaxLength="50" />
-          <Property Name="Cantidad" Type="bigint" />
-          <Property Name="Habilitado" Type="int" />
-        </EntityType>
         <EntityType Name="TiposContratos">
           <Key>
             <PropertyRef Name="IdTipoContrato" />
@@ -281,8 +283,7 @@
             <PropertyRef Name="IdTipoIdentificacion" />
           </Key>
           <Property Name="IdTipoIdentificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Identificacion" Type="varchar" MaxLength="100" />
-          <Property Name="Numero" Type="varchar" MaxLength="50" />
+          <Property Name="TipoIdentificacion" Type="varchar" MaxLength="100" />
           <Property Name="Habilitado" Type="int" />
         </EntityType>
         <EntityType Name="TiposTratamientos">
@@ -382,18 +383,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Empleado_Sueldo">
-          <End Role="Sueldos" Type="Self.Sueldos" Multiplicity="0..1" />
-          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sueldos">
-              <PropertyRef Name="IdSueldo" />
-            </Principal>
-            <Dependent Role="Empleados">
-              <PropertyRef Name="IdSueldo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Empleado_TipoContrato">
           <End Role="TiposContratos" Type="Self.TiposContratos" Multiplicity="0..1" />
           <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
@@ -417,6 +406,18 @@
             </Principal>
             <Dependent Role="Empleados">
               <PropertyRef Name="IdTipoIdentificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Cargos">
+          <End Role="Cargos" Type="Self.Cargos" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="IdCargo" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="IdCargo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -693,6 +694,7 @@
         <EntityContainer Name="ConsultorioOdonBDModelStoreContainer">
           <EntitySet Name="Anamnesis" EntityType="Self.Anamnesis" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Antecedentes" EntityType="Self.Antecedentes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cargos" EntityType="Self.Cargos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Condiciones" EntityType="Self.Condiciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Consultas" EntityType="Self.Consultas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
@@ -713,7 +715,6 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolesPaginas" EntityType="Self.RolesPaginas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sexos" EntityType="Self.Sexos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Sueldos" EntityType="Self.Sueldos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposContratos" EntityType="Self.TiposContratos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposTratamientos" EntityType="Self.TiposTratamientos" Schema="dbo" store:Type="Tables" />
@@ -740,16 +741,16 @@
             <End Role="Sexos" EntitySet="Sexos" />
             <End Role="Empleados" EntitySet="Empleados" />
           </AssociationSet>
-          <AssociationSet Name="FK_Empleado_Sueldo" Association="Self.FK_Empleado_Sueldo">
-            <End Role="Sueldos" EntitySet="Sueldos" />
-            <End Role="Empleados" EntitySet="Empleados" />
-          </AssociationSet>
           <AssociationSet Name="FK_Empleado_TipoContrato" Association="Self.FK_Empleado_TipoContrato">
             <End Role="TiposContratos" EntitySet="TiposContratos" />
             <End Role="Empleados" EntitySet="Empleados" />
           </AssociationSet>
           <AssociationSet Name="FK_Empleado_TipoIdentificacion" Association="Self.FK_Empleado_TipoIdentificacion">
             <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Cargos" Association="Self.FK_Empleados_Cargos">
+            <End Role="Cargos" EntitySet="Cargos" />
             <End Role="Empleados" EntitySet="Empleados" />
           </AssociationSet>
           <AssociationSet Name="FK_ExamenComplementario_HistoriaClinica" Association="Self.FK_ExamenComplementario_HistoriaClinica">
@@ -848,6 +849,7 @@
         <EntityContainer Name="ConsultorioOdonBDEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Anamnesis" EntityType="ConsultorioOdonBDModel.Anamnesis" />
           <EntitySet Name="Antecedentes" EntityType="ConsultorioOdonBDModel.Antecedentes" />
+          <EntitySet Name="Cargos" EntityType="ConsultorioOdonBDModel.Cargos" />
           <EntitySet Name="Condiciones" EntityType="ConsultorioOdonBDModel.Condiciones" />
           <EntitySet Name="Consultas" EntityType="ConsultorioOdonBDModel.Consultas" />
           <EntitySet Name="Departamentos" EntityType="ConsultorioOdonBDModel.Departamentos" />
@@ -868,7 +870,6 @@
           <EntitySet Name="Roles" EntityType="ConsultorioOdonBDModel.Roles" />
           <EntitySet Name="RolesPaginas" EntityType="ConsultorioOdonBDModel.RolesPaginas" />
           <EntitySet Name="Sexos" EntityType="ConsultorioOdonBDModel.Sexos" />
-          <EntitySet Name="Sueldos" EntityType="ConsultorioOdonBDModel.Sueldos" />
           <EntitySet Name="TiposContratos" EntityType="ConsultorioOdonBDModel.TiposContratos" />
           <EntitySet Name="TiposIdentificacion" EntityType="ConsultorioOdonBDModel.TiposIdentificacion" />
           <EntitySet Name="TiposTratamientos" EntityType="ConsultorioOdonBDModel.TiposTratamientos" />
@@ -882,6 +883,10 @@
           <AssociationSet Name="FK_PacienteAnamnesis_Paciente" Association="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Paciente">
             <End Role="Pacientes" EntitySet="Pacientes" />
             <End Role="Antecedentes" EntitySet="Antecedentes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleados_Cargos" Association="ConsultorioOdonBDModel.FK_Empleados_Cargos">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="Empleados" EntitySet="Empleados" />
           </AssociationSet>
           <AssociationSet Name="FK_CondicionOdontograma_HistoriaClinica" Association="ConsultorioOdonBDModel.FK_CondicionOdontograma_HistoriaClinica">
             <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
@@ -913,10 +918,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Empleado_Sexo" Association="ConsultorioOdonBDModel.FK_Empleado_Sexo">
             <End Role="Sexos" EntitySet="Sexos" />
-            <End Role="Empleados" EntitySet="Empleados" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Empleado_Sueldo" Association="ConsultorioOdonBDModel.FK_Empleado_Sueldo">
-            <End Role="Sueldos" EntitySet="Sueldos" />
             <End Role="Empleados" EntitySet="Empleados" />
           </AssociationSet>
           <AssociationSet Name="FK_Empleado_TipoContrato" Association="ConsultorioOdonBDModel.FK_Empleado_TipoContrato">
@@ -1026,6 +1027,17 @@
           <NavigationProperty Name="Anamnesis" Relationship="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Anamnesis" FromRole="Antecedentes" ToRole="Anamnesis" />
           <NavigationProperty Name="Pacientes" Relationship="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Paciente" FromRole="Antecedentes" ToRole="Pacientes" />
         </EntityType>
+        <EntityType Name="Cargos">
+          <Key>
+            <PropertyRef Name="IdCargo" />
+          </Key>
+          <Property Name="IdCargo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Salario" Type="Int64" />
+          <Property Name="Habilitado" Type="Int32" />
+          <Property Name="Observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleados_Cargos" FromRole="Cargos" ToRole="Empleados" />
+        </EntityType>
         <EntityType Name="Condiciones">
           <Key>
             <PropertyRef Name="IdCondicionOdontograma" />
@@ -1087,14 +1099,15 @@
           <Property Name="Barrio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Telefono" Type="Int64" />
           <Property Name="Celular" Type="Int64" />
+          <Property Name="NumeroIdentificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TieneUsuario" Type="Int32" />
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdTipoContrato" Type="Int32" />
           <Property Name="IdSexo" Type="Int32" />
           <Property Name="IdTipoIdentificacion" Type="Int32" />
-          <Property Name="IdSueldo" Type="Int32" />
+          <Property Name="IdCargo" Type="Int32" />
+          <NavigationProperty Name="Cargos" Relationship="ConsultorioOdonBDModel.FK_Empleados_Cargos" FromRole="Empleados" ToRole="Cargos" />
           <NavigationProperty Name="Sexos" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sexo" FromRole="Empleados" ToRole="Sexos" />
-          <NavigationProperty Name="Sueldos" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sueldo" FromRole="Empleados" ToRole="Sueldos" />
           <NavigationProperty Name="TiposContratos" Relationship="ConsultorioOdonBDModel.FK_Empleado_TipoContrato" FromRole="Empleados" ToRole="TiposContratos" />
           <NavigationProperty Name="TiposIdentificacion" Relationship="ConsultorioOdonBDModel.FK_Empleado_TipoIdentificacion" FromRole="Empleados" ToRole="TiposIdentificacion" />
           <NavigationProperty Name="Usuarios" Relationship="ConsultorioOdonBDModel.FK_Usuario_Empleado" FromRole="Empleados" ToRole="Usuarios" />
@@ -1298,16 +1311,6 @@
           <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sexo" FromRole="Sexos" ToRole="Empleados" />
           <NavigationProperty Name="Pacientes" Relationship="ConsultorioOdonBDModel.FK_Paciente_Sexo" FromRole="Sexos" ToRole="Pacientes" />
         </EntityType>
-        <EntityType Name="Sueldos">
-          <Key>
-            <PropertyRef Name="IdSueldo" />
-          </Key>
-          <Property Name="IdSueldo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Cantidad" Type="Int64" />
-          <Property Name="Habilitado" Type="Int32" />
-          <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sueldo" FromRole="Sueldos" ToRole="Empleados" />
-        </EntityType>
         <EntityType Name="TiposContratos">
           <Key>
             <PropertyRef Name="IdTipoContrato" />
@@ -1322,8 +1325,7 @@
             <PropertyRef Name="IdTipoIdentificacion" />
           </Key>
           <Property Name="IdTipoIdentificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Identificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Numero" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoIdentificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
           <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleado_TipoIdentificacion" FromRole="TiposIdentificacion" ToRole="Empleados" />
           <NavigationProperty Name="Pacientes" Relationship="ConsultorioOdonBDModel.FK_Paciente_TipoIdentificacion" FromRole="TiposIdentificacion" ToRole="Pacientes" />
@@ -1394,6 +1396,18 @@
             </Principal>
             <Dependent Role="Antecedentes">
               <PropertyRef Name="IdPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_Cargos">
+          <End Type="ConsultorioOdonBDModel.Cargos" Role="Cargos" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Empleados" Role="Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="IdCargo" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="IdCargo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1490,18 +1504,6 @@
             </Principal>
             <Dependent Role="Empleados">
               <PropertyRef Name="IdSexo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Empleado_Sueldo">
-          <End Type="ConsultorioOdonBDModel.Sueldos" Role="Sueldos" Multiplicity="0..1" />
-          <End Type="ConsultorioOdonBDModel.Empleados" Role="Empleados" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sueldos">
-              <PropertyRef Name="IdSueldo" />
-            </Principal>
-            <Dependent Role="Empleados">
-              <PropertyRef Name="IdSueldo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1776,6 +1778,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Cargos">
+            <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Cargos">
+              <MappingFragment StoreEntitySet="Cargos">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Condiciones">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Condiciones">
               <MappingFragment StoreEntitySet="Condiciones">
@@ -1825,12 +1838,13 @@
           <EntitySetMapping Name="Empleados">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Empleados">
               <MappingFragment StoreEntitySet="Empleados">
-                <ScalarProperty Name="IdSueldo" ColumnName="IdSueldo" />
+                <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
                 <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
                 <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
                 <ScalarProperty Name="IdTipoContrato" ColumnName="IdTipoContrato" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="TieneUsuario" ColumnName="TieneUsuario" />
+                <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
                 <ScalarProperty Name="Celular" ColumnName="Celular" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />
                 <ScalarProperty Name="Barrio" ColumnName="Barrio" />
@@ -2023,16 +2037,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sueldos">
-            <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Sueldos">
-              <MappingFragment StoreEntitySet="Sueldos">
-                <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
-                <ScalarProperty Name="IdSueldo" ColumnName="IdSueldo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TiposContratos">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.TiposContratos">
               <MappingFragment StoreEntitySet="TiposContratos">
@@ -2046,8 +2050,7 @@
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.TiposIdentificacion">
               <MappingFragment StoreEntitySet="TiposIdentificacion">
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="Numero" ColumnName="Numero" />
-                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="TipoIdentificacion" ColumnName="TipoIdentificacion" />
                 <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
               </MappingFragment>
             </EntityTypeMapping>

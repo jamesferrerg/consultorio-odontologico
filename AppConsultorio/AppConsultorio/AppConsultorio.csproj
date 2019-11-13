@@ -261,6 +261,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BDConsultorio.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cargos.cs">
+      <DependentUpon>BDConsultorio.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Condiciones.cs">
       <DependentUpon>BDConsultorio.tt</DependentUpon>
     </Compile>
@@ -320,9 +323,6 @@
       <DependentUpon>BDConsultorio.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sexos.cs">
-      <DependentUpon>BDConsultorio.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Sueldos.cs">
       <DependentUpon>BDConsultorio.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TiposContratos.cs">

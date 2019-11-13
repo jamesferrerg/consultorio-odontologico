@@ -30,6 +30,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Cargos">
+      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Cargos">
+        <MappingFragment StoreEntitySet="Cargos">
+          <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
+          <ScalarProperty Name="Salario" ColumnName="Salario" />
+          <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+          <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Condiciones">
       <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Condiciones">
         <MappingFragment StoreEntitySet="Condiciones">
@@ -79,12 +90,13 @@
     <EntitySetMapping Name="Empleados">
       <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Empleados">
         <MappingFragment StoreEntitySet="Empleados">
-          <ScalarProperty Name="IdSueldo" ColumnName="IdSueldo" />
+          <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
           <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
           <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
           <ScalarProperty Name="IdTipoContrato" ColumnName="IdTipoContrato" />
           <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
           <ScalarProperty Name="TieneUsuario" ColumnName="TieneUsuario" />
+          <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
           <ScalarProperty Name="Celular" ColumnName="Celular" />
           <ScalarProperty Name="Telefono" ColumnName="Telefono" />
           <ScalarProperty Name="Barrio" ColumnName="Barrio" />
@@ -277,16 +289,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Sueldos">
-      <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Sueldos">
-        <MappingFragment StoreEntitySet="Sueldos">
-          <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-          <ScalarProperty Name="Cargo" ColumnName="Cargo" />
-          <ScalarProperty Name="IdSueldo" ColumnName="IdSueldo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TiposContratos">
       <EntityTypeMapping TypeName="ConsultorioOdonBDModel.TiposContratos">
         <MappingFragment StoreEntitySet="TiposContratos">
@@ -300,8 +302,7 @@
       <EntityTypeMapping TypeName="ConsultorioOdonBDModel.TiposIdentificacion">
         <MappingFragment StoreEntitySet="TiposIdentificacion">
           <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="Numero" ColumnName="Numero" />
-          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="TipoIdentificacion" ColumnName="TipoIdentificacion" />
           <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
         </MappingFragment>
       </EntityTypeMapping>

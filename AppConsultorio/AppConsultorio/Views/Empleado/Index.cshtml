@@ -6,6 +6,8 @@
     //Castear
     List<SelectListItem> listaContrato = (List<SelectListItem>)ViewBag.listaContrato;
     List<SelectListItem> listaSexo = (List<SelectListItem>)ViewBag.listaSexo;
+    List<SelectListItem> listaIdentificacion = (List<SelectListItem>)ViewBag.listaIdentificacion;
+    List<SelectListItem> listaCargo = (List<SelectListItem>)ViewBag.listaCargo;
 }
 
 <h2>Empleados</h2>
@@ -58,37 +60,38 @@
                 <div class="row">
                     <div class="col-md-6">
                         @Html.Label("Nombres")
-                        @Html.TextBox("nombre", null, new { @class = "form-control" })
+                        @Html.TextBox("nombreC", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("nombre",new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
                         @Html.Label("Apellidos")
                         @Html.TextBox("apellido", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("apellido", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
                         @Html.Label("Identificación")
-                        <select class="form-control" id="identificacion" name="identificacion">
-                            <option value="Cédula de ciudadanía">Cédula de ciudadanía</option>
-                            <option value="Cédula de extranjería">Cédula de extranjería</option>
-                            <option value="Pasaporte">Pasaporte</option>
-                            <option value="Registro civil">Registro civil</option>
-                            <option value="Tarjeta de identidad">Tarjeta de identidad</option>
-                        </select>
+                        @Html.DropDownList("idtipoIdentificacion", listaIdentificacion, new { @class = "form-control" })
+                        @Html.ValidationMessage("idtipoIdentificacion", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
                         @Html.Label("Número de identificación")
-                        @Html.TextBox("numeroIdentificacion", null, new { @class = "form-control"})
+                        @Html.TextBox("numeroIdentificacion", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("numeroIdentificacion", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
                         @Html.Label("Sexo")
                         @Html.DropDownList("idSexo", listaSexo, new { @class = "form-control" })
+                        @Html.ValidationMessage("idSexo", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
                         @Html.Label("Dirección")
                         @Html.TextBox("direccion", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("direccion", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
                         @Html.Label("Barrio")
                         @Html.TextBox("barrio", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("barrio", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
                         @Html.Label("Teléfono fijo")
@@ -97,22 +100,22 @@
                     <div class="col-md-6">
                         @Html.Label("Celular")
                         @Html.TextBox("celular", null, new { @class = "form-control", @type = "number" })
+                        @Html.ValidationMessage("celular", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
                         @Html.Label("Contrato")
                         @Html.DropDownList("idtipoContrato", listaContrato, new { @class = "form-control" })
+                        @Html.ValidationMessage("idtipoContrato", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
                         @Html.Label("Fecha de contrato")
                         @Html.TextBox("fechacontrato", null, new { @class = "form-control", @type = "date" })
+                        @Html.ValidationMessage("fechacontrato", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-6">
                         @Html.Label("Cargo a desempeñar")
-                        @Html.TextBox("nombreSueldo", null, new { @class = "form-control" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Label("Salario")
-                        @Html.TextBox("cantidad", null, new { @class = "form-control", @type = "number" })
+                        @Html.DropDownList("idCargo", listaCargo, new { @class = "form-control" })
+                        @Html.ValidationMessage("idCargo", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -132,17 +135,36 @@
     nombre.onkeyup = function () {
         $("#frmFiltro").trigger("submit");
     }
+    function Limpiar() {
+        document.getElementById("nombreC").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("numeroIdentificacion").value = "";
+        document.getElementById("idtipoIdentificacion").value = "";
+        document.getElementById("idSexo").value = "";
+        document.getElementById("direccion").value = "";
+        document.getElementById("barrio").value = "";
+        document.getElementById("telefono").value = "";
+        document.getElementById("celular").value = "";
+        document.getElementById("idtipoContrato").value = "";
+        document.getElementById("fechacontrato").value = "";
+        document.getElementById("idCargo").value = "";
+    }
     function Agregar() {
-        document.getElementById("titulo").value = 1;
+        Limpiar();
+        document.getElementById("titulo").value = -1;
     }
     function Guardar(resultado) {
         if (resultado == 1) {
             $("#frmFiltro").trigger("submit");
-            document.getElementById("btnClose").click();
             alert("Se guardo correctamente");
+            document.getElementById("btnClose").click();
         } else {
             alert("Ocurrio un error");
         }       
+    }
+    function Editar(id) {
+        document.getElementById("titulo").value = id;
+        alert(id);
     }
 </script>
 
