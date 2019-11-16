@@ -27,20 +27,41 @@
 }, new { @id = "frmFiltro" }))
 
 {
-    @Html.TextBox("nombre", null, new { @class = "form-control col-md-3", @placeholder = "Buscar nombre del empleado" })
+    @Html.TextBox("nombreEmpleado", null, new { @class = "form-control col-md-3", @placeholder = "Buscar nombre del empleado" })
     <br />
     <div id="divEmpleado">
         @Html.Partial("_InfoEmpleado", Model)
     </div>
 }
+
 @*@Html.ValidationMessage("nombre", new { @class="text-danger"})*@
+
+<!-- Modal confirmacion eliminacion-->
+<div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Esta seguro de eliminar el registro?
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCerrarConfirmacion" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="EliminarRegistro()" class="btn btn-danger">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar nuevo empleado</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Agregar/Editar empleado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -48,95 +69,87 @@
             @using (Ajax.BeginForm("Guardar", "Empleado", null, new AjaxOptions
             {
                 HttpMethod = "POST",
-                OnSuccess = "Guardar"
+                OnSuccess = "Guardar",
+                UpdateTargetId = "error",
+                InsertionMode = InsertionMode.Replace
                 //UpdateTargetId="divEmpleado",
                 //InsertionMode=InsertionMode.Replace
 
             }))
             {
                 @Html.Hidden("titulo")
-        <div class="modal-body">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6">
-                        @Html.Label("Nombres")
-                        @Html.TextBox("nombreC", null, new { @class = "form-control" })
-                        @Html.ValidationMessage("nombre",new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Label("Apellidos")
-                        @Html.TextBox("apellido", null, new { @class = "form-control" })
-                        @Html.ValidationMessage("apellido", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Label("Identificación")
-                        @Html.DropDownList("idtipoIdentificacion", listaIdentificacion, new { @class = "form-control" })
-                        @Html.ValidationMessage("idtipoIdentificacion", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Label("Número de identificación")
-                        @Html.TextBox("numeroIdentificacion", null, new { @class = "form-control" })
-                        @Html.ValidationMessage("numeroIdentificacion", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Label("Sexo")
-                        @Html.DropDownList("idSexo", listaSexo, new { @class = "form-control" })
-                        @Html.ValidationMessage("idSexo", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Label("Dirección")
-                        @Html.TextBox("direccion", null, new { @class = "form-control" })
-                        @Html.ValidationMessage("direccion", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Label("Barrio")
-                        @Html.TextBox("barrio", null, new { @class = "form-control" })
-                        @Html.ValidationMessage("barrio", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Label("Teléfono fijo")
-                        @Html.TextBox("telefono", null, new { @class = "form-control", @type = "number" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Label("Celular")
-                        @Html.TextBox("celular", null, new { @class = "form-control", @type = "number" })
-                        @Html.ValidationMessage("celular", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Label("Contrato")
-                        @Html.DropDownList("idtipoContrato", listaContrato, new { @class = "form-control" })
-                        @Html.ValidationMessage("idtipoContrato", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Label("Fecha de contrato")
-                        @Html.TextBox("fechacontrato", null, new { @class = "form-control", @type = "date" })
-                        @Html.ValidationMessage("fechacontrato", new { @class = "text-danger" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.Label("Cargo a desempeñar")
-                        @Html.DropDownList("idCargo", listaCargo, new { @class = "form-control" })
-                        @Html.ValidationMessage("idCargo", new { @class = "text-danger" })
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.Label("Nombres")
+                                @Html.TextBox("nombre", null, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Apellidos")
+                                @Html.TextBox("apellido", null, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Identificación")
+                                @Html.DropDownList("idtipoIdentificacion", listaIdentificacion, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Número de identificación")
+                                @Html.TextBox("numeroIdentificacion", null, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Sexo")
+                                @Html.DropDownList("idSexo", listaSexo, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Dirección")
+                                @Html.TextBox("direccion", null, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Barrio")
+                                @Html.TextBox("barrio", null, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Teléfono fijo")
+                                @Html.TextBox("telefono", null, new { @class = "form-control", @type = "number" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Celular")
+                                @Html.TextBox("celular", null, new { @class = "form-control", @type = "number" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Contrato")
+                                @Html.DropDownList("idtipoContrato", listaContrato, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Fecha de contrato")
+                                @Html.TextBox("fechacontrato", null, new { @class = "form-control", @type = "date" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.Label("Cargo a desempeñar")
+                                @Html.DropDownList("idCargo", listaCargo, new { @class = "form-control" })
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
                 <div class="modal-footer">
                     <button type="button" id="btnClose" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
             }
+            <div id="error"></div>
 
         </div>
     </div>
 </div>
 
 <script>
-    var nombre = document.getElementById("nombre");
+    var nombre = document.getElementById("nombreEmpleado");
     nombre.onkeyup = function () {
         $("#frmFiltro").trigger("submit");
     }
     function Limpiar() {
-        document.getElementById("nombreC").value = "";
+        document.getElementById("nombre").value = "";
         document.getElementById("apellido").value = "";
         document.getElementById("numeroIdentificacion").value = "";
         document.getElementById("idtipoIdentificacion").value = "";
@@ -151,20 +164,53 @@
     }
     function Agregar() {
         Limpiar();
-        document.getElementById("titulo").value = -1;
+        document.getElementById("error").innerHTML = "";
+        document.getElementById("titulo").value = "-1";
     }
     function Guardar(resultado) {
-        if (resultado == 1) {
+        if (resultado == "1" || resultado == "0") {
             $("#frmFiltro").trigger("submit");
             alert("Se guardo correctamente");
             document.getElementById("btnClose").click();
         } else {
             alert("Ocurrio un error");
-        }       
+        }
     }
     function Editar(id) {
+        document.getElementById("error").innerHTML = "";
         document.getElementById("titulo").value = id;
-        alert(id);
+
+        $.get("Empleado/recuperarDatos/?titulo=" + id, function (data) {
+            document.getElementById("nombre").value = data.nombre;
+            document.getElementById("apellido").value = data.apellido;
+            document.getElementById("numeroIdentificacion").value = data.numeroIdentificacion;
+            document.getElementById("idtipoIdentificacion").value = data.idtipoIdentificacion;
+            document.getElementById("idSexo").value = data.idSexo;
+            document.getElementById("direccion").value = data.direccion;
+            document.getElementById("barrio").value = data.barrio;
+            document.getElementById("telefono").value = data.telefono;
+            document.getElementById("celular").value = data.celular;
+            document.getElementById("idtipoContrato").value = data.idtipoContrato;
+            document.getElementById("fechacontrato").value = data.fechacontrato;
+            document.getElementById("idCargo").value = data.idCargo;
+        })
+    }
+    function Eliminar(idEmpleado) {
+        document.getElementById("titulo").value = idEmpleado;
+    }
+    //Esta funcion es la que realmente hace la eliminacion del registro
+    function EliminarRegistro() {
+        var id = document.getElementById("titulo").value;
+        $.get("Empleado/eliminar/?idempleado=" + id, function (data) {
+            if (data == "1") {
+                alert("Se ejecuto correctamente");
+                //Para refrescar
+                $("#frmFiltro").trigger("submit");
+                //
+                document.getElementById("btnCerrarConfirmacion").click();
+            }
+        })
+
     }
 </script>
 

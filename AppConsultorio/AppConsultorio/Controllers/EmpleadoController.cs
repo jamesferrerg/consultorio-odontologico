@@ -126,44 +126,128 @@ namespace AppConsultorio.Controllers
             string rpta = "";
             try
             {
-                using (var bd = new ConsultorioOdonBDEntities1())
+                if(!ModelState.IsValid)
                 {
-                    if (titulo == -1)
+                    var query = (from state in ModelState.Values
+                                 from error in state.Errors
+                                 select error.ErrorMessage).ToList();
+                    rpta += "<ul class='list-group'>";
+
+                    foreach(var item in query)
                     {
-                        Empleados oEmpleado = new Empleados();
-                        oEmpleado.Nombre = oEmpleadoCLS.nombre;
-                        oEmpleado.Apellido = oEmpleadoCLS.apellido;
-                        oEmpleado.FechaContrato = oEmpleadoCLS.fechacontrato;
-                        oEmpleado.Direccion = oEmpleadoCLS.direccion;
-                        oEmpleado.Barrio = oEmpleadoCLS.barrio;
-                        oEmpleado.Telefono = oEmpleadoCLS.telefono;
-                        oEmpleado.Celular = oEmpleadoCLS.celular;
-                        oEmpleado.NumeroIdentificacion = oEmpleadoCLS.numeroIdentificacion;
-                        oEmpleado.IdTipoContrato = oEmpleadoCLS.idtipoIdentificacion;
-                        oEmpleado.IdSexo = oEmpleadoCLS.idSexo;
-                        oEmpleado.IdTipoIdentificacion = oEmpleadoCLS.idtipoIdentificacion;
-                        oEmpleado.IdCargo = oEmpleadoCLS.idCargo;
-                        oEmpleado.Habilitado = 1;
-                        bd.Empleados.Add(oEmpleado);
-                        rpta = bd.SaveChanges().ToString();
+                        rpta += "<li class='list-group-item list-group-item-action list-group-item-danger'>" + item+"</li>";
+                    }
+
+                    rpta += "</ul>";
+                }
+                else
+                {
+                    using (var bd = new ConsultorioOdonBDEntities1())
+                    {
+                        if (titulo == -1)
+                        {
+                            //Agrego
+                            Empleados oEmpleado = new Empleados();
+                            oEmpleado.Nombre = oEmpleadoCLS.nombre;
+                            oEmpleado.Apellido = oEmpleadoCLS.apellido;
+                            oEmpleado.FechaContrato = oEmpleadoCLS.fechacontrato;
+                            oEmpleado.Direccion = oEmpleadoCLS.direccion;
+                            oEmpleado.Barrio = oEmpleadoCLS.barrio;
+                            oEmpleado.Telefono = oEmpleadoCLS.telefono;
+                            oEmpleado.Celular = oEmpleadoCLS.celular;
+                            oEmpleado.NumeroIdentificacion = oEmpleadoCLS.numeroIdentificacion;
+                            oEmpleado.IdTipoContrato = oEmpleadoCLS.idtipoContrato;
+                            oEmpleado.IdSexo = oEmpleadoCLS.idSexo;
+                            oEmpleado.IdTipoIdentificacion = oEmpleadoCLS.idtipoIdentificacion;
+                            oEmpleado.IdCargo = oEmpleadoCLS.idCargo;
+                            oEmpleado.Habilitado = 1;
+                            bd.Empleados.Add(oEmpleado);
+                            rpta = bd.SaveChanges().ToString();
+                            if (rpta == "0") rpta = "";
+                        }
+                        else
+                        {
+                            //Edito
+                            Empleados oEmpleado = bd.Empleados.Where(p => p.IdEmpleado == titulo).First();
+                            oEmpleado.Nombre = oEmpleadoCLS.nombre;
+                            oEmpleado.Apellido = oEmpleadoCLS.apellido;
+                            oEmpleado.FechaContrato = oEmpleadoCLS.fechacontrato;
+                            oEmpleado.Direccion = oEmpleadoCLS.direccion;
+                            oEmpleado.Barrio = oEmpleadoCLS.barrio;
+                            oEmpleado.Telefono = oEmpleadoCLS.telefono;
+                            oEmpleado.Celular = oEmpleadoCLS.celular;
+                            oEmpleado.NumeroIdentificacion = oEmpleadoCLS.numeroIdentificacion;
+                            oEmpleado.IdTipoContrato = oEmpleadoCLS.idtipoContrato;
+                            oEmpleado.IdSexo = oEmpleadoCLS.idSexo;
+                            oEmpleado.IdTipoIdentificacion = oEmpleadoCLS.idtipoIdentificacion;
+                            oEmpleado.IdCargo = oEmpleadoCLS.idCargo;
+                            rpta = bd.SaveChanges().ToString();
+                        }
                     }
                 }
+                
             }
             catch (Exception ex)
             {
-                rpta = 0;
+                rpta = "";
             }
             
 
             return rpta;
         }
+        //Recuperar informacion para la edicion
+        public JsonResult recuperarDatos(int titulo)
+        {
+            listarComboSexo();
+            listarComboContrato();
+            listarComboCargo();
+            listarComboIdentificacion();
+            EmpleadoCLS oEmpleadoCLS = new EmpleadoCLS();
+            using (var bd = new ConsultorioOdonBDEntities1())
+            {
+                Empleados oEmpleado = bd.Empleados.Where(p => p.IdEmpleado == titulo).First();
+                oEmpleadoCLS.nombre = oEmpleado.Nombre;
+                oEmpleadoCLS.apellido = oEmpleado.Apellido;
+                oEmpleadoCLS.fechacontrato = (DateTime)oEmpleado.FechaContrato;
+                oEmpleadoCLS.direccion = oEmpleado.Direccion;
+                oEmpleadoCLS.barrio = oEmpleado.Barrio;
+                oEmpleadoCLS.telefono = (long)oEmpleado.Telefono;
+                oEmpleadoCLS.celular = (long)oEmpleado.Celular;
+                oEmpleadoCLS.numeroIdentificacion = oEmpleado.NumeroIdentificacion;
+                oEmpleadoCLS.idtipoContrato = oEmpleado.TiposContratos.IdTipoContrato;
+                oEmpleadoCLS.idSexo = oEmpleado.Sexos.IdSexo;
+                oEmpleadoCLS.idtipoIdentificacion = oEmpleado.TiposIdentificacion.IdTipoIdentificacion;
+                oEmpleadoCLS.idCargo = oEmpleado.Cargos.IdCargo;
+            }
+            return Json(oEmpleadoCLS, JsonRequestBehavior.AllowGet);
+        }
 
-        public ActionResult Filtro(string nombre)
+        //Eliminar
+        public string eliminar (EmpleadoCLS oEmpleadoCls)
+        {
+            string rpta = "";
+            try
+            {
+                int idEmpleado = oEmpleadoCls.idempleado;
+                using(var bd = new ConsultorioOdonBDEntities1())
+                {
+                    Empleados oEmpleado = bd.Empleados.Where(p => p.IdEmpleado == idEmpleado).First();
+                    oEmpleado.Habilitado = 0;
+                    rpta = bd.SaveChanges().ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                rpta = "";
+            }
+            return rpta;
+        }
+        public ActionResult Filtro(string nombreEmpleado)
         {
             List<EmpleadoCLS> listaEmpleado = null;
             using (var bd = new ConsultorioOdonBDEntities1())
             {
-                if (nombre == null)
+                if (nombreEmpleado == null)
                     listaEmpleado = (from empleado in bd.Empleados
                                      join tiposContratos in bd.TiposContratos
                                      on empleado.IdTipoContrato equals tiposContratos.IdTipoContrato
@@ -203,7 +287,7 @@ namespace AppConsultorio.Controllers
                                      join cargos in bd.Cargos
                                      on empleado.IdCargo equals cargos.IdCargo
                                      where empleado.Habilitado == 1
-                                     && empleado.Nombre.Contains(nombre)
+                                     && empleado.Nombre.Contains(nombreEmpleado)
                                      select new EmpleadoCLS
                                      {
                                          idempleado = empleado.IdEmpleado,

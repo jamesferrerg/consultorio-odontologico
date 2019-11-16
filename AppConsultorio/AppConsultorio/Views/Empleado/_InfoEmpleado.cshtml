@@ -38,7 +38,8 @@
                             <button type="button" onclick="Editar(@item.idempleado)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button type="button" onclick="Eliminar()" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                            @* en data-targe se pone el nombre del modal "elimnacion" que viene siendo el id="confirmarEliminar" *@
+                            <button type="button" onclick="Eliminar(@item.idempleado)" class="btn btn-danger" data-toggle="modal" data-target="#confirmarEliminar">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </div>

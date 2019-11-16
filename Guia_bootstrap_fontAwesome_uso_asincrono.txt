@@ -1,0 +1,27 @@
+Instalacion de bootstrap 4.3 y font Awesome 5.11
+1. Seleccionar la solucion .sln (AppConsultorio.sln) y click derecho, para luego 
+seleccionar "Administrar paquetes NuGet"
+
+2. En la busqueda poner "bootstrap 4" donde muestra lo siguiente acerca del paquete 
+que se debe instalar:
+	Descripcion: The most popular front-end framework for developing responsive, mobile first projects on the web.
+	Autores: The Bootstrap Authors, Twitter Inc.
+(https://www.youtube.com/watch?v=T3zGyMdK8Uk)
+
+3. En la busqueda poner "font awesome" donde muestra lo siguiente acerca del paquete 
+que se debe instalar:
+	Nombre: Font.Awesome
+	Descripcion: Font Awesome gives you scalable vector icons that can instantly be customized — size, 
+	color, drop shadow, and anything that can be done with the power of CSS.
+	Please see https://fontawesome.com/how-to-use/on-the-web/setup/getting-started?using=web-fonts-with-css for help using the CSS version of Font Awesome.
+	Please note that this package is not maintained by the Font Awesome team.
+	Autores: Dave Gandy,Tieson Trowbridge (NuGet package only)
+
+4. En la busqueda poner "Ajax, Unobtrusive, jQuery" donde muestra lo siguiente acerca del paquete 
+que se debe instalar:
+	Nombre: Microsoft.jQuery.Unobtrusive.Ajax
+	Descripcion: jQuery plugin that unobtrusively sets up jQuery Ajax.
+	Version: 3.2.6
+	Autor: Microsoft
+	Fecha de publicacion: 05/10/2018
+
