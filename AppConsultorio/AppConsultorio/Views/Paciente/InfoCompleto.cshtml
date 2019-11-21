@@ -1,0 +1,75 @@
+﻿@using AppConsultorio.Models
+@model PacienteCLS
+@{
+    ViewBag.Title = "InfoCompleto";
+    List<SelectListItem> listaSexo = (List<SelectListItem>)ViewBag.listaSexo;
+    List<SelectListItem> listaDepartamento = (List<SelectListItem>)ViewBag.listaDepartamento;
+    List<SelectListItem> listaTipoIdentificacion = (List<SelectListItem>)ViewBag.listaTipoIdentificacion;
+}
+
+<h2>Información del paciente</h2>
+
+<div class="row">
+        <div class="col-md-8">
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">
+                        <b>
+                            @Html.DisplayFor(p => p.nombre)
+                            @Html.DisplayFor(p => p.apellido)
+                        </b>
+                    </div>
+                    <div class="card-group">
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">@Html.DisplayFor(p => p.identificacionTipo)</li>
+                                <li class="list-group-item">Dirección: @Html.DisplayFor(p => p.direccion)</li>
+                                <li class="list-group-item">Barrio: @Html.DisplayFor(p => p.barrio)</li>
+                                <li class="list-group-item">Sexo: @Html.DisplayFor(p => p.sexoFM)</li>
+                                <li class="list-group-item">Fecha de nacimiento: @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.fechaNacimiento))</li>
+                                <li class="list-group-item">Aseguradora: @Html.DisplayFor(p => p.aseguradora)</li>
+                                <li class="list-group-item">Motivo consulta: @Html.DisplayFor(p => p. motivoConsulta)</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Número: @Html.DisplayFor(p => p.numeroIdentificacion)</li>
+                                <li class="list-group-item">Teléfono: @Html.DisplayFor(p => p.telefono)</li>
+                                <li class="list-group-item">Celular: @Html.DisplayFor(p => p.celular)</li>
+                                <li class="list-group-item">Edad: @Html.DisplayFor(p => p.edad)</li>
+                                <li class="list-group-item">Email: @Html.DisplayFor(p => p.email)</li>
+                                <li class="list-group-item">Ocupación: @Html.DisplayFor(p => p.ocupacion)</li>
+                                <li class="list-group-item">Vinculación: @Html.DisplayFor(p => p.vinculacion)</li>
+                                <li class="list-group-item">Departamento: @Html.DisplayFor(p => p.departamentoLugar)</li>
+                                <li class="list-group-item">Id de registro: @Html.DisplayFor(p => p.idPaciente)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        @*@Html.ActionLink("", "Editar", "Paciente", new { id = Model.idPaciente }, new { @class = "btn btn-primary fas fa-user-edit fa-2x" })*@
+                        <button type="button" onclick="location.href='@Url.Action("Editar", "Paciente", new { id = Model.idPaciente })'" class="btn btn-primary">
+                            <i class="fas fa-user-edit"></i>
+                        </button>
+                        @* en data-targe se pone el nombre del modal "elimnacion" que viene siendo el id="confirmarEliminar" *@
+                        @Html.ActionLink(" ", "Eliminar", "Paciente", new { id=Model.idPaciente}, new { @class="fas fa-trash-alt btn btn-danger btn-lg", @onclick="eliminar()"})
+                        @*<button type="button" onclick="eliminar(); location.href = '@Url.Action("Eliminar", "Paciente", new { id = Model.idPaciente},null)'" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>*@
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+</div>
+
+<script>
+
+    function eliminar() {
+        if (confirm("¿Desea eliminar el registro?") == 1) {
+            alert("Se elimino correctamente");
+        } else {
+            event.preventDefault();
+        }
+    }
+
+</script>

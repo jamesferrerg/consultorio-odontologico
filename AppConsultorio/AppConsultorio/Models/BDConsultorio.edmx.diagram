@@ -5,34 +5,34 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e352d554c01d4043a8845f7213018055" Name="Diagram1" ZoomLevel="49">
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Anamnesis" Width="1.5" PointX="9" PointY="1.625" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Antecedentes" Width="1.5" PointX="11.25" PointY="13.25" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Cargos" Width="1.5" PointX="0.75" PointY="19.25" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Condiciones" Width="1.5" PointX="13.5" PointY="12" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Consultas" Width="1.5" PointX="10.5" PointY="22.625" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Departamentos" Width="1.5" PointX="3.75" PointY="11.375" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.DetallesFacturas" Width="1.5" PointX="10.5" PointY="31.625" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Empleados" Width="1.5" PointX="3" PointY="15" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Examenes" Width="1.5" PointX="10.5" PointY="10.375" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.ExamenesClinicos" Width="1.5" PointX="8.25" PointY="6.875" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.ExamenesComplementarios" Width="1.5" PointX="10.5" PointY="26" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Facturas" Width="1.5" PointX="8.25" PointY="31.375" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.HistoriasClinicas" Width="1.5" PointX="8.25" PointY="11.5" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Municipios" Width="1.5" PointX="6" PointY="7.375" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Odontogramas" Width="1.5" PointX="11.25" PointY="7.375" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Pacientes" Width="1.5" PointX="6" PointY="14.5" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.PacientesResponsables" Width="1.5" PointX="11.25" PointY="16.375" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Paginas" Width="1.5" PointX="12" PointY="4" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Radiografias" Width="1.5" PointX="10.5" PointY="19.5" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Responsables" Width="1.5" PointX="9" PointY="35.25" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Roles" Width="1.5" PointX="6" PointY="11" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.RolesPaginas" Width="1.5" PointX="14.25" PointY="9" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Sexos" Width="1.5" PointX="0.75" PointY="22.125" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.TiposContratos" Width="1.5" PointX="0.75" PointY="13.75" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.TiposIdentificacion" Width="1.5" PointX="0.75" PointY="16.375" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.TiposTratamientos" Width="1.5" PointX="10.5" PointY="29" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.TiposUsuarios" Width="1.5" PointX="6" PointY="21.875" />
-        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Tratamientos" Width="1.5" PointX="12.75" PointY="22.75" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Anamnesis" Width="1.5" PointX="6" PointY="6.625" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Antecedentes" Width="1.5" PointX="8.25" PointY="12.25" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Cargos" Width="1.5" PointX="3.75" PointY="24" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Condiciones" Width="1.5" PointX="10.5" PointY="17" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Consultas" Width="1.5" PointX="10.5" PointY="29.625" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Departamentos" Width="1.5" PointX="0.75" PointY="13.375" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.DetallesFacturas" Width="1.5" PointX="7.5" PointY="31.625" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Empleados" Width="1.5" PointX="6" PointY="15" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Examenes" Width="1.5" PointX="13.5" PointY="20.375" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.ExamenesClinicos" Width="1.5" PointX="11.25" PointY="12.875" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.ExamenesComplementarios" Width="1.5" PointX="10.5" PointY="26.625" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Facturas" Width="1.5" PointX="5.25" PointY="31.375" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.HistoriasClinicas" Width="1.5" PointX="8.25" PointY="19.5" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Municipios" Width="1.5" PointX="3" PointY="4.375" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Odontogramas" Width="1.5" PointX="8.25" PointY="24.375" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Pacientes" Width="1.5" PointX="3" PointY="14.375" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.PacientesResponsables" Width="1.5" PointX="5.25" PointY="11.375" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Paginas" Width="1.5" PointX="6" PointY="27.75" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Radiografias" Width="1.5" PointX="10.5" PointY="20.625" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Responsables" Width="1.5" PointX="3" PointY="11.25" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Roles" Width="1.5" PointX="6" PointY="23.75" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.RolesPaginas" Width="1.5" PointX="8.25" PointY="27.75" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Sexos" Width="1.5" PointX="0.75" PointY="16.375" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.TiposContratos" Width="1.5" PointX="3.75" PointY="21.375" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.TiposIdentificacion" Width="1.5" PointX="3.75" PointY="7.75" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.TiposTratamientos" Width="1.5" PointX="10.5" PointY="33" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.TiposUsuarios" Width="1.5" PointX="6" PointY="21" />
+        <EntityTypeShape EntityType="ConsultorioOdonBDModel.Tratamientos" Width="1.5" PointX="12.75" PointY="29.625" />
         <EntityTypeShape EntityType="ConsultorioOdonBDModel.Usuarios" Width="1.5" PointX="8.25" PointY="16" />
         <AssociationConnector Association="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Anamnesis" />
         <AssociationConnector Association="ConsultorioOdonBDModel.FK_PacienteAnamnesis_Paciente" />

@@ -179,9 +179,10 @@
     <Key>
       <PropertyRef Name="IdPaciente" />
     </Key>
-    <Property Name="IdPaciente" Type="int" Nullable="false" />
+    <Property Name="IdPaciente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" />
     <Property Name="Apellido" Type="varchar" MaxLength="50" />
+    <Property Name="NumeroIdentificacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaNacimiento" Type="datetime" />
     <Property Name="Edad" Type="int" />
     <Property Name="Email" Type="varchar" MaxLength="100" />

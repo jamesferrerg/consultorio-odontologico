@@ -1,0 +1,37 @@
+﻿@using AppConsultorio.Models
+@model List<PacienteCLS>
+
+@{
+    ViewBag.Title = "Paciente";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Pacientes</h2>
+@Html.ActionLink("Agregar paciente", "Agregar", "Paciente", null, new { @class="btn btn-primary"})
+@*<button type="button" onclick="Agregar()" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <i class="fas fa-user-plus"></i>
+</button>*@
+<br />
+<br />
+
+@using (Ajax.BeginForm("Filtro", "", new AjaxOptions
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "divPaciente",
+    InsertionMode = InsertionMode.Replace
+}, new { @id = "frmFiltro" }))
+
+{
+    @Html.TextBox("nombrePaciente", null, new { @class = "form-control col-md-3", @placeholder = "Buscar por nombre del paciente" })
+    <br />
+    <div id="divPaciente">
+        @Html.Partial("_TablaPaciente", Model)
+    </div>
+}
+
+<script>
+    var nombreFiltro = document.getElementById("nombrePaciente");
+    nombreFiltro.onkeyup = function () {
+        $("#frmFiltro").trigger("submit");
+    }
+</script>

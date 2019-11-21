@@ -184,9 +184,10 @@
           <Key>
             <PropertyRef Name="IdPaciente" />
           </Key>
-          <Property Name="IdPaciente" Type="int" Nullable="false" />
+          <Property Name="IdPaciente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Apellido" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroIdentificacion" Type="varchar" MaxLength="50" />
           <Property Name="FechaNacimiento" Type="datetime" />
           <Property Name="Edad" Type="int" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
@@ -1207,9 +1208,10 @@
           <Key>
             <PropertyRef Name="IdPaciente" />
           </Key>
-          <Property Name="IdPaciente" Type="Int32" Nullable="false" />
+          <Property Name="IdPaciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroIdentificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
           <Property Name="Edad" Type="Int32" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -1957,6 +1959,7 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Edad" ColumnName="Edad" />
                 <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />

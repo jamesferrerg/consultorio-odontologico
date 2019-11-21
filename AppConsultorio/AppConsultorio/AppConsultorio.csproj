@@ -237,6 +237,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
+    <Compile Include="Controllers\PacienteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -301,6 +302,7 @@
     <Compile Include="Models\Odontogramas.cs">
       <DependentUpon>BDConsultorio.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PacienteCLS.cs" />
     <Compile Include="Models\Pacientes.cs">
       <DependentUpon>BDConsultorio.tt</DependentUpon>
     </Compile>
@@ -370,6 +372,11 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Empleado\_InfoEmpleado.cshtml" />
+    <Content Include="Views\Paciente\Index.cshtml" />
+    <Content Include="Views\Paciente\_TablaPaciente.cshtml" />
+    <Content Include="Views\Paciente\Agregar.cshtml" />
+    <Content Include="Views\Paciente\InfoCompleto.cshtml" />
+    <Content Include="Views\Paciente\Editar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

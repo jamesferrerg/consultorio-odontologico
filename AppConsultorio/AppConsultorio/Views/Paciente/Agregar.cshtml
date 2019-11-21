@@ -1,0 +1,158 @@
+﻿@using AppConsultorio.Models
+@model PacienteCLS
+
+@{
+    ViewBag.Title = "Agregar";
+    List<SelectListItem> listaSexo = (List<SelectListItem>)ViewBag.listaSexo;
+    List<SelectListItem> listaDepartamento = (List<SelectListItem>)ViewBag.listaDepartamento;
+    List<SelectListItem> listaTipoIdentificacion = (List<SelectListItem>)ViewBag.listaTipoIdentificacion;
+}
+
+<h2>Agregar</h2>
+
+
+@using (Html.BeginForm("Agregar", "Paciente", FormMethod.Post, new { @id="frmAgregar"}))
+{
+    <div class="form-row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label>Nombre</label>
+                    @Html.TextBoxFor(p => p.nombre, new { @class = "form-control", @placeholder = "Primer y segundo nombre" })
+                    @Html.ValidationMessage("nombre", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>Apellido</label>
+                    @Html.TextBoxFor(p => p.apellido, new { @class = "form-control", @placeholder = "Primer y segundo apellido" })
+                    @Html.ValidationMessage("apellido", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label>Tipo de identificación</label>
+                    @Html.DropDownList("idTipoIdentificacion", listaTipoIdentificacion, null, new { @class = "form-control" })
+                    @Html.ValidationMessage("idTipoIdentificacion", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3 mb-3">
+                    @Html.Label("Número de identificación")
+                    @Html.TextBoxFor(p => p.numeroIdentificacion, new { @class = "form-control", @placeholder = "Ingrese número de identificación" })
+                    @Html.ValidationMessage("numeroIdentificacion", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    @Html.Label("Fecha de nacimiento")
+                    @Html.EditorFor(p => p.fechaNacimiento, null, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("fechaNacimiento", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3 mb-3">
+                    @Html.Label("Edad")
+                    @Html.TextBoxFor(p => p.edad, new { @class = "form-control", @type = "number", @placeholder = "Ingrese edad del paciente" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    @Html.Label("Sexo")
+                    @Html.DropDownList("idSexo", listaSexo, null, new { @class = "form-control" })
+                    @Html.ValidationMessage("idSexo", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3 mb-3">
+                    @Html.Label("Lugar de nacimiento")
+                    @Html.DropDownList("idDepartamento", listaDepartamento, null, new { @class = "form-control" })
+                    @Html.ValidationMessage("idDepartamento", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-6">
+                    @Html.Label("Email")
+                    @Html.TextBoxFor(p => p.email, new { @class = "form-control", @type = "email", @placeholder = "Ingrese correo electronico del paciente" })
+                    @Html.ValidationMessage("email", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    @Html.Label("Dirección")
+                    @Html.TextBoxFor(p => p.direccion, new { @class = "form-control", @placeholder = "Ingrese dirección de residencia" })
+                    @Html.ValidationMessage("direccion", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3 mb-3">
+                    @Html.Label("Barrio")
+                    @Html.TextBoxFor(p => p.barrio, new { @class = "form-control", @placeholder = "Ingrese el barrio de residencia" })
+                    @Html.ValidationMessage("barrio", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    @Html.Label("Télefono")
+                    @Html.TextBoxFor(p => p.telefono, new { @class = "form-control", @type = "number", @placeholder = "Ingrese número telefonico fijo" })
+                </div>
+                <div class="col-md-3 mb-3">
+                    @Html.Label("Celular")
+                    @Html.TextBoxFor(p => p.celular, new { @class = "form-control", @type = "number", @placeholder = "Ingrese número de celular" })
+                    @Html.ValidationMessage("celular", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-6">
+                    @Html.Label("Ocupación")
+                    @Html.TextBoxFor(p => p.ocupacion, new { @class = "form-control", @placeholder = "Ingrese ocupación del paciente" })
+                    @Html.ValidationMessage("ocupacion", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    @Html.Label("Aseguradora")
+                    @Html.TextBoxFor(p => p.aseguradora, new { @class = "form-control", @placeholder = "Ingrese nombre de la aseguradora" })
+                    @Html.ValidationMessage("aseguradora", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3 mb-3">
+                    @Html.Label("Vinculación")
+                    @Html.TextBoxFor(p => p.vinculacion, new { @class = "form-control", @placeholder = "Ingrese tipo de vinculación" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-6">
+                    @Html.Label("Motivo de consulta")
+                    @Html.TextAreaFor(p => p.motivoConsulta, new { @class = "form-control" })
+                    @Html.ValidationMessage("motivoConsulta", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div style="margin:auto">
+                <br />
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Guardar
+                </button>
+                <button type="button" onclick="location.href='@Url.Action("Index", "Paciente", null)'" class="btn btn-danger">
+                    Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Desea guardar los cambios
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" onclick="Agregar()" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function Agregar() {
+        var formulario = document.getElementById("frmAgregar");
+        formulario.submit();
+    }
+</script>
