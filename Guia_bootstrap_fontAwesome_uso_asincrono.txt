@@ -1,4 +1,4 @@
-Instalacion de bootstrap 4.3 y font Awesome 5.11
+Instalacion de bootstrap 4.3, font Awesome 5.11, uso de giltro con ajax y paginador asp.net
 1. Seleccionar la solucion .sln (AppConsultorio.sln) y click derecho, para luego 
 seleccionar "Administrar paquetes NuGet"
 
@@ -24,4 +24,13 @@ que se debe instalar:
 	Version: 3.2.6
 	Autor: Microsoft
 	Fecha de publicacion: 05/10/2018
+5. En la busqueda poner "PagedList.Mvc" donde muestra lo siguiente acerca del paquete 
+que se debe instalar:
+	Nombre: PagedList.Mvc
+	Descripcion: Asp.Net MVC HtmlHelper method for generating paging control for use with PagedList library.
+	Version: 4.5
+	Autor: Troy Goode
+	Fecha de publicacion: 30/09/2013
+	Dependencias: PagedList (>= 1.17.0)
+	Por defecto se instala el paquete o dependencia anterior
 
