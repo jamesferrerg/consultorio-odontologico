@@ -16,12 +16,12 @@ namespace AppConsultorio.Models
     {
         public int IdUsuario { get; set; }
         public string NombreU { get; set; }
-        public string Contraseña { get; set; }
+        public string Contrasena { get; set; }
         public Nullable<int> Habilitado { get; set; }
         public Nullable<int> IdRol { get; set; }
         public Nullable<int> IdTipoUsuario { get; set; }
+        public Nullable<int> IdAnon { get; set; }
     
-        public virtual Empleados Empleados { get; set; }
         public virtual Roles Roles { get; set; }
         public virtual TiposUsuarios TiposUsuarios { get; set; }
     }

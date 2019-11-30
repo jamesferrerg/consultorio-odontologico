@@ -84,8 +84,10 @@ namespace AppConsultorio.Controllers
             listarComboIdentificacion();
             //List<EmpleadoCLS> listaEmpleado = null;
             List<EmpleadoCLS> listaEmpleado = new List<EmpleadoCLS>();
+
             using (var bd = new ConsultorioOdonBDEntities1())
             {
+
                 listaEmpleado = (from empleado in bd.Empleados
                                  join tiposContratos in bd.TiposContratos
                                  on empleado.IdTipoContrato equals tiposContratos.IdTipoContrato
@@ -115,6 +117,7 @@ namespace AppConsultorio.Controllers
                                     sexoFM = sexos.Sexo,
                                     nombreContrato = tiposContratos.Contrato
                                  }).ToList();
+
             }
 
             return View(listaEmpleado);
@@ -311,39 +314,5 @@ namespace AppConsultorio.Controllers
             return PartialView("_InfoEmpleado", listaEmpleado);
         }
 
-        //[HttpPost]
-        //public ActionResult Agregar(EmpleadoCLS oEmpleadoCLS)
-        //{
-        //    if(!ModelState.IsValid)
-        //    {
-        //        return View(oEmpleadoCLS);
-        //    }
-        //    else
-        //    {
-        //        using (var bd = new ConsultorioOdonBDEntities1())
-        //        {
-        //            Empleados oEmpleado = new Empleados();
-        //            oEmpleado.Nombre = oEmpleadoCLS.nombre;
-        //            oEmpleado.Apellido = oEmpleadoCLS.apellido;
-        //            oEmpleado.FechaContrato = oEmpleadoCLS.fechacontrato;
-        //            oEmpleado.Direccion = oEmpleadoCLS.direccion;
-        //            oEmpleado.Barrio = oEmpleadoCLS.barrio;
-        //            oEmpleado.Telefono = oEmpleadoCLS.telefono;
-        //            oEmpleado.Sexos.Sexo = oEmpleadoCLS.sexoFM;
-        //            oEmpleado.TiposIdentificacion.Identificacion = oEmpleadoCLS.identificacion;
-        //            oEmpleado.TiposIdentificacion.Numero = oEmpleadoCLS.numeroIdentificacion;
-        //            oEmpleado.Sueldos.Cargo = oEmpleadoCLS.nombreSueldo;
-        //            oEmpleado.Sueldos.Cantidad = oEmpleadoCLS.cantidad;
-        //            oEmpleado.TiposContratos.Contrato = oEmpleadoCLS.nombreContrato;
-        //            bd.Empleados.Add(oEmpleado);
-        //            bd.SaveChanges();
-
-
-        //        }
-        //    }
-
-
-        //    return RedirectToAction("Index");
-        //}
     }
 }

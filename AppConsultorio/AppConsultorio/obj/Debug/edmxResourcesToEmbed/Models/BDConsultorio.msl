@@ -90,6 +90,7 @@
     <EntitySetMapping Name="Empleados">
       <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Empleados">
         <MappingFragment StoreEntitySet="Empleados">
+          <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
           <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
           <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
           <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
@@ -340,10 +341,11 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="IdAnon" ColumnName="IdAnon" />
           <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
           <ScalarProperty Name="IdRol" ColumnName="IdRol" />
           <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+          <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
           <ScalarProperty Name="NombreU" ColumnName="NombreU" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
         </MappingFragment>

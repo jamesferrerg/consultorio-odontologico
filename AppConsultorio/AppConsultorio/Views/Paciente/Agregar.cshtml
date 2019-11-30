@@ -10,8 +10,7 @@
 
 <h2>Agregar</h2>
 
-
-@using (Html.BeginForm("Agregar", "Paciente", FormMethod.Post, new { @id="frmAgregar"}))
+@using (Html.BeginForm("Agregar", "Paciente", FormMethod.Post, new { @id = "frmAgregar" }))
 {
     <div class="form-row">
         <div class="col-md-12">
@@ -149,10 +148,14 @@
     </div>
 </div>
 
+@* Mensaje de un usuario ya existente en js *@
+@Html.Raw(TempData["msg"])
+
 <script>
 
     function Agregar() {
         var formulario = document.getElementById("frmAgregar");
         formulario.submit();
     }
+
 </script>

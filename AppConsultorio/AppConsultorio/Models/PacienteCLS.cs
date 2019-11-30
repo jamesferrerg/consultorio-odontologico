@@ -77,6 +77,8 @@ namespace AppConsultorio.Models
         public string departamentoLugar { get; set; }
 
         public string sexoFM { get; set; }
+
+        public string nombreYapellido { get; set; }
  
     }
 }

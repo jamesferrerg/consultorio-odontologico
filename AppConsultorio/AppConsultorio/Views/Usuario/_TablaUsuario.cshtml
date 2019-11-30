@@ -1,0 +1,41 @@
+﻿@using AppConsultorio.Models
+@model List<UsuarioCLS>
+
+
+<div class="tabla-responsive-md">
+    <table class="table table-bordered table-responsive-md table-hover">
+
+        <thead class="thead-light">
+            <tr>
+                <th>Nombre empleado</th>
+                <th>Nombre usuario</th>
+                <th>Nombre rol</th>
+                <th>Tipo usuario</th>
+                <th>Operaciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.nombreEmpleado</td>
+                    <td>@item.nombreU</td>
+                    <td>@item.nombreRol</td>
+                    <td>@item.nombreTipoUsuario</td>
+                    <td>
+                        <button type="button" onclick="Editar(@item.idUsuario)" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fas fa-user-edit"></i>
+                        </button>
+                        @* en data-targe se pone el nombre del modal "elimnacion" que viene siendo el id="confirmarEliminar" *@
+                        <button type="button" onclick="Eliminar(@item.idUsuario)" class="btn btn-danger" data-toggle="modal" data-target="#confirmarEliminar">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

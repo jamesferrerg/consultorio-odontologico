@@ -98,6 +98,7 @@
     <Property Name="IdSexo" Type="int" />
     <Property Name="IdTipoIdentificacion" Type="int" />
     <Property Name="IdCargo" Type="int" />
+    <Property Name="IdTipoUsuario" Type="int" />
   </EntityType>
   <EntityType Name="Examenes">
     <Key>
@@ -313,11 +314,12 @@
       <PropertyRef Name="IdUsuario" />
     </Key>
     <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NombreU" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Contraseña" Type="varchar" MaxLength="50" />
+    <Property Name="NombreU" Type="varchar" MaxLength="50" />
+    <Property Name="Contrasena" Type="varchar" MaxLength="250" />
     <Property Name="Habilitado" Type="int" />
     <Property Name="IdRol" Type="int" />
     <Property Name="IdTipoUsuario" Type="int" />
+    <Property Name="IdAnon" Type="int" />
   </EntityType>
   <Association Name="FK_CondicionOdontograma_HistoriaClinica">
     <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="0..1" />
@@ -414,6 +416,18 @@
       </Principal>
       <Dependent Role="Empleados">
         <PropertyRef Name="IdCargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleados_TiposUsuarios">
+    <End Role="TiposUsuarios" Type="Self.TiposUsuarios" Multiplicity="0..1" />
+    <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposUsuarios">
+        <PropertyRef Name="IdTipoUsuario" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="IdTipoUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -651,18 +665,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Usuario_Empleado">
-    <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Empleados">
-        <PropertyRef Name="IdEmpleado" />
-      </Principal>
-      <Dependent Role="Usuarios">
-        <PropertyRef Name="IdUsuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Usuario_Rol">
     <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -749,6 +751,10 @@
       <End Role="Cargos" EntitySet="Cargos" />
       <End Role="Empleados" EntitySet="Empleados" />
     </AssociationSet>
+    <AssociationSet Name="FK_Empleados_TiposUsuarios" Association="Self.FK_Empleados_TiposUsuarios">
+      <End Role="TiposUsuarios" EntitySet="TiposUsuarios" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
     <AssociationSet Name="FK_ExamenComplementario_HistoriaClinica" Association="Self.FK_ExamenComplementario_HistoriaClinica">
       <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
       <End Role="ExamenesComplementarios" EntitySet="ExamenesComplementarios" />
@@ -824,10 +830,6 @@
     <AssociationSet Name="FK_Tratamientos_TiposTratamientos" Association="Self.FK_Tratamientos_TiposTratamientos">
       <End Role="TiposTratamientos" EntitySet="TiposTratamientos" />
       <End Role="Tratamientos" EntitySet="Tratamientos" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Usuario_Empleado" Association="Self.FK_Usuario_Empleado">
-      <End Role="Empleados" EntitySet="Empleados" />
-      <End Role="Usuarios" EntitySet="Usuarios" />
     </AssociationSet>
     <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
       <End Role="Roles" EntitySet="Roles" />

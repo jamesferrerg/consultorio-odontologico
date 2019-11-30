@@ -1,22 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AppConsultorio.Models;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using PagedList;
 
 namespace AppConsultorio.Controllers
 {
     public class PacienteController : Controller
     {
         // GET: Paciente
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             List<PacienteCLS> listaPaciente = new List<PacienteCLS>();
+
             try
             {
                 using(var bd = new ConsultorioOdonBDEntities1())
                 {
+
                     listaPaciente = (from paciente in bd.Pacientes
                                      join tipoIdentificacion in bd.TiposIdentificacion
                                      on paciente.IdTipoIdentificacion equals tipoIdentificacion.IdTipoIdentificacion
@@ -27,19 +36,24 @@ namespace AppConsultorio.Controllers
                                          nombre = paciente.Nombre,
                                          apellido = paciente.Apellido,
                                          numeroIdentificacion = paciente.NumeroIdentificacion,
+                                         nombreYapellido = paciente.Nombre+" "+paciente.Apellido,
                                          celular = (long)paciente.Celular
                                      }).ToList();
-                                    
+
+                    Session["lista"] = listaPaciente;
                 }
+    
             }
             catch (Exception ex)
             {
                 listaPaciente = new List<PacienteCLS>();
             }
-            return View(listaPaciente);
+            int pageSize = 7;
+            int pageNumber = (page ?? 1);
+            return View(listaPaciente.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult Filtro (string nombrePaciente)
+        public ActionResult Filtro (string nombrePaciente, int? page)
         {
             List<PacienteCLS> listaPaciente = new List<PacienteCLS>();
             try
@@ -83,7 +97,10 @@ namespace AppConsultorio.Controllers
             {
                 listaPaciente = new List<PacienteCLS>();
             }
-            return PartialView("_TablaPaciente", listaPaciente);
+            //return PartialView("_TablaPaciente", listaPaciente);
+            int pageSize = 7;
+            int pageNumber = (page ?? 1);
+            return View("_TablaPaciente", listaPaciente.ToPagedList(pageNumber, pageSize));
         }
 
         //Generando una vista completa de la tabla Paciente
@@ -161,28 +178,40 @@ namespace AppConsultorio.Controllers
             }
             using (var bd = new ConsultorioOdonBDEntities1())
             {
-                Pacientes oPaciente = new Pacientes();
-                oPaciente.Nombre = oPacienteCLS.nombre;
-                oPaciente.Apellido = oPacienteCLS.apellido;
-                oPaciente.NumeroIdentificacion = oPacienteCLS.numeroIdentificacion;
-                oPaciente.FechaNacimiento = oPacienteCLS.fechaNacimiento;
-                oPaciente.Edad = oPacienteCLS.edad;
-                oPaciente.Email = oPacienteCLS.email;
-                oPaciente.Direccion = oPacienteCLS.direccion;
-                oPaciente.Barrio = oPacienteCLS.barrio;
-                oPaciente.Telefono = oPacienteCLS.telefono;
-                oPaciente.Celular = oPacienteCLS.celular;
-                oPaciente.Ocupacion = oPacienteCLS.ocupacion;
-                oPaciente.Aseguradora = oPacienteCLS.aseguradora;
-                oPaciente.Vinculacion = oPacienteCLS.vinculacion;
-                oPaciente.MotivoConsulta = oPacienteCLS.motivoConsulta;
-                oPaciente.IdSexo = oPacienteCLS.idSexo;
-                oPaciente.IdDepartamento = oPacienteCLS.idDepartamento;
-                oPaciente.IdTipoIdentificacion = oPacienteCLS.idTipoIdentificacion;
-                oPaciente.Habilitado = 1;
+                int cantidad = 0;
+                cantidad = bd.Pacientes.Where(p => p.NumeroIdentificacion == oPacienteCLS.numeroIdentificacion).Count();
+                if (cantidad >= 1)
+                {
+                    listarCombos();
+                    TempData["msg"] = "<script>alert('El paciente ya se encuentra registrado');</script>";
+                    return View(oPacienteCLS);
+                }
+                else
+                {
+                    Pacientes oPaciente = new Pacientes();
+                    oPaciente.Nombre = oPacienteCLS.nombre;
+                    oPaciente.Apellido = oPacienteCLS.apellido;
+                    oPaciente.NumeroIdentificacion = oPacienteCLS.numeroIdentificacion;
+                    oPaciente.FechaNacimiento = oPacienteCLS.fechaNacimiento;
+                    oPaciente.Edad = oPacienteCLS.edad;
+                    oPaciente.Email = oPacienteCLS.email;
+                    oPaciente.Direccion = oPacienteCLS.direccion;
+                    oPaciente.Barrio = oPacienteCLS.barrio;
+                    oPaciente.Telefono = oPacienteCLS.telefono;
+                    oPaciente.Celular = oPacienteCLS.celular;
+                    oPaciente.Ocupacion = oPacienteCLS.ocupacion;
+                    oPaciente.Aseguradora = oPacienteCLS.aseguradora;
+                    oPaciente.Vinculacion = oPacienteCLS.vinculacion;
+                    oPaciente.MotivoConsulta = oPacienteCLS.motivoConsulta;
+                    oPaciente.IdSexo = oPacienteCLS.idSexo;
+                    oPaciente.IdDepartamento = oPacienteCLS.idDepartamento;
+                    oPaciente.IdTipoIdentificacion = oPacienteCLS.idTipoIdentificacion;
+                    oPaciente.Habilitado = 1;
 
-                bd.Pacientes.Add(oPaciente);
-                bd.SaveChanges();
+                    bd.Pacientes.Add(oPaciente);
+                    bd.SaveChanges();
+                }
+
             }
             return RedirectToAction("Index");
         }
@@ -288,27 +317,38 @@ namespace AppConsultorio.Controllers
                 }
                 using (var bd = new ConsultorioOdonBDEntities1())
                 {
-                    Pacientes oPaciente = bd.Pacientes.Where(p => p.IdPaciente.Equals(id)).First();
-                    oPaciente.IdPaciente = oPacienteCls.idPaciente;
-                    oPaciente.Nombre = oPacienteCls.nombre;
-                    oPaciente.Apellido = oPacienteCls.apellido;
-                    oPaciente.NumeroIdentificacion = oPacienteCls.numeroIdentificacion;
-                    oPaciente.FechaNacimiento = oPacienteCls.fechaNacimiento;
-                    oPaciente.Edad = oPacienteCls.edad;
-                    oPaciente.Email = oPacienteCls.email;
-                    oPaciente.Direccion = oPacienteCls.direccion;
-                    oPaciente.Barrio = oPacienteCls.barrio;
-                    oPaciente.Telefono = oPacienteCls.telefono;
-                    oPaciente.Celular = oPacienteCls.celular;
-                    oPaciente.Ocupacion = oPacienteCls.ocupacion;
-                    oPaciente.Aseguradora = oPacienteCls.aseguradora;
-                    oPaciente.Vinculacion = oPacienteCls.vinculacion;
-                    oPaciente.MotivoConsulta = oPacienteCls.motivoConsulta;
-                    oPaciente.IdSexo = oPacienteCls.idSexo;
-                    oPaciente.IdDepartamento = oPacienteCls.idDepartamento;
-                    oPaciente.IdTipoIdentificacion = oPacienteCls.idTipoIdentificacion;
+                    int cantidad = 0;
+                    cantidad = bd.Pacientes.Where(p => p.NumeroIdentificacion == oPacienteCls.numeroIdentificacion && p.IdPaciente!=id).Count();
+                    if (cantidad >= 1)
+                    {
+                        listarCombos();
+                        TempData["msg"] = "<script>alert('Ya existe un paciente registrado');</script>";
+                        return View(oPacienteCls);
+                    }
+                    else
+                    {
+                        Pacientes oPaciente = bd.Pacientes.Where(p => p.IdPaciente.Equals(id)).First();
+                        oPaciente.IdPaciente = oPacienteCls.idPaciente;
+                        oPaciente.Nombre = oPacienteCls.nombre;
+                        oPaciente.Apellido = oPacienteCls.apellido;
+                        oPaciente.NumeroIdentificacion = oPacienteCls.numeroIdentificacion;
+                        oPaciente.FechaNacimiento = oPacienteCls.fechaNacimiento;
+                        oPaciente.Edad = oPacienteCls.edad;
+                        oPaciente.Email = oPacienteCls.email;
+                        oPaciente.Direccion = oPacienteCls.direccion;
+                        oPaciente.Barrio = oPacienteCls.barrio;
+                        oPaciente.Telefono = oPacienteCls.telefono;
+                        oPaciente.Celular = oPacienteCls.celular;
+                        oPaciente.Ocupacion = oPacienteCls.ocupacion;
+                        oPaciente.Aseguradora = oPacienteCls.aseguradora;
+                        oPaciente.Vinculacion = oPacienteCls.vinculacion;
+                        oPaciente.MotivoConsulta = oPacienteCls.motivoConsulta;
+                        oPaciente.IdSexo = oPacienteCls.idSexo;
+                        oPaciente.IdDepartamento = oPacienteCls.idDepartamento;
+                        oPaciente.IdTipoIdentificacion = oPacienteCls.idTipoIdentificacion;
 
-                    bd.SaveChanges();
+                        bd.SaveChanges();
+                    }   
 
                 }
             }
@@ -336,6 +376,107 @@ namespace AppConsultorio.Controllers
                 return View();
             }
             return RedirectToAction("Index");
+        }
+
+        public FileResult generarPDF()
+        {
+
+            Document doc = new Document();
+            byte[] buffer;
+
+            using(MemoryStream ms = new MemoryStream())
+            {
+                //guardamos del documento en memoria
+                PdfWriter.GetInstance(doc, ms);
+                doc.Open();
+
+                Paragraph title = new Paragraph("Listado de clientes");
+                title.Alignment = Element.ALIGN_CENTER;
+                doc.Add(title);
+
+                Paragraph espacio = new Paragraph(" ");
+                doc.Add(espacio);
+                //Columnas (tabla)
+                PdfPTable table = new PdfPTable(3);
+
+                //Ancho de las columnas
+                float[] value = new float[3] { 45, 25, 20 };
+                table.SetWidths(value);
+                //Creando celdas (poniendo contenido)
+                PdfPCell celda1 = new PdfPCell(new Phrase("Nombre y apellido"));
+                celda1.BackgroundColor = new BaseColor(195, 195, 195);
+                celda1.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                table.AddCell(celda1);
+
+                PdfPCell celda2 = new PdfPCell(new Phrase("No. de identificación"));
+                celda2.BackgroundColor = new BaseColor(195, 195, 195);
+                celda2.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                table.AddCell(celda2);
+
+                PdfPCell celda3 = new PdfPCell(new Phrase("Celular"));
+                celda3.BackgroundColor = new BaseColor(195, 195, 195);
+                celda3.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                table.AddCell(celda3);
+
+                List<PacienteCLS> lista = (List<PacienteCLS>)Session["lista"];
+                int noRegistros = lista.Count;
+                for(int i=0; i<noRegistros; i++)
+                {
+                    table.AddCell(lista[i].nombreYapellido);
+                    table.AddCell(lista[i].numeroIdentificacion);
+                    table.AddCell(lista[i].celular.ToString());
+                }
+
+                doc.Add(table);
+                doc.Close();
+
+                buffer = ms.ToArray();
+            }
+
+            return File(buffer, "application/pdf");
+        }
+
+        public FileResult generadorExcel()
+        {
+            byte[] buffer;
+
+            using(MemoryStream ms = new MemoryStream())
+            {
+                //Todo el documento excel
+                ExcelPackage ep = new ExcelPackage();
+
+                //Crear una hoja
+                ep.Workbook.Worksheets.Add("Reporte");
+                ExcelWorksheet ew = ep.Workbook.Worksheets[1];
+
+                //Ponemos nombre de las columnas
+                ew.Cells[1, 1].Value = "Nombre y apellido";
+                ew.Cells[1, 2].Value = "No. de identificación";
+                ew.Cells[1, 3].Value = "Celular";
+                ew.Column(1).Width = 45;
+                ew.Column(2).Width = 25;
+                ew.Column(3).Width = 20;
+                using(var range = ew.Cells[1, 1, 1, 3])
+                {
+                    range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    range.Style.Font.Color.SetColor(Color.White);
+                    range.Style.Fill.BackgroundColor.SetColor(Color.DarkRed);
+                }
+
+                List<PacienteCLS> lista = (List<PacienteCLS>)Session["lista"];
+                int noRegistros = lista.Count;
+                for (int i = 0; i < noRegistros; i++)
+                {
+                    ew.Cells[i + 2, 1].Value = lista[i].nombreYapellido;
+                    ew.Cells[i + 2, 2].Value = lista[i].numeroIdentificacion;
+                    ew.Cells[i + 2, 3].Value = lista[i].celular;
+                }
+
+                ep.SaveAs(ms);
+                buffer = ms.ToArray();
+            }
+
+            return File(buffer, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

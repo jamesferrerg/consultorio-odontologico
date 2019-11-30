@@ -29,11 +29,12 @@ namespace AppConsultorio.Models
         public Nullable<int> IdSexo { get; set; }
         public Nullable<int> IdTipoIdentificacion { get; set; }
         public Nullable<int> IdCargo { get; set; }
+        public Nullable<int> IdTipoUsuario { get; set; }
     
         public virtual Cargos Cargos { get; set; }
         public virtual Sexos Sexos { get; set; }
         public virtual TiposContratos TiposContratos { get; set; }
         public virtual TiposIdentificacion TiposIdentificacion { get; set; }
-        public virtual Usuarios Usuarios { get; set; }
+        public virtual TiposUsuarios TiposUsuarios { get; set; }
     }
 }

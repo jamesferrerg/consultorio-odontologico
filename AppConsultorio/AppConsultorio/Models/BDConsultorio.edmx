@@ -103,6 +103,7 @@
           <Property Name="IdSexo" Type="int" />
           <Property Name="IdTipoIdentificacion" Type="int" />
           <Property Name="IdCargo" Type="int" />
+          <Property Name="IdTipoUsuario" Type="int" />
         </EntityType>
         <EntityType Name="Examenes">
           <Key>
@@ -318,11 +319,12 @@
             <PropertyRef Name="IdUsuario" />
           </Key>
           <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NombreU" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Contraseña" Type="varchar" MaxLength="50" />
+          <Property Name="NombreU" Type="varchar" MaxLength="50" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="250" />
           <Property Name="Habilitado" Type="int" />
           <Property Name="IdRol" Type="int" />
           <Property Name="IdTipoUsuario" Type="int" />
+          <Property Name="IdAnon" Type="int" />
         </EntityType>
         <Association Name="FK_CondicionOdontograma_HistoriaClinica">
           <End Role="HistoriasClinicas" Type="Self.HistoriasClinicas" Multiplicity="0..1" />
@@ -419,6 +421,18 @@
             </Principal>
             <Dependent Role="Empleados">
               <PropertyRef Name="IdCargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleados_TiposUsuarios">
+          <End Role="TiposUsuarios" Type="Self.TiposUsuarios" Multiplicity="0..1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposUsuarios">
+              <PropertyRef Name="IdTipoUsuario" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="IdTipoUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -656,18 +670,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuario_Empleado">
-          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Empleados">
-              <PropertyRef Name="IdEmpleado" />
-            </Principal>
-            <Dependent Role="Usuarios">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Usuario_Rol">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -754,6 +756,10 @@
             <End Role="Cargos" EntitySet="Cargos" />
             <End Role="Empleados" EntitySet="Empleados" />
           </AssociationSet>
+          <AssociationSet Name="FK_Empleados_TiposUsuarios" Association="Self.FK_Empleados_TiposUsuarios">
+            <End Role="TiposUsuarios" EntitySet="TiposUsuarios" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
           <AssociationSet Name="FK_ExamenComplementario_HistoriaClinica" Association="Self.FK_ExamenComplementario_HistoriaClinica">
             <End Role="HistoriasClinicas" EntitySet="HistoriasClinicas" />
             <End Role="ExamenesComplementarios" EntitySet="ExamenesComplementarios" />
@@ -829,10 +835,6 @@
           <AssociationSet Name="FK_Tratamientos_TiposTratamientos" Association="Self.FK_Tratamientos_TiposTratamientos">
             <End Role="TiposTratamientos" EntitySet="TiposTratamientos" />
             <End Role="Tratamientos" EntitySet="Tratamientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Empleado" Association="Self.FK_Usuario_Empleado">
-            <End Role="Empleados" EntitySet="Empleados" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
             <End Role="Roles" EntitySet="Roles" />
@@ -929,9 +931,9 @@
             <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
             <End Role="Empleados" EntitySet="Empleados" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Empleado" Association="ConsultorioOdonBDModel.FK_Usuario_Empleado">
+          <AssociationSet Name="FK_Empleados_TiposUsuarios" Association="ConsultorioOdonBDModel.FK_Empleados_TiposUsuarios">
+            <End Role="TiposUsuarios" EntitySet="TiposUsuarios" />
             <End Role="Empleados" EntitySet="Empleados" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
           <AssociationSet Name="FK_PacienteExamen_ExamenClinico" Association="ConsultorioOdonBDModel.FK_PacienteExamen_ExamenClinico">
             <End Role="ExamenesClinicos" EntitySet="ExamenesClinicos" />
@@ -1107,11 +1109,12 @@
           <Property Name="IdSexo" Type="Int32" />
           <Property Name="IdTipoIdentificacion" Type="Int32" />
           <Property Name="IdCargo" Type="Int32" />
+          <Property Name="IdTipoUsuario" Type="Int32" />
           <NavigationProperty Name="Cargos" Relationship="ConsultorioOdonBDModel.FK_Empleados_Cargos" FromRole="Empleados" ToRole="Cargos" />
           <NavigationProperty Name="Sexos" Relationship="ConsultorioOdonBDModel.FK_Empleado_Sexo" FromRole="Empleados" ToRole="Sexos" />
           <NavigationProperty Name="TiposContratos" Relationship="ConsultorioOdonBDModel.FK_Empleado_TipoContrato" FromRole="Empleados" ToRole="TiposContratos" />
           <NavigationProperty Name="TiposIdentificacion" Relationship="ConsultorioOdonBDModel.FK_Empleado_TipoIdentificacion" FromRole="Empleados" ToRole="TiposIdentificacion" />
-          <NavigationProperty Name="Usuarios" Relationship="ConsultorioOdonBDModel.FK_Usuario_Empleado" FromRole="Empleados" ToRole="Usuarios" />
+          <NavigationProperty Name="TiposUsuarios" Relationship="ConsultorioOdonBDModel.FK_Empleados_TiposUsuarios" FromRole="Empleados" ToRole="TiposUsuarios" />
         </EntityType>
         <EntityType Name="Examenes">
           <Key>
@@ -1349,6 +1352,7 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
+          <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Empleados_TiposUsuarios" FromRole="TiposUsuarios" ToRole="Empleados" />
           <NavigationProperty Name="Usuarios" Relationship="ConsultorioOdonBDModel.FK_Usuario_TipoUsuario" FromRole="TiposUsuarios" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Tratamientos">
@@ -1368,12 +1372,12 @@
             <PropertyRef Name="IdUsuario" />
           </Key>
           <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreU" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdRol" Type="Int32" />
           <Property Name="IdTipoUsuario" Type="Int32" />
-          <NavigationProperty Name="Empleados" Relationship="ConsultorioOdonBDModel.FK_Usuario_Empleado" FromRole="Usuarios" ToRole="Empleados" />
+          <Property Name="IdAnon" Type="Int32" />
           <NavigationProperty Name="Roles" Relationship="ConsultorioOdonBDModel.FK_Usuario_Rol" FromRole="Usuarios" ToRole="Roles" />
           <NavigationProperty Name="TiposUsuarios" Relationship="ConsultorioOdonBDModel.FK_Usuario_TipoUsuario" FromRole="Usuarios" ToRole="TiposUsuarios" />
         </EntityType>
@@ -1535,15 +1539,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuario_Empleado">
-          <End Type="ConsultorioOdonBDModel.Empleados" Role="Empleados" Multiplicity="1" />
-          <End Type="ConsultorioOdonBDModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+        <Association Name="FK_Empleados_TiposUsuarios">
+          <End Type="ConsultorioOdonBDModel.TiposUsuarios" Role="TiposUsuarios" Multiplicity="0..1" />
+          <End Type="ConsultorioOdonBDModel.Empleados" Role="Empleados" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Empleados">
-              <PropertyRef Name="IdEmpleado" />
+            <Principal Role="TiposUsuarios">
+              <PropertyRef Name="IdTipoUsuario" />
             </Principal>
-            <Dependent Role="Usuarios">
-              <PropertyRef Name="IdUsuario" />
+            <Dependent Role="Empleados">
+              <PropertyRef Name="IdTipoUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1840,6 +1844,7 @@
           <EntitySetMapping Name="Empleados">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Empleados">
               <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
                 <ScalarProperty Name="IdCargo" ColumnName="IdCargo" />
                 <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
                 <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
@@ -2090,10 +2095,11 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="ConsultorioOdonBDModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="IdAnon" ColumnName="IdAnon" />
                 <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
-                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
                 <ScalarProperty Name="NombreU" ColumnName="NombreU" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
               </MappingFragment>

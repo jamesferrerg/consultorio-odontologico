@@ -17,6 +17,7 @@ namespace AppConsultorio.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TiposUsuarios()
         {
+            this.Empleados = new HashSet<Empleados>();
             this.Usuarios = new HashSet<Usuarios>();
         }
     
@@ -25,6 +26,8 @@ namespace AppConsultorio.Models
         public string Descripcion { get; set; }
         public Nullable<int> Habilitado { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Empleados> Empleados { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuarios> Usuarios { get; set; }
     }

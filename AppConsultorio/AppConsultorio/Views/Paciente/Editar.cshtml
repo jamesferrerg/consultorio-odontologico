@@ -9,13 +9,13 @@
 
 <h2>Editar</h2>
 
-@using (Html.BeginForm("Editar", "Paciente", FormMethod.Post, new { @id="frmEditar" }))
+@using (Html.BeginForm("Editar", "Paciente", FormMethod.Post, new { @id = "frmEditar" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-row">
         <div class="col-md-12">
             <div style="display:none">@Html.EditorFor(p => p.idPaciente, new { htmlAttributes = new { @class = "form-control col-md-1", @readOnly = true } })</div>
-            
+
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label>Nombre</label>
@@ -150,6 +150,9 @@
         </div>
     </div>
 </div>
+
+@* Mensaje de un usuario ya existente en js *@
+@Html.Raw(TempData["msg"])
 
 <script>
 

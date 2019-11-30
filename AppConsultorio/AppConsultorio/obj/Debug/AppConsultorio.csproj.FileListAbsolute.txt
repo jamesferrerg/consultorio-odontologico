@@ -87,3 +87,10 @@ D:\Proyectos asp.net\ConsultorioOdontologico\AppConsultorio\AppConsultorio\bin\W
 D:\Proyectos asp.net\ConsultorioOdontologico\AppConsultorio\AppConsultorio\bin\Antlr3.Runtime.pdb
 D:\Proyectos asp.net\ConsultorioOdontologico\AppConsultorio\AppConsultorio\bin\Newtonsoft.Json.xml
 D:\Proyectos asp.net\ConsultorioOdontologico\AppConsultorio\AppConsultorio\bin\System.Web.Optimization.xml
+D:\Proyectos asp.net\ConsultorioOdontologico\AppConsultorio\AppConsultorio\bin\PagedList.dll
+D:\Proyectos asp.net\ConsultorioOdontologico\AppConsultorio\AppConsultorio\bin\PagedList.Mvc.dll
+D:\Proyectos asp.net\ConsultorioOdontologico\AppConsultorio\AppConsultorio\bin\PagedList.xml
+D:\Proyectos asp.net\ConsultorioOdontologico\AppConsultorio\AppConsultorio\bin\PagedList.Mvc.xml
+D:\Proyectos asp.net\ConsultorioOdontologico\AppConsultorio\AppConsultorio\bin\itextsharp.dll
+D:\Proyectos asp.net\ConsultorioOdontologico\AppConsultorio\AppConsultorio\bin\EPPlus.dll
+D:\Proyectos asp.net\ConsultorioOdontologico\AppConsultorio\AppConsultorio\bin\EPPlus.xml
