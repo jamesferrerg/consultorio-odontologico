@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AppConsultorio.Models;
+using AppConsultorio.Filters;
 
 namespace AppConsultorio.Controllers
 {
+    [Acceder]
     public class EmpleadoController : Controller
     {
         // GET: Empleado
@@ -110,6 +112,7 @@ namespace AppConsultorio.Controllers
                                     telefono = (long)empleado.Telefono,
                                     celular = (long)empleado.Celular,
                                     numeroIdentificacion = empleado.NumeroIdentificacion,
+                                    email = empleado.Email,
                                     //2. 
                                     tipoIdentificacion = tiposIdentificacion.TipoIdentificacion,
                                     nombreCargo = cargos.Cargo,
@@ -159,6 +162,7 @@ namespace AppConsultorio.Controllers
                             oEmpleado.Telefono = oEmpleadoCLS.telefono;
                             oEmpleado.Celular = oEmpleadoCLS.celular;
                             oEmpleado.NumeroIdentificacion = oEmpleadoCLS.numeroIdentificacion;
+                            oEmpleado.Email = oEmpleadoCLS.email;
                             oEmpleado.IdTipoContrato = oEmpleadoCLS.idtipoContrato;
                             oEmpleado.IdSexo = oEmpleadoCLS.idSexo;
                             oEmpleado.IdTipoIdentificacion = oEmpleadoCLS.idtipoIdentificacion;
@@ -180,6 +184,7 @@ namespace AppConsultorio.Controllers
                             oEmpleado.Telefono = oEmpleadoCLS.telefono;
                             oEmpleado.Celular = oEmpleadoCLS.celular;
                             oEmpleado.NumeroIdentificacion = oEmpleadoCLS.numeroIdentificacion;
+                            oEmpleado.Email = oEmpleadoCLS.email;
                             oEmpleado.IdTipoContrato = oEmpleadoCLS.idtipoContrato;
                             oEmpleado.IdSexo = oEmpleadoCLS.idSexo;
                             oEmpleado.IdTipoIdentificacion = oEmpleadoCLS.idtipoIdentificacion;
@@ -217,6 +222,7 @@ namespace AppConsultorio.Controllers
                 oEmpleadoCLS.telefono = (long)oEmpleado.Telefono;
                 oEmpleadoCLS.celular = (long)oEmpleado.Celular;
                 oEmpleadoCLS.numeroIdentificacion = oEmpleado.NumeroIdentificacion;
+                oEmpleadoCLS.email = oEmpleado.Email;
                 oEmpleadoCLS.idtipoContrato = oEmpleado.TiposContratos.IdTipoContrato;
                 oEmpleadoCLS.idSexo = oEmpleado.Sexos.IdSexo;
                 oEmpleadoCLS.idtipoIdentificacion = oEmpleado.TiposIdentificacion.IdTipoIdentificacion;
@@ -272,6 +278,7 @@ namespace AppConsultorio.Controllers
                                          barrio = empleado.Barrio,
                                          telefono = (long)empleado.Telefono,
                                          numeroIdentificacion = empleado.NumeroIdentificacion,
+                                         email = empleado.Email,
                                          //2. 
                                          tipoIdentificacion = tiposIdentificacion.TipoIdentificacion,
                                          nombreCargo = cargos.Cargo,
@@ -303,6 +310,7 @@ namespace AppConsultorio.Controllers
                                          telefono = (long)empleado.Telefono,
                                          celular = (long)empleado.Celular,
                                          numeroIdentificacion = empleado.NumeroIdentificacion,
+                                         email = empleado.Email,
                                          //2. 
                                          tipoIdentificacion = tiposIdentificacion.TipoIdentificacion,
                                          nombreCargo = cargos.Cargo,

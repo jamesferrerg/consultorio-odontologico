@@ -97,6 +97,7 @@
           <ScalarProperty Name="IdTipoContrato" ColumnName="IdTipoContrato" />
           <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
           <ScalarProperty Name="TieneUsuario" ColumnName="TieneUsuario" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
           <ScalarProperty Name="Celular" ColumnName="Celular" />
           <ScalarProperty Name="Telefono" ColumnName="Telefono" />

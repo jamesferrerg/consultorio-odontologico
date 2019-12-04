@@ -50,6 +50,10 @@ namespace AppConsultorio.Models
         [Display(Name = "Número de identificación")]
         public string numeroIdentificacion { get; set; }
 
+        [StringLength(100, ErrorMessage = "Longitud maxima de 100 caracteres")]
+        [EmailAddress(ErrorMessage = "Ingrese un email valido")]
+        public string email { get; set; }
+
         public int habilitado { get; set; }
 
         // 1. Id's de otras tablas

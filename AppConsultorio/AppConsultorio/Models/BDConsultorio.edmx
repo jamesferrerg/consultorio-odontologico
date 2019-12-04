@@ -97,6 +97,7 @@
           <Property Name="Telefono" Type="bigint" />
           <Property Name="Celular" Type="bigint" />
           <Property Name="NumeroIdentificacion" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="TieneUsuario" Type="int" />
           <Property Name="Habilitado" Type="int" />
           <Property Name="IdTipoContrato" Type="int" />
@@ -1103,6 +1104,7 @@
           <Property Name="Telefono" Type="Int64" />
           <Property Name="Celular" Type="Int64" />
           <Property Name="NumeroIdentificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="TieneUsuario" Type="Int32" />
           <Property Name="Habilitado" Type="Int32" />
           <Property Name="IdTipoContrato" Type="Int32" />
@@ -1851,6 +1853,7 @@
                 <ScalarProperty Name="IdTipoContrato" ColumnName="IdTipoContrato" />
                 <ScalarProperty Name="Habilitado" ColumnName="Habilitado" />
                 <ScalarProperty Name="TieneUsuario" ColumnName="TieneUsuario" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
                 <ScalarProperty Name="Celular" ColumnName="Celular" />
                 <ScalarProperty Name="Telefono" ColumnName="Telefono" />

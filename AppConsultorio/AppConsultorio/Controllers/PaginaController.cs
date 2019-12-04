@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AppConsultorio.Models;
+using AppConsultorio.Filters;
 
 namespace AppConsultorio.Controllers
 {
+    [Acceder]
     public class PaginaController : Controller
     {
         // GET: Pagina

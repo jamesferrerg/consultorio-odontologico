@@ -7,9 +7,11 @@ using AppConsultorio.Models;
 using System.Transactions;
 using System.Security.Cryptography;
 using System.Text;
+using AppConsultorio.Filters;
 
 namespace AppConsultorio.Controllers
 {
+    [Acceder]
     public class UsuarioController : Controller
     {
         public void listaPersonas()

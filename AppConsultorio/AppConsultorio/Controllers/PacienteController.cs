@@ -11,9 +11,11 @@ using iTextSharp.text.pdf;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using PagedList;
+using AppConsultorio.Filters;
 
 namespace AppConsultorio.Controllers
 {
+    [Acceder]
     public class PacienteController : Controller
     {
         // GET: Paciente

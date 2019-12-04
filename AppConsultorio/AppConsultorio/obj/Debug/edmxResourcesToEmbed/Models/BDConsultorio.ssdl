@@ -92,6 +92,7 @@
     <Property Name="Telefono" Type="bigint" />
     <Property Name="Celular" Type="bigint" />
     <Property Name="NumeroIdentificacion" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
     <Property Name="TieneUsuario" Type="int" />
     <Property Name="Habilitado" Type="int" />
     <Property Name="IdTipoContrato" Type="int" />

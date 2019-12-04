@@ -118,6 +118,10 @@
                                 @Html.TextBox("celular", null, new { @class = "form-control", @type = "number" })
                             </div>
                             <div class="col-md-6">
+                                @Html.Label("Email")
+                                @Html.TextBox("email", null, new { @class = "form-control", @type = "email" })
+                            </div>
+                            <div class="col-md-6">
                                 @Html.Label("Contrato")
                                 @Html.DropDownList("idtipoContrato", listaContrato, new { @class = "form-control" })
                             </div>
@@ -158,6 +162,7 @@
         document.getElementById("barrio").value = "";
         document.getElementById("telefono").value = "";
         document.getElementById("celular").value = "";
+        document.getElementById("email").value = "";
         document.getElementById("idtipoContrato").value = "";
         document.getElementById("fechacontrato").value = "";
         document.getElementById("idCargo").value = "";
@@ -190,6 +195,7 @@
             document.getElementById("barrio").value = data.barrio;
             document.getElementById("telefono").value = data.telefono;
             document.getElementById("celular").value = data.celular;
+            document.getElementById("email").value = data.email;
             document.getElementById("idtipoContrato").value = data.idtipoContrato;
             document.getElementById("fechacontrato").value = data.fechacontrato;
             document.getElementById("idCargo").value = data.idCargo;

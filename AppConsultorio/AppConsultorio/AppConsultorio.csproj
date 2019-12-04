@@ -131,6 +131,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Archivos\PersonasCorreo.txt" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -144,6 +145,7 @@
     <Content Include="Content\fontawesome-all.min.css" />
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\login-style.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
@@ -251,11 +253,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="ClasesAuxiliares\Correo.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PacienteController.cs" />
     <Compile Include="Controllers\PaginaController.cs" />
+    <Compile Include="Controllers\PantallaPrincipalController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Filters\Acceder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -314,6 +319,7 @@
     <Compile Include="Models\HistoriasClinicas.cs">
       <DependentUpon>BDConsultorio.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MenuCLS.cs" />
     <Compile Include="Models\Municipios.cs">
       <DependentUpon>BDConsultorio.tt</DependentUpon>
     </Compile>
@@ -401,6 +407,7 @@
     <Content Include="Views\Usuario\_TablaUsuario.cshtml" />
     <Content Include="Views\Pagina\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\PantallaPrincipal\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

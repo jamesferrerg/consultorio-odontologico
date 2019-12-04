@@ -1,7 +1,137 @@
-﻿
+﻿@using AppConsultorio.Models
+@model UsuarioCLS
 @{
-    ViewBag.Title = "Index";
+    Layout = null;
 }
 
-<h2>Index</h2>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>@ViewBag.Title - Inicio de sesión</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/login-style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/fontawesome-all.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
 
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Iniciar sesión</h5>
+                        @using (Ajax.BeginForm("Login", "Login", "", new AjaxOptions
+                        {
+                            HttpMethod = "POST",
+                            OnSuccess = "Ingresar",
+                            UpdateTargetId = "divRespuesta"
+                        }, new { @id = "frmLogin" }))
+                        {
+                            <div class="form-signin">
+                                <div class="form-label-group">
+                                    @Html.TextBox("nombreU", null, new { @class = "form-control", @placeholder = "Nombre de usuario", @required = "true", @autofocus = "autofocus", @id = "inputUsuario" })
+                                    <label for="inputUsuario">Nombre de usuario</label>
+                                </div>
+
+                                <div class="form-label-group">
+                                    @Html.Password("contrasena", null, new { @class = "form-control", @placeholder = "Contraseña", @required = "true", @id = "inputPassword" })
+                                    <label for="inputPassword">Contraseña</label>
+                                </div>
+
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">Recordar contraseña</label>
+                                </div>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Ingresar</button>
+                                <br>
+                                <a id="btnOlvideContra" data-toggle="modal" data-target="#exampleModal" href="#btnOlvideContra">¿Olvidaste la contraseña?</a>
+                                <hr class="my-4">
+
+                            </div>
+
+                            <div id="divRespuesta"></div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @using (Ajax.BeginForm("RecuperarContra", "Login", null, new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    OnSuccess = "Recuperar",
+                    UpdateTargetId = "error",
+
+                }))
+                {
+                    @Html.Hidden("titulo")
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.Label("Correo electronico")
+                                    @Html.TextBox("correo", null, new { @class = "form-control", @type = "email" })
+                                </div>
+                                <div class="col-md-12">
+                                    @Html.Label("Número de identificación")
+                                    @Html.TextBox("noIdentificacion", null, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnClose" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                }
+                <div id="error"></div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
+
+<script>
+
+    function Ingresar(rpta) {
+
+        if (rpta == "1") {
+            document.location.href = "@Url.Action("Index", "PantallaPrincipal")";
+            document.getElementById("divRespuesta").innerHTML = "";
+        } else {
+            alert("Usuario o contraseña incorrectas");
+        }
+    }
+
+    function Recuperar(rpta) {
+        if (rpta == "1") {
+            alert("Se envío la clave al correo");
+            document.getElementById("btnClose").click();
+        } else {
+            alert("Ocurrio un error");
+        }
+    }
+
+</script>

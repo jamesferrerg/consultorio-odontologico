@@ -23,6 +23,7 @@ namespace AppConsultorio.Models
         public Nullable<long> Telefono { get; set; }
         public Nullable<long> Celular { get; set; }
         public string NumeroIdentificacion { get; set; }
+        public string Email { get; set; }
         public Nullable<int> TieneUsuario { get; set; }
         public Nullable<int> Habilitado { get; set; }
         public Nullable<int> IdTipoContrato { get; set; }
