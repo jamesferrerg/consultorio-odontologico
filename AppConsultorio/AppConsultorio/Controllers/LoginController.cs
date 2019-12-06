@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using AppConsultorio.ClasesAuxiliares;
 using AppConsultorio.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace AppConsultorio.Controllers
 {
@@ -24,8 +27,17 @@ namespace AppConsultorio.Controllers
 
             try
             {
+                //Validate Google recaptcha here
+                var response = Request["g-recaptcha-response"];
+                string secretKey = "6LdH9MUUAAAAALrVwcBywXKUPJZ_VC12t-x4XX1a";
+                var client = new WebClient();
+                var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
+                var obj = JObject.Parse(result);
+                var status = (bool)obj.SelectToken("success");
+
                 if (!ModelState.IsValid)
                 {
+                    
                     var query = (from state in ModelState.Values
                                  from error in state.Errors
                                  select error.ErrorMessage).ToList();
@@ -40,6 +52,7 @@ namespace AppConsultorio.Controllers
                 }
                 else
                 {
+
                     string nombreUsuario = oUsuario.nombreU;
                     string password = oUsuario.contrasena;
                     // 1. Cifrar la contraseña
@@ -52,10 +65,27 @@ namespace AppConsultorio.Controllers
                     {
                         int numeroVeces = bd.Usuarios.Where(p => p.NombreU == nombreUsuario && p.Contrasena == cadenaContraCifrada).Count();
                         mensaje = numeroVeces.ToString();
+                        ViewBag.Message = status ? "Google reCaptcha validation success" : "Google reCaptcha validation failed";
 
-                        if (mensaje == "0") mensaje = "Usuario y/o contraseña incorrecto";
+                        if (mensaje == "0" || !status)
+                        {
+                            if (mensaje == "0" && !status)
+                            {
+                                mensaje = "Usuario y/o contraseña incorrecto <br> Google reCaptcha error de validación";
+                            }else if (mensaje == "0")
+                            {
+                                mensaje = "Usuario y/o contraseña incorrecto";
+                            }
+                            else
+                            {
+                                mensaje = "Google reCaptcha error de validación";
+                            }
+                            
+                        }
+                            
                         else
                         {
+
                             Usuarios ousuario = bd.Usuarios.Where(p => p.NombreU == nombreUsuario && p.Contrasena == cadenaContraCifrada).First();
                             //Todo el objeto usuario
                             Session["Usuario"] = ousuario;

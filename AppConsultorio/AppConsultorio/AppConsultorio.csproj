@@ -157,6 +157,7 @@
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="img\welcomeLogin.png" />
     <Content Include="Models\BDConsultorio.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BDConsultorio.edmx</DependentUpon>
